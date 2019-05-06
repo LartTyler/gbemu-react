@@ -1,0 +1,9 @@
+# Package files
+/node_modules
+
+# Parcel files
+/.cache
+/dist
+
+# IDE files
+/.idea
