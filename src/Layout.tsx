@@ -1,8 +1,27 @@
 import {Classes, Colors} from '@blueprintjs/core';
 import * as React from 'react';
+import {Gameboy} from './Components/Gameboy';
+import {Cpu} from './Emulator/Cpu/Cpu';
+import {HardwareBus, IHardwareBus} from './Emulator/hardware';
+import {Memory} from './Emulator/Memory/Memory';
 import './index.scss';
 
-export class Layout extends React.PureComponent<{}, {}> {
+interface IState {
+	hardware: IHardwareBus;
+}
+
+export class Layout extends React.PureComponent<{}, IState> {
+	public constructor(props: {}) {
+		super(props);
+
+		const cpu = new Cpu();
+		const memory = new Memory();
+
+		this.state = {
+			hardware: new HardwareBus(cpu, memory),
+		};
+	}
+
 	public render(): React.ReactNode {
 		return (
 			<div
@@ -14,7 +33,7 @@ export class Layout extends React.PureComponent<{}, {}> {
 					padding: 10,
 				}}
 			>
-				Coming soon.
+				<Gameboy hardware={this.state.hardware} />
 			</div>
 		);
 	}
