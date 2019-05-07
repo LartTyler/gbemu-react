@@ -9,6 +9,7 @@
     - [`DEC r8`](#dec-r8)
     - [`DEC r16`](#dec-r16)
 - [Load](#load)
+    - [`LD r8, n8`](#ld-r8-n8)
 	- [`LD r16, r8`](#ld-r16-r8)
 	- [`LD r16, n16`](#ld-r16-n16)
 - [Miscellaneous](#miscellaneous)
@@ -20,6 +21,7 @@
 |----|-------|
 |`PC`|The program counter|
 |`SP`|The stack pointer|
+|`(XY)`|A register or register pair in parenthesis indicates an address reference defined by the register(s)|
 |n8|An immediate 8-bit value (the next byte in memory following the instruction)|
 |n16|An immediate 16-bit value (the next 2 bytes in memory following the instruction)|
 |r8|An 8-bit CPU register|
@@ -28,7 +30,8 @@
 
 **Additional notes:**
 - In the case of paired registers, the first register listed always contains the most significant bits.
-- The phrase "paired registers" can also refer to the stack pointer, unless otherwise noted.
+- The phrase "paired registers" or "register pair" can also refer to the stack pointer, unless otherwise noted.
+- An address reference to `(PC)` can sometimes refer to an 8-bit value, and sometimes to a 16-bit value in memory. Refer to the instruction's docs to determine which it is.
 - Where possible, descriptions are as semantic as possible.
 	- The phrase `value at XYZ` refers to an address pointed to in memory by some register or pair of registers.
 	- The phrase `value in XYZ` refers to a value stored in a register or pair of registers.
@@ -139,6 +142,26 @@ No flags are modified.
 |0x3B|`DEC SP`|
 
 ## Load
+### `LD r8, n8`
+**Length:** 2 bytes
+**Cycles (m-time):** 2
+
+Loads an immediate 8-bit value at `(PC)` into an 8-bit register.
+
+#### Flags
+No flags are modified.
+
+#### Instructions
+|Opcode|Instruction|
+|---|---|
+|0x06|`LD B, (PC)`|
+|0x0E|`LD C, (PC)`|
+|0x16|`LD D, (PC)`|
+|0x1E|`LD E, (PC)`|
+|0x26|`LD H, (PC)`|
+|0x2E|`LD L, (PC)`|
+|0x3E|`LD A, (PC)`|
+
 ### `LD (r16), r8`
 **Length:** 2 bytes
 **Cycles (m-time):** 1
