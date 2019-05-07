@@ -8,6 +8,8 @@ describe('LD r8, n8', () => {
 
 	beforeEach(() => {
 		hardware.cpu.reset();
+
+		hardware.cpu.registers.programCounter = 0xC000;
 	});
 
 	const runner = (code: number, target: CpuRegister) => {
@@ -17,7 +19,7 @@ describe('LD r8, n8', () => {
 
 		expect(registers[target]).toBe(10);
 
-		expect(registers.programCounter).toBe(2);
+		expect(registers.programCounter).toBe(0xC002);
 		expect(hardware.cpu.clock).toBe(2);
 	};
 
