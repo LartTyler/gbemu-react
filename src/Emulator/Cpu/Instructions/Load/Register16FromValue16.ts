@@ -1,9 +1,12 @@
-import {IHardwareBus} from '../../../../hardware';
-import {from16Bit} from '../../../../Utility/number';
-import {CpuRegister} from '../../../Cpu';
-import {Instruction} from '../../../Instruction';
+import {IHardwareBus} from '../../../hardware';
+import {from16Bit} from '../../../Utility/number';
+import {CpuRegister} from '../../Cpu';
+import {Instruction} from '../../Instruction';
 
-export class Register16LoadFromValue16 extends Instruction {
+/**
+ * LD r16, n16
+ */
+export class Register16FromValue16 extends Instruction {
 	protected high: CpuRegister;
 	protected low: CpuRegister;
 

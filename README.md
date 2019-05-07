@@ -1,8 +1,9 @@
 # Reference
-- [Gameboy Classic Development Wiki](http://gbdev.gg8.se/wiki/articles/Main_Page)
+- [CGB Development Wiki](http://gbdev.gg8.se/wiki/articles/Main_Page)
+- [Detailed CGB Internals](http://marc.rawer.de/Gameboy/Docs/GBCPUman.pdf)
 - CPU
-    - [Detailed GB Classic Opcode Reference](https://rednex.github.io/rgbds/gbz80.7.html)
-    - [GB Classic Opcode Table](http://pastraiser.com/cpu/gameboy/gameboy_opcodes.html)
+    - [Detailed CGB Instruction Reference](https://rednex.github.io/rgbds/gbz80.7.html)
+    - [CGB Opcode Table](http://pastraiser.com/cpu/gameboy/gameboy_opcodes.html)
     - [Full Z80 Opcode Reference](http://z80-heaven.wikidot.com/opcode-reference-chart)
 - Memory
     - [Memory Region Map](http://gameboy.mongenel.com/dmg/asmmemmap.html) (see [Memory Regions (Implementation)](#memory-regions-implementation))
@@ -29,6 +30,8 @@ segments it's memory, the actual memory implementation combines a few sequential
 |`$FF80 - $FFFE`|127b|Zero-page RAM|A small segment of fast memory|
 |`$FFFF`|1b|Interrupt enable register|A special IO register that controls interrupts|
 
+## Instructions (Implementation)
+For implementation details relating to CPU instructions, [click here](src/Emulator/Cpu/README.md).
 
 ## Game Cart (Implementation)
 Stub.

@@ -19,4 +19,12 @@ export class InstructionSet {
 
 		return this.instructions[index];
 	}
+
+	public all(): Instruction[] {
+		return this.instructions;
+	}
+
+	public count(): number {
+		return this.all().length;
+	}
 }

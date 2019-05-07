@@ -1,11 +1,11 @@
 import {ICpu, ICpuRegisters, IHardwareBus, IHardwareBusAware} from '../hardware';
 import {toHex} from '../Utility/number';
-import {instructions} from './Instructions/Primary';
+import {instructions} from './Instructions';
 
 export enum RegisterFlag {
 	CARRY = 0x10,
 	HALF_CARRY = 0x20,
-	OPERATION = 0x40,
+	SUBTRACT = 0x40,
 	ZERO = 0x80,
 }
 
