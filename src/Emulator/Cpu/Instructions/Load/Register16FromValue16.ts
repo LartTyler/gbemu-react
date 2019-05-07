@@ -8,7 +8,7 @@ import {Instruction} from '../../Instruction';
  */
 export class Register16FromValue16 extends Instruction {
 	public constructor(code: number, protected high: CpuRegister, protected low?: CpuRegister) {
-		super(code, `LD ${high === 'stackPointer' ? 'SP' : high.toUpperCase()}${low.toUpperCase()}, n16`, 3, 3);
+		super(code, `LD ${high === 'stackPointer' ? 'SP' : high.toUpperCase()}${(low || '').toUpperCase()}, n16`, 3, 3);
 
 		if (high !== 'stackPointer' && !low)
 			throw new Error('Only the stackPointer register can be used as a standalone 16-bit register');

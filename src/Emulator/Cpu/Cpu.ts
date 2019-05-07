@@ -55,7 +55,7 @@ export class Cpu implements ICpu, IHardwareBusAware {
 
 		this.registers.programCounter &= 0xFFFF;
 
-		operator.invoke(this.hardware);
+		operator.execute(this.hardware);
 
 		throw new Error('Cpu.step() not fully implemented yet');
 	}

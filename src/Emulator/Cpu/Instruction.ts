@@ -22,5 +22,5 @@ export abstract class Instruction {
 			hardware.cpu.clock += this.duration;
 	}
 
-	public abstract invoke(hardware: IHardwareBus): void;
+	protected abstract invoke(hardware: IHardwareBus): void;
 }
