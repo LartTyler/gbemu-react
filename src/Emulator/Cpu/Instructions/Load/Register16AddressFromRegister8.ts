@@ -16,7 +16,7 @@ export class Register16AddressFromRegister8 extends Instruction {
 		super(code, `LD (${high.toUpperCase()}${low.toUpperCase()}), ${source.toUpperCase()}`, 1, 2);
 	}
 
-	public invoke(hardware: IHardwareBus): void {
+	protected invoke(hardware: IHardwareBus): void {
 		const registers = hardware.cpu.registers;
 
 		hardware.memory.write(to16Bit(registers[this.high], registers[this.low]), registers[this.source]);

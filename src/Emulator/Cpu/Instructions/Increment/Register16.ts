@@ -14,7 +14,7 @@ export class Register16 extends Instruction {
 			throw new Error('Only the stackPointer can be used as a standalone 16-bit register');
 	}
 
-	public invoke(hardware: IHardwareBus): void {
+	protected invoke(hardware: IHardwareBus): void {
 		const registers = hardware.cpu.registers;
 
 		if (this.high === 'stackPointer')

@@ -10,7 +10,7 @@ export class Register8 extends Instruction {
 		super(code, `INC ${target.toUpperCase()}`, 1, 1);
 	}
 
-	public invoke(hardware: IHardwareBus): void {
+	protected invoke(hardware: IHardwareBus): void {
 		const registers = hardware.cpu.registers;
 
 		registers[this.target] = (registers[this.target] + 1) & 0xFF;

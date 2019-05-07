@@ -6,7 +6,7 @@ export class Noop extends Instruction {
 		super(0x00, 'NOP', 1, 1);
 	}
 
-	public invoke(hardware: IHardwareBus): void {
+	protected invoke(hardware: IHardwareBus): void {
 		// Noop
 	}
 }
