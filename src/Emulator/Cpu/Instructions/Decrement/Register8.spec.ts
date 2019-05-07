@@ -1,11 +1,11 @@
 import {run} from 'tslint/lib/runner';
-import {HardwareBus} from '../../../hardware';
+import {HardwareBus} from '../../../Hardware/HardwareBus';
 import {Memory} from '../../../Memory/Memory';
 import {Cpu, CpuRegister, RegisterFlag} from '../../Cpu';
 import {instructions} from '../index';
 
 describe('DEC r8', () => {
-	const hardware = new HardwareBus(new Cpu(), new Memory());
+	const hardware = new HardwareBus();
 	const registers = hardware.cpu.registers;
 
 	beforeEach(() => {

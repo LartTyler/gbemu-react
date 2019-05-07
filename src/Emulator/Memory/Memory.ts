@@ -1,5 +1,5 @@
 import {Cartridge, ICartridge} from '../Cartridge/Cartridge';
-import {IMemory} from '../hardware';
+import {IMemory} from '../Hardware';
 import {from16Bit, to16Bit, toHex} from '../Utility/number';
 import {bios} from './bios';
 

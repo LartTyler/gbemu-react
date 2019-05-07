@@ -1,4 +1,4 @@
-import {IHardwareBus} from '../hardware';
+import {IHardwareBus} from '../Hardware';
 
 export abstract class Instruction {
 	public readonly code: number;

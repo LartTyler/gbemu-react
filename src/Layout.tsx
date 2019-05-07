@@ -2,7 +2,8 @@ import {Classes, Colors} from '@blueprintjs/core';
 import * as React from 'react';
 import {Gameboy} from './Components/Gameboy';
 import {Cpu} from './Emulator/Cpu/Cpu';
-import {HardwareBus, IHardwareBus} from './Emulator/hardware';
+import {IHardwareBus} from './Emulator/Hardware';
+import {HardwareBus} from './Emulator/Hardware/HardwareBus';
 import {Memory} from './Emulator/Memory/Memory';
 import './index.scss';
 

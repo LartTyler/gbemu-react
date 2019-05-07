@@ -1,6 +1,6 @@
 import {Classes, FileInput} from '@blueprintjs/core';
 import * as React from 'react';
-import {IHardwareBus} from '../Emulator/hardware';
+import {IHardwareBus} from '../Emulator/Hardware';
 
 interface IProps {
 	hardware: IHardwareBus;

@@ -1,5 +1,4 @@
-import {Omit} from 'yargs';
-import {ICartridge} from './Cartridge/Cartridge';
+import {ICartridge} from '../Cartridge/Cartridge';
 
 export interface IResettable {
 	reset(): void;
@@ -44,27 +43,6 @@ export interface IHardwareBus extends IResettable {
 
 export interface IHardwareBusAware {
 	setHardwareBus(hardware: IHardwareBus): void;
-}
-
-export class HardwareBus {
-	public readonly cpu: ICpu;
-	public readonly memory: IMemory;
-
-	public constructor(cpu: ICpu, memory: IMemory) {
-		this.cpu = cpu;
-		this.memory = memory;
-
-		if (isHardwareBusAware(cpu))
-			cpu.setHardwareBus(this);
-
-		if (isHardwareBusAware(memory))
-			memory.setHardwareBus(this);
-	}
-
-	public reset(): void {
-		this.cpu.reset();
-		this.memory.reset();
-	}
 }
 
 export const isHardwareBusAware = (value: any): value is IHardwareBusAware => {

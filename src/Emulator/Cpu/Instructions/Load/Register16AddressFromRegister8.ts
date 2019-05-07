@@ -1,4 +1,4 @@
-import {IHardwareBus} from '../../../hardware';
+import {IHardwareBus} from '../../../Hardware';
 import {to16Bit} from '../../../Utility/number';
 import {CpuRegister} from '../../Cpu';
 import {Instruction} from '../../Instruction';

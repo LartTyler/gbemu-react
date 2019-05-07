@@ -1,4 +1,4 @@
-import {IHardwareBus} from '../../../hardware';
+import {IHardwareBus} from '../../../Hardware';
 import {CpuRegister, RegisterFlag} from '../../Cpu';
 import {Instruction} from '../../Instruction';
 

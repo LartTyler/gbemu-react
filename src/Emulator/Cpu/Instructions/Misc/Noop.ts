@@ -1,4 +1,4 @@
-import {IHardwareBus} from '../../../hardware';
+import {IHardwareBus} from '../../../Hardware';
 import {Instruction} from '../../Instruction';
 
 export class Noop extends Instruction {

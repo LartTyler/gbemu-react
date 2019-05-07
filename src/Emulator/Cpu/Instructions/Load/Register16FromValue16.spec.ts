@@ -1,11 +1,11 @@
-import {HardwareBus} from '../../../hardware';
+import {HardwareBus} from '../../../Hardware/HardwareBus';
 import {Memory} from '../../../Memory/Memory';
 import {to16Bit} from '../../../Utility/number';
 import {Cpu, CpuRegister} from '../../Cpu';
 import {instructions} from '../index';
 
 describe('LD r16, n16', () => {
-	const hardware = new HardwareBus(new Cpu(), new Memory());
+	const hardware = new HardwareBus();
 
 	beforeEach(() => {
 		hardware.cpu.reset();
