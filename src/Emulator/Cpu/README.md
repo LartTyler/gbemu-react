@@ -5,6 +5,9 @@
 - [Increment](#increment)
     - [`INC r8`](#inc-r8)
     - [`INC r16`](#inc-r16)
+- [Decrement](#decrement)
+    - [`DEC r8`](#dec-r8)
+    - [`DEC r16`](#dec-r16)
 - [Load](#load)
 	- [`LD r16, r8`](#ld-r16-r8)
 	- [`LD r16, n16`](#ld-r16-n16)
@@ -45,7 +48,7 @@ be affected by an instruction, as well as what conditions cause a flag to change
 will not be modified by the instruction, and will instead preserve their old value. Possible flags are:
 
 - **Bit 7: Carry (C)** indicates that the last math instruction caused a 16-bit overflow or underflow, or if the `A` register is the smaller value for comparison operations.
-- **Bit 6: Half Carry (H)** indicates that the last math instruction caused an 8-bit overflow or underflow.
+- **Bit 6: Half Carry (H)** indicates that the last math instruction caused an 8-bit overflow.
 - **Bit 5: Subtract (N)** indicates that the last math instruction was a subtraction operation.
 - **Bit 4: Zero (Z)** indicates that the result of a math operation is zero, or that two values are equal for comparison operations.
 
@@ -63,9 +66,9 @@ browser's search function to find `0xYZ`, where `YZ` is the hexidecimal value of
 Increments the value stored in an 8-bit register.
 
 #### Flags
-- **Zero (Z)** is set if the operation overflowed.
-- **Subtract (N)** is reset.
-- **Half Carry (H)** is set if the operation overflowed.
+- **Zero (Z)** is set if the result is zero.
+- **Subtract (N)** is always reset.
+- **Half Carry (H)** is set if the operation overflowed (i.e. the new value is 0).
 
 #### Instructions
 |Opcode|Instruction|
@@ -94,6 +97,46 @@ No flags are modified.
 |0x13|`INC DE`|
 |0x23|`INC HL`|
 |0x33|`INC SP`|
+
+## Decrement
+### `DEC r8`
+**Length:** 1 byte
+**Cycles (m-time):** 1
+
+Decrements the value stored in an 8-bit register.
+
+#### Flags
+- **Zero (Z)** is set if the result is zero.
+- **Subtract (N)** is always set.
+- **Half Carry (H)** is set if the operation overflowed (i.e. the new value is 255).
+
+#### Instructions
+|Opcode|Instruction|
+|---|---|
+|0x05|`DEC B`|
+|0x0D|`DEC C`|
+|0x15|`DEC D`|
+|0x1D|`DEC E`|
+|0x25|`DEC H`|
+|0x2D|`DEC L`|
+|0x3D|`DEC A`|
+
+### `DEC r16`
+**Length:** 1 byte
+**Cycles (m-time):** 2
+
+Decrements the value stored in a 16-bit register pair.
+
+#### Flags
+No flags are modified.
+
+#### Instructions
+|Opcode|Instruction|
+|---|---|
+|0x0B|`DEC BC`|
+|0x1B|`DEC DE`|
+|0x2B|`DEC HL`|
+|0x3B|`DEC SP`|
 
 ## Load
 ### `LD (r16), r8`
