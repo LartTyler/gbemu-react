@@ -12,12 +12,15 @@ export const toHex = (value: number, prefix: boolean = true): string => {
 	return output;
 };
 
-export const toBinary = (value: number): string => {
+export const toBinary = (value: number, prefix: boolean = true): string => {
 	let output = value.toString(2);
 	const mod = output.length % 4;
 
 	if (mod !== 0)
 		output = '0'.repeat(4 - mod) + output;
+
+	if (prefix)
+		output = `0b${output}`;
 
 	return output;
 };
