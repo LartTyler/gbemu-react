@@ -143,7 +143,7 @@ No flags are modified.
 **Length:** 2 bytes
 **Cycles (m-time):** 1
 
-Loads the 8-bit value in `A` into the address pointed to by the register pair `(r16)`.
+Loads the value of an 8-bit register into the address pointed to by a 16-bit register pair.
 
 #### Flags
 No flags are modified.
@@ -158,7 +158,7 @@ No flags are modified.
 **Length:** 3 bytes
 **Cycles (m-time):** 3
 
-Loads an immediate 16-bit value at `(PC)` into a register pair.
+Loads an immediate 16-bit value at `(PC)` into a 16-bit register pair.
 
 #### Flags
 No flags are modified.
