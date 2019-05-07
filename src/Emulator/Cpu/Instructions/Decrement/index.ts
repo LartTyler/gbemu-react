@@ -1,3 +1,4 @@
+import {Register16} from './Register16';
 import {Register8} from './Register8';
 
 export const decrementInstructions = [
@@ -9,4 +10,10 @@ export const decrementInstructions = [
 	new Register8(0x25, 'h'),
 	new Register8(0x2D, 'l'),
 	new Register8(0x3D, 'a'),
+
+	// DEC r16
+	new Register16(0x0B, 'b', 'c'),
+	new Register16(0x1B, 'd', 'e'),
+	new Register16(0x2B, 'h', 'l'),
+	new Register16(0x3B, 'stackPointer'),
 ];
