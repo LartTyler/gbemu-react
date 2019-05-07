@@ -7,17 +7,11 @@ import {Instruction} from '../../Instruction';
  * LD r16, n16
  */
 export class Register16FromValue16 extends Instruction {
-	protected high: CpuRegister;
-	protected low: CpuRegister;
+	public constructor(code: number, protected high: CpuRegister, protected low?: CpuRegister) {
+		super(code, `LD ${high === 'stackPointer' ? 'SP' : high.toUpperCase()}${low.toUpperCase()}, n16`, 3, 3);
 
-	public constructor(code: number, high: CpuRegister, low?: CpuRegister) {
 		if (high !== 'stackPointer' && !low)
 			throw new Error('Only the stackPointer register can be used as a standalone 16-bit register');
-
-		super(code, `LD ${high === 'stackPointer' ? 'SP' : high}${low}, n16`, 3, 3);
-
-		this.high = high;
-		this.low = low;
 	}
 
 	public invoke(hardware: IHardwareBus): void {

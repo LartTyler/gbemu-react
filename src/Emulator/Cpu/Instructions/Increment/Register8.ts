@@ -6,12 +6,8 @@ import {Instruction} from '../../Instruction';
  * INC r8
  */
 export class Register8 extends Instruction {
-	protected target: CpuRegister;
-
-	public constructor(code: number, target: CpuRegister) {
+	public constructor(code: number, protected target: CpuRegister) {
 		super(code, `INC ${target.toUpperCase()}`, 1, 1);
-
-		this.target = target;
 	}
 
 	public invoke(hardware: IHardwareBus): void {

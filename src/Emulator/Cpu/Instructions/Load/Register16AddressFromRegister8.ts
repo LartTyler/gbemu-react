@@ -7,16 +7,13 @@ import {Instruction} from '../../Instruction';
  * LD (r16), r8
  */
 export class Register16AddressFromRegister8 extends Instruction {
-	protected high: CpuRegister;
-	protected low: CpuRegister;
-	protected source: CpuRegister;
-
-	public constructor(code: number, high: CpuRegister, low: CpuRegister, source: CpuRegister = 'a') {
-		super(code, `LD (${high}${low}), ${source}`, 1, 2);
-
-		this.high = high;
-		this.low = low;
-		this.source = source;
+	public constructor(
+		code: number,
+		protected high: CpuRegister,
+		protected low: CpuRegister,
+		protected source: CpuRegister = 'a',
+	) {
+		super(code, `LD (${high.toUpperCase()}${low.toUpperCase()}), ${source.toUpperCase()}`, 1, 2);
 	}
 
 	public invoke(hardware: IHardwareBus): void {
