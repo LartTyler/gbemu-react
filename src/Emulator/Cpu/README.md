@@ -12,6 +12,8 @@
     - [`LD r8, n8`](#ld-r8-n8)
 	- [`LD r16, r8`](#ld-r16-r8)
 	- [`LD r16, n16`](#ld-r16-n16)
+- [Bit Shift](#bit-shift)
+    - [`RLCA`](#rlca)
 - [Miscellaneous](#miscellaneous)
     - [`NOP`](#nop)
 </details>
@@ -208,3 +210,26 @@ No flags are modified.
 |Opcode|Instruction|
 |---|---|
 |0x00|`NOP`|
+
+## Bit Shift
+### `RLCA`
+**Length:** 1 byte
+**Cycles (m-time):** 1
+
+Performs a bit rotation to the left on the 8-bit register `A`. The bit leaving on the left is copied to the 
+**Carry (C)** flag, and to bit 0.
+
+```
+C <- [7 <- 0] <- 7
+``` 
+
+#### Flags
+- **Zero (Z)** is always reset.
+- **Subtract (N)** is always reset.
+- **Half Carry (H)** is always reset.
+- **Carry (C)** is set to the value in bit 7 of `A`.
+
+#### Instructions
+|Opcode|Instruction|
+|---|---|
+|0x07|`RLCA`|
