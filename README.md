@@ -10,7 +10,7 @@
 
 # Notes
 ## Memory (Notes)
-- Memory reads are from the BIOS until 0x100 is read, after which point all reads are from the game cart.
+- Memory reads below $0100 are from the BIOS until $0100 is read. After the first read to $0100, all reads below $0100 are from the game cart instead.
 
 # Implementation Details
 ## Memory Regions (Implementation)
