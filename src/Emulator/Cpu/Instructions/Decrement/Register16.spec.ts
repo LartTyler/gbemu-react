@@ -33,8 +33,8 @@ describe('DEC r16', () => {
 
 		instructions.get(code).execute(hardware);
 
-		expect(registers[high]).toBe((values.high - 1) & 0xFF);
-		expect(registers[low]).toBe((values.low - 1) & 0xFF);
+		expect(registers[high]).toBe(from16Bit(499).high);
+		expect(registers[low]).toBe(from16Bit(499).low);
 
 		registers[high] = 0;
 		registers[low] = 0;
