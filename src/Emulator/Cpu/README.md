@@ -196,21 +196,6 @@ No flags are modified.
 |0x21|`LD HL, (PC)`|
 |0x31|`LD SP, (PC)`|
 
-## Miscellaneous
-### `NOP`
-**Length:** 1 byte
-**Cycles (m-time):** 1
-
-No operation performed.
-
-#### Flags
-No flags are modified.
-
-#### Instructions
-|Opcode|Instruction|
-|---|---|
-|0x00|`NOP`|
-
 ## Bit Shift
 ### `RLCA`
 **Length:** 1 byte
@@ -233,3 +218,18 @@ C <- [7 <- 0] <- 7
 |Opcode|Instruction|
 |---|---|
 |0x07|`RLCA`|
+
+## Miscellaneous
+### `NOP`
+**Length:** 1 byte
+**Cycles (m-time):** 1
+
+No operation performed.
+
+#### Flags
+No flags are modified.
+
+#### Instructions
+|Opcode|Instruction|
+|---|---|
+|0x00|`NOP`|
