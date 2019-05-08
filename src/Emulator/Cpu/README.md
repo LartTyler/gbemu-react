@@ -252,28 +252,6 @@ No flags are modified.
 |0x08|`LD (PC), SP`|
 
 ## Bit Shift
-### `RLCA`
-**Length:** 1 byte
-**Cycles (m-time):** 1
-
-Performs a bit rotation to the left on the 8-bit register `A`. The bit leaving on the left is copied to the 
-**Carry (C)** flag, and to bit 0.
-
-```
-C <- [7 <- 0] <- [7]
-``` 
-
-#### Flags
-- **Zero (Z)** is always reset.
-- **Subtract (N)** is always reset.
-- **Half Carry (H)** is always reset.
-- **Carry (C)** is set to the value in bit 7 of `A`.
-
-#### Instructions
-|Opcode|Instruction|
-|---|---|
-|0x07|`RLCA`|
-
 ### `RLA`
 **Length:** 1 byte
 **Cycles (m-time):** 1
@@ -296,27 +274,27 @@ C <- [7 <- 0] <- C
 |---|---|
 |0x17|`RLA`|
 
-### `RRCA`
+### `RLCA`
 **Length:** 1 byte
 **Cycles (m-time):** 1
 
-Performs a bit rotation to the right on the 8-bit register `A`. The bit leaving on the right is copied to the
-**Carry (C)** flag, and to bit 7.
+Performs a bit rotation to the left on the 8-bit register `A`. The bit leaving on the left is copied to the 
+**Carry (C)** flag, and to bit 0.
 
 ```
-[0] -> [7 -> 0] -> C
-```
+C <- [7 <- 0] <- [7]
+``` 
 
 #### Flags
 - **Zero (Z)** is always reset.
 - **Subtract (N)** is always reset.
 - **Half Carry (H)** is always reset.
-- **Carry (C)** is set to the value of bit 0 in `A`.
+- **Carry (C)** is set to the value in bit 7 of `A`.
 
 #### Instructions
 |Opcode|Instruction|
 |---|---|
-|0x0F|`RRCA`|
+|0x07|`RLCA`|
 
 ### `RRA`
 **Length:** 1 byte
@@ -339,6 +317,28 @@ C -> [7 -> 0] -> C
 |Opcode|Instruction|
 |---|---|
 |0x1F|`RRA`|
+
+### `RRCA`
+**Length:** 1 byte
+**Cycles (m-time):** 1
+
+Performs a bit rotation to the right on the 8-bit register `A`. The bit leaving on the right is copied to the
+**Carry (C)** flag, and to bit 7.
+
+```
+[0] -> [7 -> 0] -> C
+```
+
+#### Flags
+- **Zero (Z)** is always reset.
+- **Subtract (N)** is always reset.
+- **Half Carry (H)** is always reset.
+- **Carry (C)** is set to the value of bit 0 in `A`.
+
+#### Instructions
+|Opcode|Instruction|
+|---|---|
+|0x0F|`RRCA`|
 
 ## Miscellaneous
 ### `NOP`
