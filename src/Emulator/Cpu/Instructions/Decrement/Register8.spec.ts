@@ -1,7 +1,5 @@
-import {run} from 'tslint/lib/runner';
 import {HardwareBus} from '../../../Hardware/HardwareBus';
-import {Memory} from '../../../Memory/Memory';
-import {Cpu, CpuRegister, RegisterFlag} from '../../Cpu';
+import {CpuRegister, RegisterFlag} from '../../Cpu';
 import {instructions} from '../index';
 
 describe('DEC r8', () => {
@@ -30,11 +28,11 @@ describe('DEC r8', () => {
 		expect(registers[target]).toBe(0);
 		expect(registers.flags).toBe(RegisterFlag.SUBTRACT | RegisterFlag.ZERO);
 
-		registers[target] = 0;
+		registers[target] = 16;
 
 		instructions.get(code).execute(hardware);
 
-		expect(registers[target]).toBe(255);
+		expect(registers[target]).toBe(15);
 		expect(registers.flags).toBe(RegisterFlag.SUBTRACT | RegisterFlag.HALF_CARRY);
 	};
 

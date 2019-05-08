@@ -361,3 +361,5 @@ on the low byte, then on the high byte. The flags set as a result of 16-bit oper
 of that second operation performed on the high byte. For example, in the case of `ADD HL, r16`, the **Half Carry (H)**
 flag is actually set based on whether or not the 11th bit carried into the 12th, when you consider the `r16` register
 as a whole, not the 8th to 9th bit like you might expect.
+
+For a more detailed explanation, [click here](https://robdor.com/2016/08/10/gameboy-emulator-half-carry-flag/).
