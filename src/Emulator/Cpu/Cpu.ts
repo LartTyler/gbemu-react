@@ -18,6 +18,9 @@ export class Cpu implements ICpu, IHardwareBusAware {
 
 	protected hardware: IHardwareBus;
 
+	protected halt: boolean = true;
+	protected tickIntervalId: number = null;
+
 	public constructor() {
 		this.registers = {
 			a: 0,
@@ -34,11 +37,13 @@ export class Cpu implements ICpu, IHardwareBusAware {
 	}
 
 	public pause(): void {
-		throw new Error('Cpu.pause() not implemented yet');
+		this.halt = true;
 	}
 
 	public start(): void {
-		throw new Error('Cpu.start() not implemented yet');
+		this.halt = false;
+
+		this.frame();
 	}
 
 	public step(): void {
@@ -56,8 +61,6 @@ export class Cpu implements ICpu, IHardwareBusAware {
 		this.registers.programCounter &= 0xFFFF;
 
 		operator.execute(this.hardware);
-
-		throw new Error('Cpu.step() not fully implemented yet');
 	}
 
 	public reset(): void {
@@ -76,5 +79,20 @@ export class Cpu implements ICpu, IHardwareBusAware {
 
 	public setHardwareBus(hardware: IHardwareBus): void {
 		this.hardware = hardware;
+	}
+
+	protected frame(): void {
+		this.tickIntervalId = null;
+
+		const frameClock = this.clock + 17556;
+
+		do {
+			this.step();
+
+			if (this.halt)
+				return;
+		} while (this.clock < frameClock);
+
+		this.tickIntervalId = window.setTimeout(() => this.frame(), 1);
 	}
 }
