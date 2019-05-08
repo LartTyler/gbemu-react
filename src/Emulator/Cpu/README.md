@@ -13,6 +13,7 @@
 	- [`LD r16, r8`](#ld-r16-r8)
 	- [`LD r16, n16`](#ld-r16-n16)
 - [Bit Shift](#bit-shift)
+    - [`RLA`](#rla)
     - [`RLCA`](#rlca)
 - [Miscellaneous](#miscellaneous)
     - [`NOP`](#nop)
@@ -218,6 +219,28 @@ C <- [7 <- 0] <- 7
 |Opcode|Instruction|
 |---|---|
 |0x07|`RLCA`|
+
+### `RLA`
+**Length:** 1 byte
+**Cycles (m-time):** 1
+
+Performs a bit rotation to the left on the 8-bit register `A`. The current value of the **Carry (C)** flag is copied to
+bit 0, and the bit leaving on the left is copied to the **Carry (C)** flag.
+
+```
+C <- [7 <- 0] <- C
+```
+
+#### Flags
+- **Zero (Z)** is always reset.
+- **Subtract (N)** is always reset.
+- **Half Carry (H)** is always reset.
+- **Carry (C)** is set to the value of bit 7 in `A`.
+
+#### Instructions
+|Opcode|Instruction|
+|---|---|
+|0x17|`RLA`|
 
 ## Miscellaneous
 ### `NOP`
