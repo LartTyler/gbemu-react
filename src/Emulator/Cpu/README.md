@@ -12,6 +12,7 @@
     - [`LD r8, n8`](#ld-r8-n8)
 	- [`LD r16, r8`](#ld-r16-r8)
 	- [`LD r16, n16`](#ld-r16-n16)
+	- [`LD n16, SP`](#ld-n16-sp)
 - [Bit Shift](#bit-shift)
     - [`RLA`](#rla)
     - [`RLCA`](#rlca)
@@ -196,6 +197,20 @@ No flags are modified.
 |0x11|`LD DE, (PC)`|
 |0x21|`LD HL, (PC)`|
 |0x31|`LD SP, (PC)`|
+
+### `LD n16, SP`
+**Length:** 3 bytes
+**Cycles (m-time):** 5
+
+Loads the 16-bit value stored in `SP` into the address pointed to by the 16-bit value at `(PC)`.
+
+#### Flags
+No flags are modified.
+
+#### Instructions
+|Opcode|Instruction|
+|---|---|
+|0x08|`LD (PC), SP`|
 
 ## Bit Shift
 ### `RLCA`
