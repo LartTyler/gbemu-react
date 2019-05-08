@@ -7,7 +7,7 @@ import {Instruction} from '../../Instruction';
  * INC r16
  */
 export class Register16 extends Instruction {
-	public constructor(code: number, protected high: CpuRegister, protected low: CpuRegister) {
+	public constructor(code: number, protected high: CpuRegister, protected low?: CpuRegister) {
 		super(code, `INC ${high === 'stackPointer' ? 'SP' : high.toUpperCase()}${(low || '').toUpperCase()}`, 1, 2);
 
 		if (high !== 'stackPointer' && !low)
