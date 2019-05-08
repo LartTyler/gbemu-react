@@ -43,7 +43,7 @@
 - Where possible, descriptions are as semantic as possible.
 	- The phrase `value at XYZ` refers to an address pointed to in memory by some register or pair of registers.
 	- The phrase `value in XYZ` refers to a value stored in a register or pair of registers.
-- When semtantics alone do not provide sufficient clarity, refer to the table above for a list of common terms and symbology.
+- When semantics alone do not provide sufficient clarity, refer to the table above for a list of common terms and symbology.
 	- Writing a register pair as `HL` always refers to the registers as a 16-bit container.
 	- Writing a register pair as `(HL)` always refers to the register(s) as a 16-bit pointer to an address in memory.
 
