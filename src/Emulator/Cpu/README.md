@@ -76,8 +76,8 @@ Adds the value in a 16-bit register to the 16-bit `HL` register pair.
 
 #### Flags
 - **Subtract (N)** is always reset.
-- **Half Carry (H)** is set if the low byte (the 8-bit `L` register) overflowed.
-- **Carry (C)** is set if the high byte (the 8-bit `H` register) overflowed.
+- **Half Carry (H)** is set if the low nibble of the 8-bit `H` register overflowed. [Click here](#16-bit-carries) for a full explanation.
+- **Carry (C)** is set if the high nibble of the 8-bit `H` register overflowed. [Click here](#16-bit-carries) for a full explanation.
 
 #### Instructions
 |Opcode|Instruction|
@@ -293,3 +293,10 @@ No flags are modified.
 |Opcode|Instruction|
 |---|---|
 |0x00|`NOP`|
+
+## 16 Bit Carries
+When the CPU performs 16-bit math operations (such as `ADD HL, r16`), it actually performs two 8-bit operations, first
+on the low byte, then on the high byte. The flags set as a result of 16-bit operations actually come from the results
+of that second operation performed on the high byte. For example, in the case of `ADD HL, r16`, the **Half Carry (H)**
+flag is actually set based on whether or not the 11th bit carried into the 12th, when you consider the `r16` register
+as a whole, not the 8th to 9th bit like you might expect.
