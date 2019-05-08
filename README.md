@@ -5,6 +5,7 @@
     - [Detailed CGB Instruction Reference](https://rednex.github.io/rgbds/gbz80.7.html)
     - [CGB Opcode Table](http://pastraiser.com/cpu/gameboy/gameboy_opcodes.html)
     - [Full Z80 Opcode Reference](http://z80-heaven.wikidot.com/opcode-reference-chart) (Actual Z80, not GB Z80)
+    - [Z80 Instructions Document](http://datasheets.chipdb.org/Zilog/Z80/z80-documented-0.90.pdf) (Actual Z80, not GB Z80)
 - Memory
     - [Memory Region Map](http://gameboy.mongenel.com/dmg/asmmemmap.html) (see [Memory Regions (Implementation)](#memory-regions-implementation))
 
