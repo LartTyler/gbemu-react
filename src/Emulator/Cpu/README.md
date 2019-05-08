@@ -81,6 +81,7 @@ Adds the value in a 16-bit register to the 16-bit `HL` register pair.
 
 #### Instructions
 |Opcode|Instruction|
+|---|---|
 |0x09|`ADD HL, BC`|
 |0x19|`ADD HL, DE`|
 |0x29|`ADD HL, HL`|
