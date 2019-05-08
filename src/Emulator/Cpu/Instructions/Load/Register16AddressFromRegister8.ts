@@ -1,6 +1,6 @@
 import {IHardwareBus} from '../../../Hardware';
-import {to16Bit} from '../../../Utility/number';
-import {CpuRegister} from '../../Cpu';
+import {toRegisterDisplayName} from '../../../Utility/string';
+import {CpuRegister16, CpuRegister8} from '../../Cpu';
 import {Instruction} from '../../Instruction';
 
 /**
@@ -9,16 +9,15 @@ import {Instruction} from '../../Instruction';
 export class Register16AddressFromRegister8 extends Instruction {
 	public constructor(
 		code: number,
-		protected high: CpuRegister,
-		protected low: CpuRegister,
-		protected source: CpuRegister = 'a',
+		protected target: CpuRegister16,
+		protected source: CpuRegister8,
 	) {
-		super(code, `LD (${high.toUpperCase()}${low.toUpperCase()}), ${source.toUpperCase()}`, 1, 2);
+		super(code, `LD (${toRegisterDisplayName(target)}), ${source.toUpperCase()}`, 1, 2);
 	}
 
 	protected invoke(hardware: IHardwareBus): void {
 		const registers = hardware.cpu.registers;
 
-		hardware.memory.write(to16Bit(registers[this.high], registers[this.low]), registers[this.source]);
+		hardware.memory.write(registers[this.target], registers[this.source]);
 	}
 }

@@ -12,8 +12,8 @@ export const decrementInstructions = [
 	new Register8(0x3D, 'a'),
 
 	// DEC r16
-	new Register16(0x0B, 'b', 'c'),
-	new Register16(0x1B, 'd', 'e'),
-	new Register16(0x2B, 'h', 'l'),
+	new Register16(0x0B, 'bc'),
+	new Register16(0x1B, 'de'),
+	new Register16(0x2B, 'hl'),
 	new Register16(0x3B, 'stackPointer'),
 ];

@@ -14,7 +14,7 @@ export class RegisterALeftCarry extends Instruction {
 		const registers = hardware.cpu.registers;
 
 		const highBit = registers.a & 0x80; // Mask off every bit except the MSB
-		registers.a = (registers.a << 1) & 0xFF;
+		registers.a = registers.a << 1;
 
 		if (registers.flags & RegisterFlag.CARRY)
 			registers.a += 1;

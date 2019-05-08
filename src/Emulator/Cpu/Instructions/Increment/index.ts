@@ -12,8 +12,8 @@ export const incrementInstructions = [
 	new Register8(0x3C, 'a'),
 
 	// INC r16
-	new Register16(0x03, 'b', 'c'),
-	new Register16(0x13, 'd', 'e'),
-	new Register16(0x23, 'h', 'l'),
+	new Register16(0x03, 'bc'),
+	new Register16(0x13, 'de'),
+	new Register16(0x23, 'hl'),
 	new Register16(0x33, 'stackPointer'),
 ];
