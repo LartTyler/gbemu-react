@@ -1,3 +1,4 @@
+import {Cartridge} from '../Cartridge/Cartridge';
 import {Memory} from './Memory';
 
 describe('Memory', () => {
@@ -24,6 +25,10 @@ describe('Memory', () => {
 	});
 
 	test('First read to $0100 turns off BIOS', () => {
+		memory.setCartridge(new Cartridge(new Uint8Array(8192)));
+
+		expect(memory.read(0)).toBe(0x31);
+
 		memory.read(0x100);
 
 		expect(memory.read(0)).toBe(0);
