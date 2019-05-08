@@ -188,6 +188,21 @@ No flags are modified.
 |0x2E|`LD L, (PC)`|
 |0x3E|`LD A, (PC)`|
 
+### `LD r8, (r16)`
+**Length:** 1 bytes
+**Cycles (m-time):** 2
+
+Loads the value pointed to by a 16-bit register pair into an 8-bit register.
+
+#### Flags
+No flags are modified.
+
+#### Instructions
+|Opcode|Instruction|
+|---|---|
+|0x0A|`LD A, (BC)`|
+|0x1A|`LD A, (DE)`|
+
 ### `LD (r16), r8`
 **Length:** 1 bytes
 **Cycles (m-time):** 2
