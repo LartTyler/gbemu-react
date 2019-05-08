@@ -258,7 +258,7 @@ Performs a bit rotation to the left on the 8-bit register `A`. The bit leaving o
 **Carry (C)** flag, and to bit 0.
 
 ```
-C <- [7 <- 0] <- 7
+C <- [7 <- 0] <- [7]
 ``` 
 
 #### Flags
@@ -293,6 +293,50 @@ C <- [7 <- 0] <- C
 |Opcode|Instruction|
 |---|---|
 |0x17|`RLA`|
+
+### `RRCA`
+**Length:** 1 byte
+**Cycles (m-time):** 1
+
+Performs a bit rotation to the right on the 8-bit register `A`. The bit leaving on the right is copied to the
+**Carry (C)** flag, and to bit 7.
+
+```
+[0] -> [7 -> 0] -> C
+```
+
+#### Flags
+- **Zero (Z)** is always reset.
+- **Subtract (N)** is always reset.
+- **Half Carry (H)** is always reset.
+- **Carry (C)** is set to the value of bit 0 in `A`.
+
+#### Instructions
+|Opcode|Instruction|
+|---|---|
+|0x0F|`RRCA`|
+
+### `RRA`
+**Length:** 1 byte
+**Cycles (m-time):** 1
+
+Performs a bit rotation to the right on the 8-bit register `A`. The current value of the **Carry (C)** flag is copied to
+bit 7, and the bit leaving on the right is copied to the **Carry (C)** flag.
+
+```
+C -> [7 -> 0] -> C
+```
+
+#### Flags
+- **Zero (Z)** is always reset.
+- **Subtract (N)** is always reset.
+- **Half Carry (H)** is always reset.
+- **Carry (C)** is set to the value of bit 0 in `A`.
+
+#### Instructions
+|Opcode|Instruction|
+|---|---|
+|0x1F|`RRA`|
 
 ## Miscellaneous
 ### `NOP`
