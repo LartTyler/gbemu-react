@@ -1,6 +1,7 @@
 import {Address16FromStackPointer} from './Address16FromStackPointer';
 import {Register16AddressFromRegister8} from './Register16AddressFromRegister8';
 import {Register16FromValue16} from './Register16FromValue16';
+import {Register8FromRegister16Address} from './Register8FromRegister16Address';
 import {Register8FromValue8} from './Register8FromValue8';
 
 export const loadInstructions = [
@@ -12,6 +13,10 @@ export const loadInstructions = [
 	new Register8FromValue8(0x26, 'h'),
 	new Register8FromValue8(0x2E, 'l'),
 	new Register8FromValue8(0x3E, 'a'),
+
+	// LD r8, (r16)
+	new Register8FromRegister16Address(0x0A, 'a', 'bc'),
+	new Register8FromRegister16Address(0x1A, 'a', 'de'),
 
 	// LD r16, n16
 	new Register16FromValue16(0x01, 'bc'),
