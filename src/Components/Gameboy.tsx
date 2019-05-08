@@ -43,14 +43,20 @@ export class Gameboy extends React.PureComponent<IProps, IState> {
 	}
 
 	private onCartridgeChange = (event: React.FormEvent<HTMLInputElement>) => {
+		this.props.hardware.reset();
+
 		const file = event.currentTarget.files[0];
 
 		this.setState({
 			selectedFile: file.name,
 		});
 
-		this.props.hardware.memory.loadCartridge(file).then(() => this.setState({
-			title: this.props.hardware.memory.getCartridge().title,
-		}));
+		this.props.hardware.memory.loadCartridge(file).then(() => {
+			this.setState({
+				title: this.props.hardware.memory.getCartridge().title,
+			});
+
+			this.props.hardware.cpu.start();
+		});
 	};
 }
