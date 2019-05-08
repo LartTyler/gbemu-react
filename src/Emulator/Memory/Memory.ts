@@ -123,6 +123,10 @@ export class Memory implements IMemory {
 		return this.cartridge;
 	}
 
+	public setCartridge(cartridge: Cartridge): void {
+		this.cartridge = cartridge;
+	}
+
 	public loadCartridge(file: File): Promise<FileReader> {
 		const reader = new FileReader();
 
@@ -130,7 +134,7 @@ export class Memory implements IMemory {
 			reader.addEventListener('load', () => {
 				const rom = (reader.result as string).split('').map(char => char.charCodeAt(0));
 
-				this.cartridge = new Cartridge(new Uint8Array(rom));
+				this.setCartridge(new Cartridge(new Uint8Array(rom)));
 
 				resolve(reader);
 			});
