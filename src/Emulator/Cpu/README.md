@@ -2,6 +2,8 @@
 <summary><strong>Click to Expand the Table of Contents</strong></summary>
 
 - [Terms and Notes](#terms-and-notes)
+- [Add](#add)
+    - [`ADD HL, r16`](#add-hl-r16)
 - [Increment](#increment)
     - [`INC r8`](#inc-r8)
     - [`INC r16`](#inc-r16)
