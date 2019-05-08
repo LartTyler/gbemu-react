@@ -65,6 +65,25 @@ bits of the flags register is not used, and should always contain zeros.
 Each section below contains a table listing all similar instructions. To find a specific opcode quickly, use your
 browser's search function to find `0xYZ`, where `YZ` is the hexidecimal value of the opcode you're looking for.
 
+## Add
+### `ADD HL, r16`
+**Length:** 1 byte
+**Cycles (m-time):** 2
+
+Adds the value in a 16-bit register to the 16-bit `HL` register pair.
+
+#### Flags
+- **Subtract (N)** is always reset.
+- **Half Carry (H)** is set if the low byte (the 8-bit `L` register) overflowed.
+- **Carry (C)** is set if the high byte (the 8-bit `H` register) overflowed.
+
+#### Instructions
+|Opcode|Instruction|
+|0x09|`ADD HL, BC`|
+|0x19|`ADD HL, DE`|
+|0x29|`ADD HL, HL`|
+|0x39|`ADD HL, SP`|
+
 ## Increment
 ### `INC r8`
 **Length:** 1 byte
