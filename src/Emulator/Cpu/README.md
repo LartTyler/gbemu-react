@@ -18,6 +18,8 @@
 - [Bit Shift](#bit-shift)
     - [`RLA`](#rla)
     - [`RLCA`](#rlca)
+    - [`RRA`](#rra)
+    - [`RRCA`](#rrca)
 - [Miscellaneous](#miscellaneous)
     - [`NOP`](#nop)
 </details>
