@@ -15,6 +15,10 @@ export interface ICpuRegisters {
 	l: number;
 	stackPointer: number;
 	programCounter: number;
+
+	bc: number;
+	de: number;
+	hl: number;
 }
 
 export interface ICpu extends IResettable {

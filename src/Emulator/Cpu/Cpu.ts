@@ -1,6 +1,7 @@
 import {ICpu, ICpuRegisters, IHardwareBus, IHardwareBusAware} from '../Hardware';
 import {toHex} from '../Utility/number';
 import {instructions} from './Instructions';
+import {Registers} from './Registers';
 
 export enum RegisterFlag {
 	CARRY = 0x10,
@@ -9,10 +10,12 @@ export enum RegisterFlag {
 	ZERO = 0x80,
 }
 
-export type CpuRegister = 'a' | 'b' | 'c' | 'd' | 'e' | 'h' | 'l' | 'stackPointer';
+export type CpuRegister8 = 'a' | 'b' | 'c' | 'd' | 'e' | 'h' | 'l';
+export type CpuRegister16 = 'stackPointer' | 'bc' | 'de' | 'hl';
+export type CpuRegister = CpuRegister8 | CpuRegister16;
 
 export class Cpu implements ICpu, IHardwareBusAware {
-	public readonly registers: ICpuRegisters;
+	public readonly registers: Registers;
 
 	public clock: number = 0;
 
@@ -22,18 +25,7 @@ export class Cpu implements ICpu, IHardwareBusAware {
 	protected tickIntervalId: number = null;
 
 	public constructor() {
-		this.registers = {
-			a: 0,
-			b: 0,
-			c: 0,
-			d: 0,
-			e: 0,
-			flags: 0,
-			h: 0,
-			l: 0,
-			programCounter: 0,
-			stackPointer: 0,
-		};
+		this.registers = new Registers();
 	}
 
 	public pause(): void {
@@ -65,16 +57,8 @@ export class Cpu implements ICpu, IHardwareBusAware {
 
 	public reset(): void {
 		this.clock = 0;
-		this.registers.a = 0;
-		this.registers.b = 0;
-		this.registers.c = 0;
-		this.registers.d = 0;
-		this.registers.flags = 0;
-		this.registers.e = 0;
-		this.registers.h = 0;
-		this.registers.l = 0;
-		this.registers.programCounter = 0;
-		this.registers.stackPointer = 0;
+
+		this.registers.reset();
 	}
 
 	public setHardwareBus(hardware: IHardwareBus): void {
