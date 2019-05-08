@@ -189,8 +189,8 @@ No flags are modified.
 |0x3E|`LD A, (PC)`|
 
 ### `LD (r16), r8`
-**Length:** 2 bytes
-**Cycles (m-time):** 1
+**Length:** 1 bytes
+**Cycles (m-time):** 2
 
 Loads the value of an 8-bit register into the address pointed to by a 16-bit register pair.
 
