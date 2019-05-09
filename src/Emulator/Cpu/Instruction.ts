@@ -14,11 +14,17 @@ export abstract class Instruction {
 	}
 
 	public execute(hardware: IHardwareBus): void {
+		const programCounter = hardware.cpu.registers.programCounter;
+		const clock = hardware.cpu.clock;
+
 		this.invoke(hardware);
 
-		hardware.cpu.registers.programCounter += this.length;
+		// We should only modify PC automatically if it wasn't modified during instruction execution.
+		if (hardware.cpu.registers.programCounter === programCounter)
+			hardware.cpu.registers.programCounter += this.length;
 
-		if (this.duration !== null)
+		// We should only update the CPU clock automatically if it wasn't modified during instruction execution.
+		if (hardware.cpu.clock === clock && this.duration !== null)
 			hardware.cpu.clock += this.duration;
 	}
 
