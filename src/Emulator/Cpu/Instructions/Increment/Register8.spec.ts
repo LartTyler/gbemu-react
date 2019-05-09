@@ -1,6 +1,5 @@
 import {HardwareBus} from '../../../Hardware/HardwareBus';
-import {Memory} from '../../../Memory/Memory';
-import {Cpu, CpuRegister, RegisterFlag} from '../../Cpu';
+import {CpuRegister, RegisterFlag} from '../../Cpu';
 import {instructions} from '../index';
 
 describe('INC r8', () => {
@@ -12,18 +11,27 @@ describe('INC r8', () => {
 	});
 
 	const runner = (code: number, target: CpuRegister) => {
+		const instruction = instructions.get(code);
+
 		registers[target] = 5;
 
-		instructions.get(code).execute(hardware);
+		instruction.execute(hardware);
 
 		expect(registers[target]).toBe(6);
 
 		expect(hardware.cpu.clock).toBe(1);
 		expect(registers.programCounter).toBe(1);
 
-		registers[target] = 0xFF;
+		registers[target] = 15;
 
-		instructions.get(code).execute(hardware);
+		instruction.execute(hardware);
+
+		expect(registers[target]).toBe(16);
+		expect(registers.flags).toBe(RegisterFlag.HALF_CARRY);
+
+		registers[target] = 255;
+
+		instruction.execute(hardware);
 
 		expect(registers[target]).toBe(0);
 		expect(registers.flags).toBe(RegisterFlag.ZERO | RegisterFlag.HALF_CARRY);
