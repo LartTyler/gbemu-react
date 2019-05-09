@@ -1,10 +1,11 @@
 import {HardwareBus} from '../../../Hardware/HardwareBus';
+import {instructions} from '../index';
 
 describe('STOP', () => {
 	const hardware = new HardwareBus();
 
 	test('STOP', () => {
-		hardware.cpu.stop();
+		instructions.get(0x10).execute(hardware);
 
 		expect(hardware.cpu.clock).toBe(1);
 		expect(hardware.cpu.registers.programCounter).toBe(2);
