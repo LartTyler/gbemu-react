@@ -188,6 +188,29 @@ No flags are modified.
 |---|---|
 |0x18|`JR s8`|
 
+### `JR cc, s8`
+**Length:** 2 bytes
+**Cycles (m-time):** 2 if condition `cc` is not met, 3 if it is
+
+Makes a relative jump (adds a value to `PC`) using a signed immediate 8-bit value, if condition `cc` is met. "Condition"
+is a test against the **Carry (C)** or **Zero (Z)** flags, and may be one of the following tests.
+
+- **Z** if the **Zero (Z)** flag is set.
+- **NZ** if the **Zero (Z)** flag is not set.
+- **C** if the **Carry (C)** flag is set.
+- **NC** if the *Carry (C)** flag is not set.
+
+#### Flags
+No flags are modified.
+
+#### Instructions
+|Opcode|Instruction|
+|---|---|
+|0x20|`JR NZ, s8`|
+|0x28|`JR Z, s8`|
+|0x30|`JR NC, s8`|
+|0x38|`JR C, s8`|
+
 ## Load
 ### `LD r8, n8`
 **Length:** 2 bytes
