@@ -1,6 +1,7 @@
 # Reference
 - [CGB Development Wiki](http://gbdev.gg8.se/wiki/articles/Main_Page)
 - [Detailed CGB Internals](http://marc.rawer.de/Gameboy/Docs/GBCPUman.pdf)
+- [Repository of Useful GB Development Links](https://github.com/gbdev/awesome-gbdev)
 - CPU
     - [Detailed CGB Instruction Reference](https://rednex.github.io/rgbds/gbz80.7.html)
     - [CGB Opcode Table](http://pastraiser.com/cpu/gameboy/gameboy_opcodes.html)
