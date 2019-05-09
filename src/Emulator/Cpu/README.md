@@ -59,7 +59,7 @@ be affected by an instruction, as well as what conditions cause a flag to change
 will not be modified by the instruction, and will instead preserve their old value. Possible flags are:
 
 - **Bit 7: Carry (C)** indicates that the last math instruction caused a 16-bit overflow or underflow, or if the `A` register is the smaller value for comparison operations.
-- **Bit 6: Half Carry (H)** indicates that the last math instruction caused an 8-bit overflow.
+- **Bit 6: Half Carry (H)** indicates that the last math instruction caused the low nibble of an 8-bit value to overflow. [Click here](#half-carry-behavior) for a more detailed explanation.
 - **Bit 5: Subtract (N)** indicates that the last math instruction was a subtraction operation.
 - **Bit 4: Zero (Z)** indicates that the result of a math operation is zero, or that two values are equal for comparison operations.
 
@@ -78,8 +78,8 @@ Adds the value in a 16-bit register to the 16-bit `HL` register pair.
 
 #### Flags
 - **Subtract (N)** is always reset.
-- **Half Carry (H)** is set if the low nibble of the 8-bit `H` register overflowed. [Click here](#16-bit-carries) for a full explanation.
-- **Carry (C)** is set if the high nibble of the 8-bit `H` register overflowed. [Click here](#16-bit-carries) for a full explanation.
+- **Half Carry (H)** is set if bit 11 carried into bit 12. [Click here](#16-bit-half-carries) for a full explanation.
+- **Carry (C)** is set if the operation overflowed (i.e. the new value would be greater than 65535).
 
 #### Instructions
 |Opcode|Instruction|
@@ -99,7 +99,7 @@ Increments the value stored in an 8-bit register.
 #### Flags
 - **Zero (Z)** is set if the result is zero.
 - **Subtract (N)** is always reset.
-- **Half Carry (H)** is set if the operation overflowed (i.e. the new value is 0).
+- **Half Carry (H)** is set if bit 3 carried into bit 4. [Click here](#half-carry-behavior) for a full explanation.
 
 #### Instructions
 |Opcode|Instruction|
@@ -139,7 +139,7 @@ Decrements the value stored in an 8-bit register.
 #### Flags
 - **Zero (Z)** is set if the result is zero.
 - **Subtract (N)** is always set.
-- **Half Carry (H)** is set if the operation overflowed (i.e. the new value is 255).
+- **Half Carry (H)** is set if the there was a borrow from bit 4 to bit 3 during the operation. [Click here](#half-carry-behavior) for a full explanation.
 
 #### Instructions
 |Opcode|Instruction|
@@ -355,11 +355,34 @@ No flags are modified.
 |---|---|
 |0x00|`NOP`|
 
-## 16 Bit Carries
-When the CPU performs 16-bit math operations (such as `ADD HL, r16`), it actually performs two 8-bit operations, first
-on the low byte, then on the high byte. The flags set as a result of 16-bit operations actually come from the results
-of that second operation performed on the high byte. For example, in the case of `ADD HL, r16`, the **Half Carry (H)**
-flag is actually set based on whether or not the 11th bit carried into the 12th, when you consider the `r16` register
-as a whole, not the 8th to 9th bit like you might expect.
+## Half Carry Behavior
+A half carry occurs when a math instruction causes the lower nibble of an 8-bit register to either:
 
-For a more detailed explanation, [click here](https://robdor.com/2016/08/10/gameboy-emulator-half-carry-flag/).
+- Overflow from bit 3 to bit 4, in the case of addition instructions
+- Overflow from bit 4 to bit 3, in the case of subtraction instructions.
+
+For **addition**, the formula for detecting a half carry looks something like this.
+
+```
+(a & 0xF) + (b & 0xF) & 0x10
+```
+
+If the result is non-zero, a half carry occurred. Basically, if adding the low nibble of a and b together cause bit 4 to
+be set (`0x10`), then the operation results in a half carry.
+
+For **subtraction**, the formula for detecting a half carry looks something like this.
+
+```
+(a & 0xF) - (b & 0xF)
+``` 
+
+If the result is less than zero, a half carry occurred. Basically, if the low nibble of a is less than that of b, then
+the operation results in a half carry.
+
+### 16-Bit Half Carries
+16-bit half carries work differently than 8-bit half carries. Instead of operating on the low nibble of a 16-bit value,
+they actually operate on the low nibble of the high byte of the 16-bit value.
+
+You can visualize it by imagining 16-bit math operations as being split into two parts: first, the operation applied to
+the low bytes of the values being added, and then the operation being applied the high bytes of the same. Since the
+high byte is processed last, those are the results that determine which flags are set.
