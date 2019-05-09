@@ -35,3 +35,11 @@ export const from16Bit = (value: number): {high: number, low: number} => {
 export const to16Bit = (high: number, low: number): number => {
 	return (high << 8) + low;
 };
+
+export const fromTwosComplement = (value: number, mask: number = 0x80): number => {
+	return -(value & mask) + (value & ~mask);
+};
+
+export const toTwosComplement = (value: number, mask: number = 0xFF): number => {
+	return value & mask;
+};

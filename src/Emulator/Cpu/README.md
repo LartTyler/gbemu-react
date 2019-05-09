@@ -10,6 +10,8 @@
 - [Decrement](#decrement)
     - [`DEC r8`](#dec-r8)
     - [`DEC r16`](#dec-r16)
+- [Jump](#jump)
+    - [`JR s8`](#jr-s8)
 - [Load](#load)
     - [`LD r8, n8`](#ld-r8-n8)
 	- [`LD r16, r8`](#ld-r16-r8)
@@ -33,6 +35,7 @@
 |`(XY)`|A register or register pair in parenthesis indicates an address reference defined by the register(s)|
 |n8|An immediate 8-bit value (the next byte in memory following the instruction)|
 |n16|An immediate 16-bit value (the next 2 bytes in memory following the instruction)|
+|s8|An immediate 8-bit signed value (the next byte in memory following the instruction, treated as a signed integer)|
 |r8|An 8-bit CPU register|
 |r16|Two 8-bit CPU registers paired to contain a 16-bit value (e.g. `HL`)|
 |(r16)|An address in memory pointed to by a pair of 8-bit CPU registers (e.g. `(HL)`)|
@@ -169,6 +172,21 @@ No flags are modified.
 |0x1B|`DEC DE`|
 |0x2B|`DEC HL`|
 |0x3B|`DEC SP`|
+
+## Jump
+### `JR s8`
+**Length:** 2 bytes
+**Cycles (m-time):** 3
+
+Makes a relative jump (adds a value to `PC`) using a signed immediate 8-bit value.
+
+#### Flags
+No flags are modified.
+
+#### Instructions
+|Opcode|Instruction|
+|---|---|
+|0x18|`JR s8`|
 
 ## Load
 ### `LD r8, n8`
