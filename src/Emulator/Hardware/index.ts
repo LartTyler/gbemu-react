@@ -27,7 +27,7 @@ export interface ICpu extends IResettable {
 	readonly registers: ICpuRegisters;
 
 	start(): void;
-	pause(): void;
+	stop(): void;
 	step(): void;
 }
 

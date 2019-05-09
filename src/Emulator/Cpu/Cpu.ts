@@ -28,7 +28,7 @@ export class Cpu implements ICpu, IHardwareBusAware {
 		this.registers = new Registers();
 	}
 
-	public pause(): void {
+	public stop(): void {
 		this.halt = true;
 	}
 
@@ -43,7 +43,7 @@ export class Cpu implements ICpu, IHardwareBusAware {
 		const operator = instructions.get(opcode);
 
 		if (!operator) {
-			this.pause();
+			this.stop();
 
 			throw new Error(
 				`Instruction ${toHex(opcode)} is not implemented (at ${this.registers.programCounter & 0xFFFF})`,

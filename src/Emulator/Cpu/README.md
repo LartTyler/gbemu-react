@@ -22,6 +22,7 @@
     - [`RRCA`](#rrca)
 - [Miscellaneous](#miscellaneous)
     - [`NOP`](#nop)
+    - [`STOP`](#stop)
 </details>
 
 ## Terms and Notes
@@ -354,6 +355,20 @@ No flags are modified.
 |Opcode|Instruction|
 |---|---|
 |0x00|`NOP`|
+
+### `STOP`
+**Length:** 2 bytes
+**Cycles (m-time):** 1
+
+Stops CPU execution.
+
+#### Flags
+No flags are modified.
+
+#### Instructions
+|Opcode|Instruction|
+|---|---|
+|0x10|`STOP`|
 
 ## Half Carry Behavior
 A half carry occurs when a math instruction causes the lower nibble of an 8-bit register to either:
