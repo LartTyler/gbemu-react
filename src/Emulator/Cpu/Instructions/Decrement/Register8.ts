@@ -13,12 +13,14 @@ export class Register8 extends Instruction {
 	protected invoke(hardware: IHardwareBus): void {
 		const registers = hardware.cpu.registers;
 
+		// A half carry can occur if the bits in the lower nibble are all off prior to the operation.
+		const halfCarry = (registers[this.target] & 0xF) === 0;
 		registers[this.target] -= 1;
 
 		registers.flags &= RegisterFlag.CARRY; // Mask off all flags except the carry flag, which shouldn't be modified
 		registers.flags |= RegisterFlag.SUBTRACT;
 
-		if (registers[this.target] === 0xFF)
+		if (halfCarry)
 			registers.flags |= RegisterFlag.HALF_CARRY;
 		else if (registers[this.target] === 0)
 			registers.flags |= RegisterFlag.ZERO;
