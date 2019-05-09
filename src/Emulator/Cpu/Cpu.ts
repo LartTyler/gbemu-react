@@ -46,11 +46,9 @@ export class Cpu implements ICpu, IHardwareBusAware {
 			this.stop();
 
 			throw new Error(
-				`Instruction ${toHex(opcode)} is not implemented (at ${this.registers.programCounter & 0xFFFF})`,
+				`Instruction ${toHex(opcode)} is not implemented (at ${this.registers.programCounter})`,
 			);
 		}
-
-		this.registers.programCounter &= 0xFFFF;
 
 		operator.execute(this.hardware);
 	}
