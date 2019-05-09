@@ -6,8 +6,8 @@ import {Instruction} from '../../Instruction';
  * RLA
  */
 export class RegisterALeftCarry extends Instruction {
-	public constructor(code: number) {
-		super(code, 'RLA', 1, 1);
+	public constructor() {
+		super(0x17, 'RLA', 1, 1);
 	}
 
 	protected invoke(hardware: IHardwareBus): void {

@@ -5,14 +5,14 @@ import {RegisterARightCarry} from './RegisterARightCarry';
 
 export const bitshiftInstructions = [
 	// RLCA
-	new RegisterALeft(0x07),
+	new RegisterALeft(),
 
 	// RLA
-	new RegisterALeftCarry(0x17),
+	new RegisterALeftCarry(),
 
 	// RRCA
-	new RegisterARight(0x0F),
+	new RegisterARight(),
 
 	// RRA
-	new RegisterARightCarry(0x1F),
+	new RegisterARightCarry(),
 ];
