@@ -50,6 +50,9 @@ export class Cpu implements ICpu, IHardwareBusAware {
 			);
 		}
 
+		/**
+		 * Note: clock and PC updates are handled by {@see Instruction}.
+		 */
 		operator.execute(this.hardware);
 	}
 

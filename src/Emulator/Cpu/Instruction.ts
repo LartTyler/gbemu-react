@@ -19,11 +19,11 @@ export abstract class Instruction {
 
 		this.invoke(hardware);
 
-		// We should only modify PC automatically if it wasn't modified during instruction execution.
+		// Only update PC automatically if it wasn't modified during instruction execution.
 		if (hardware.cpu.registers.programCounter === programCounter)
 			hardware.cpu.registers.programCounter += this.length;
 
-		// We should only update the CPU clock automatically if it wasn't modified during instruction execution.
+		// Only update the CPU clock automatically if it wasn't modified during instruction execution.
 		if (hardware.cpu.clock === clock && this.duration !== null)
 			hardware.cpu.clock += this.duration;
 	}
