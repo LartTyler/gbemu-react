@@ -4,10 +4,10 @@ import {bitshiftInstructions} from './BitShift';
 import {decrementInstructions} from './Decrement';
 import {incrementInstructions} from './Increment';
 import {loadInstructions} from './Load';
-import {Noop} from './Misc/Noop';
+import {miscInstructions} from './Misc';
 
 export const instructions = new InstructionSet([
-	new Noop(),
+	...miscInstructions,
 	...addInstructions,
 	...bitshiftInstructions,
 	...decrementInstructions,
