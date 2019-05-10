@@ -1,3 +1,4 @@
+import {DecimalAdjustA} from './DecimalAdjustA';
 import {Noop} from './Noop';
 import {Stop} from './Stop';
 
@@ -7,4 +8,7 @@ export const miscInstructions = [
 
 	// STOP
 	new Stop(),
+
+	// DAA
+	new DecimalAdjustA(),
 ];

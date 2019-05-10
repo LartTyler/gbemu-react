@@ -27,6 +27,7 @@
 - [Miscellaneous](#miscellaneous)
     - [`NOP`](#nop)
     - [`STOP`](#stop)
+    - [`DAA`](#daa)
 </details>
 
 ## Terms and Notes
@@ -442,6 +443,34 @@ No flags are modified.
 |Opcode|Instruction|
 |---|---|
 |0x10|`STOP`|
+
+### `DAA`
+**Length:** 1 byte
+**Cycles (m-time):** 1
+
+Corrects the 8-bit value in register `A` so that it's properly encoded as a [binary-coded decimal](https://en.wikipedia.org/wiki/Binary-coded_decimal).
+This instruction is intended for use following add / subtract instructions, and uses the flags set by those instructions
+to determine how the value in `A` needs to be adjusted.
+
+If the previous operation was an add (**Subtract (N)** flag is unset), `DAA` takes the following actions.
+
+- If the **Carry (C)** flag is set, or if `A > 0x99` (the largest possible 8-bit BCD value), add 0x60 (+6 to high nibble).
+- If the **Half Carry (H)** flag is set, of if `(A & 0x0F) > 0x09` (the largest possible BCD value for a nibble), add 0x6 (+6 to low nibble).
+
+If the previous operation was a subtract (**Subtract (N)** flag is set), `DAA` takes the following actions.
+
+- If the **Carry (C)** flag is set, subtract 0x60 (-6 from high nibble).
+- If the **Half Carry (H)** flag is set, subtract 0x6 (-6 from low nibble).
+
+#### Flags
+- **Zero (Z)** is set if the result is zero.
+- **Half Carry (H)** is always reset.
+- **Carry (C)** is set if 6 was added to or subtracted from the high nibble (i.e. if the respective **Carry (C)** condition was triggered).
+
+#### Instructions
+|Opcode|Instruction|
+|---|---|
+|0x27|`DAA`|
 
 ## Half Carry Behavior
 A half carry occurs when a math instruction causes the lower nibble of an 8-bit register to either:
