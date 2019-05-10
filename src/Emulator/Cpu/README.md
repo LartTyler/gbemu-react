@@ -19,6 +19,7 @@
 	- [`LD n16, SP`](#ld-n16-sp)
 	- [`LDI (r16), r8`](#ldi-r16-r8)
 	- [`LDD (r16), r8`](#ldd-r16-r8)
+	- [`LDI r8, (r16)`](#ldi-r8-r16)
 - [Bit Shift](#bit-shift)
     - [`RLA`](#rla)
     - [`RLCA`](#rlca)
@@ -325,6 +326,21 @@ No flags are modified.
 |Opcode|Instruction|
 |---|---|
 |0x32|`LDD (HL), A`|
+
+### `LDI r8, (r16)`
+**Length:** 1 byte
+**Cycles (m-time):** 2
+
+Loads the 8-bit value stored at the address pointed to by the 16-bit register `(r16)` into the 8-bit register `r8`, then
+post-increments the 16-bit register pair `r16`.
+
+#### Flags
+No flags are modified.
+
+#### Instructions
+|Opcode|Instruction|
+|---|---|
+|0x2A|`LDI A, (HL)`|
 
 ## Bit Shift
 ### `RLA`

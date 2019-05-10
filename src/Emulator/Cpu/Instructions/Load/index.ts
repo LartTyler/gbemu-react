@@ -4,6 +4,7 @@ import {Register16AddressFromRegister8PostDecrement} from './Register16AddressFr
 import {Register16AddressFromRegister8PostIncrement} from './Register16AddressFromRegister8PostIncrement';
 import {Register16FromValue16} from './Register16FromValue16';
 import {Register8FromRegister16Address} from './Register8FromRegister16Address';
+import {Register8FromRegister16AddressPostIncrement} from './Register8FromRegister16AddressPostIncrement';
 import {Register8FromValue8} from './Register8FromValue8';
 
 export const loadInstructions = [
@@ -35,6 +36,9 @@ export const loadInstructions = [
 
 	// LDI (r16), r8
 	new Register16AddressFromRegister8PostIncrement(0x22, 'hl', 'a'),
+
+	// LDI r8, (r16)
+	new Register8FromRegister16AddressPostIncrement(0x2A, 'a', 'hl'),
 
 	// LDD (r16), r8
 	new Register16AddressFromRegister8PostDecrement(0x32, 'hl', 'a'),
