@@ -18,6 +18,7 @@
 	- [`LD r16, n16`](#ld-r16-n16)
 	- [`LD n16, SP`](#ld-n16-sp)
 	- [`LDI (r16), r8`](#ldi-r16-r8)
+	- [`LDD (r16), r8`](#ldd-r16-r8)
 - [Bit Shift](#bit-shift)
     - [`RLA`](#rla)
     - [`RLCA`](#rlca)
