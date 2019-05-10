@@ -1,4 +1,5 @@
 import {Register16} from './Register16';
+import {Register16Address} from './Register16Address';
 import {Register8} from './Register8';
 
 export const incrementInstructions = [
@@ -16,4 +17,7 @@ export const incrementInstructions = [
 	new Register16(0x13, 'de'),
 	new Register16(0x23, 'hl'),
 	new Register16(0x33, 'stackPointer'),
+
+	// INC (r16)
+	new Register16Address(0x34, 'hl'),
 ];

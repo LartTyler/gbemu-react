@@ -7,6 +7,7 @@
 - [Increment](#increment)
     - [`INC r8`](#inc-r8)
     - [`INC r16`](#inc-r16)
+    - [`INC (r16)` (Address)](#inc-r16-address)
 - [Decrement](#decrement)
     - [`DEC r8`](#dec-r8)
     - [`DEC r16`](#dec-r16)
@@ -138,6 +139,22 @@ No flags are modified.
 |0x13|`INC DE`|
 |0x23|`INC HL`|
 |0x33|`INC SP`|
+
+### `INC (r16)` (Address)
+**Length:** 1 byte
+**Cycles (m-time):** 3
+
+Increments the value pointed to by a 16-bit register pair.
+
+#### Flags
+- **Zero (Z)** is set if the result is zero.
+- **Subtract (N)** is always reset.
+- **Half Carry (H)** is set if bit 3 carried into bit 4. [Click here](#half-carry-behavior) for a full explanation.
+
+#### Instructions
+|Opcode|Instruction|
+|---|---|
+|0x34|`INC (HL)`|
 
 ## Decrement
 ### `DEC r8`
