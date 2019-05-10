@@ -23,8 +23,4 @@ export class InstructionSet {
 	public all(): Instruction[] {
 		return this.instructions;
 	}
-
-	public count(): number {
-		return this.all().length;
-	}
 }
