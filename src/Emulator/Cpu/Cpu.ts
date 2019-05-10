@@ -1,4 +1,4 @@
-import {ICpu, ICpuRegisters, IHardwareBus, IHardwareBusAware} from '../Hardware';
+import {ICpu, IHardwareBus, IHardwareBusAware} from '../Hardware';
 import {toHex} from '../Utility/number';
 import {instructions} from './Instructions';
 import {Registers} from './Registers';
