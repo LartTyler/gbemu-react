@@ -1,3 +1,4 @@
+import {ComplementA} from './ComplementA';
 import {DecimalAdjustA} from './DecimalAdjustA';
 import {Noop} from './Noop';
 import {Stop} from './Stop';
@@ -11,4 +12,7 @@ export const miscInstructions = [
 
 	// DAA
 	new DecimalAdjustA(),
+
+	// CPL
+	new ComplementA(),
 ];

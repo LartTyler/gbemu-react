@@ -30,6 +30,7 @@
     - [`NOP`](#nop)
     - [`STOP`](#stop)
     - [`DAA`](#daa)
+    - [`CPL`](#cpl)
 </details>
 
 ## Terms and Notes
@@ -503,6 +504,21 @@ If the previous operation was a subtract (**Subtract (N)** flag is set), `DAA` t
 |Opcode|Instruction|
 |---|---|
 |0x27|`DAA`|
+
+### `CPL`
+**Length:** 1 byte
+**Cycles (m-time):** 1
+
+Inverts the bits in the 8-bit `A` register (i.e. the bitwise expression `~A`).
+
+#### Flags
+- **Subtract (N)** is always set.
+- **Half Carry (H)** is always set.
+
+#### Instructions
+|Opcode|Instruction|
+|---|---|
+|0x2F|`CPL`|
 
 ## Half Carry Behavior
 A half carry occurs when a math instruction causes the lower nibble of an 8-bit register to either:
