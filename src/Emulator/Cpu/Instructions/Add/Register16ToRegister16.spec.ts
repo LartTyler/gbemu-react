@@ -1,5 +1,5 @@
 import {HardwareBus} from '../../../Hardware/HardwareBus';
-import {CpuRegister16, RegisterFlag} from '../../Cpu';
+import {CpuRegister16, RegisterFlag} from '../../Registers';
 import {instructions} from '../index';
 
 describe('ADD r16, 16', () => {

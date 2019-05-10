@@ -1,7 +1,8 @@
 import {HardwareBus} from '../../../Hardware/HardwareBus';
 import {Memory} from '../../../Memory/Memory';
 import {from16Bit} from '../../../Utility/number';
-import {Cpu, CpuRegister} from '../../Cpu';
+import {Cpu} from '../../Cpu';
+import {CpuRegister} from '../../Registers';
 import {instructions} from '../index';
 
 describe('DEC r16', () => {

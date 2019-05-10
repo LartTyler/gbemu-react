@@ -1,4 +1,5 @@
-import {CpuRegister, RegisterFlag} from '../Cpu/Cpu';
+
+import {CpuRegister, RegisterFlag} from '../Cpu/Registers';
 
 export const fromBinary = (data: Uint8Array): string => String.fromCharCode(...data).replace(/\0/g, '');
 

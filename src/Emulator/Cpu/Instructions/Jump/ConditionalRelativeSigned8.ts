@@ -1,8 +1,8 @@
 import {IHardwareBus} from '../../../Hardware';
 import {fromTwosComplement} from '../../../Utility/number';
 import {toFlagDisplayName} from '../../../Utility/string';
-import {RegisterFlag} from '../../Cpu';
 import {Instruction} from '../../Instruction';
+import {RegisterFlag} from '../../Registers';
 
 /**
  * JR cc, s8

@@ -1,6 +1,6 @@
 import {IHardwareBus} from '../../../Hardware';
-import {CpuRegister8, RegisterFlag} from '../../Cpu';
 import {Instruction} from '../../Instruction';
+import {CpuRegister8, RegisterFlag} from '../../Registers';
 
 /**
  * DEC r8

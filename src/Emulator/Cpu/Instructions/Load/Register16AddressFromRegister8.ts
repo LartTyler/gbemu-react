@@ -1,7 +1,7 @@
 import {IHardwareBus} from '../../../Hardware';
 import {toRegisterDisplayName} from '../../../Utility/string';
-import {CpuRegister16, CpuRegister8} from '../../Cpu';
 import {Instruction} from '../../Instruction';
+import {CpuRegister16, CpuRegister8} from '../../Registers';
 
 /**
  * LD (r16), r8

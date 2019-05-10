@@ -1,4 +1,4 @@
-import {RegisterFlag} from '../../Cpu';
+import {RegisterFlag} from '../../Registers';
 import {ConditionalRelativeSigned8} from './ConditionalRelativeSigned8';
 import {RelativeSigned8} from './RelativeSigned8';
 

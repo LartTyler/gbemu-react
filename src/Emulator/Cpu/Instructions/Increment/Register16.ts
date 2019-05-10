@@ -1,8 +1,8 @@
 import {IHardwareBus} from '../../../Hardware';
 import {from16Bit, to16Bit} from '../../../Utility/number';
 import {toRegisterDisplayName} from '../../../Utility/string';
-import {CpuRegister, CpuRegister16} from '../../Cpu';
 import {Instruction} from '../../Instruction';
+import {CpuRegister, CpuRegister16} from '../../Registers';
 
 /**
  * INC r16

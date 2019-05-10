@@ -1,6 +1,6 @@
 import {IHardwareBus} from '../../../Hardware';
-import {RegisterFlag} from '../../Cpu';
 import {Instruction} from '../../Instruction';
+import {RegisterFlag} from '../../Registers';
 
 /**
  * RRA

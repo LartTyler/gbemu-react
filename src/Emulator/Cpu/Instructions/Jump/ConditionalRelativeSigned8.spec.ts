@@ -1,6 +1,6 @@
 import {HardwareBus} from '../../../Hardware/HardwareBus';
 import {toTwosComplement} from '../../../Utility/number';
-import {RegisterFlag} from '../../Cpu';
+import {RegisterFlag} from '../../Registers';
 import {instructions} from '../index';
 
 describe('JR cc, s8', () => {

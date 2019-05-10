@@ -1,6 +1,6 @@
 import {IHardwareBus} from '../../../Hardware';
-import {CpuRegister16, RegisterFlag} from '../../Cpu';
 import {Instruction} from '../../Instruction';
+import {CpuRegister16, RegisterFlag} from '../../Registers';
 
 /**
  * ADD r16, r16

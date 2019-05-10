@@ -1,6 +1,6 @@
 import {IHardwareBus} from '../../../Hardware';
-import {CpuRegister8} from '../../Cpu';
 import {Instruction} from '../../Instruction';
+import {CpuRegister8} from '../../Registers';
 
 /**
  * LD r8, n8

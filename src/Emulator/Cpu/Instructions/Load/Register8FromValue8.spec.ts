@@ -1,5 +1,5 @@
 import {HardwareBus} from '../../../Hardware/HardwareBus';
-import {CpuRegister} from '../../Cpu';
+import {CpuRegister} from '../../Registers';
 import {instructions} from '../index';
 
 describe('LD r8, n8', () => {
