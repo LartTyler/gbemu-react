@@ -184,6 +184,8 @@ export class Memory implements IMemory {
 	}
 
 	public write(address: number, value: number): void {
+		value &= 0xFF;
+
 		if (address === 0x100)
 			this.inBios = false;
 
