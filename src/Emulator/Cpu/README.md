@@ -11,6 +11,7 @@
 - [Decrement](#decrement)
     - [`DEC r8`](#dec-r8)
     - [`DEC r16`](#dec-r16)
+    - [`DEC (r16)` (Address)](#dec-r16-address)
 - [Jump](#jump)
     - [`JR s8`](#jr-s8)
 - [Load](#load)
@@ -195,6 +196,22 @@ No flags are modified.
 |0x1B|`DEC DE`|
 |0x2B|`DEC HL`|
 |0x3B|`DEC SP`|
+
+### `DEC (r16)` (Address)
+**Length:** 1
+**Cycles (m-time):** 3
+
+Decrements the value pointed to by a 16-bit register pair.
+
+#### Flags
+- **Zero (Z)** is set if the result is zero.
+- **Subtract (N)** is always set.
+- **Half Carry (H)** is set if the there was a borrow from bit 4 to bit 3 during the operation. [Click here](#half-carry-behavior) for a full explanation.
+
+#### Instructions
+|Opcode|Instruction|
+|---|---|
+|0x35|`DEC (HL)`|
 
 ## Jump
 ### `JR s8`
