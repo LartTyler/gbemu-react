@@ -12,6 +12,7 @@
     - [`SBC r8, r8`](#sbc-r8-r8)
     - [`SBC r8, (r16)`](#sbc-r8-r16)
     - [`CP r8, r8`](#cp-r8-r8)
+    - [`CP r8, (r16)`](#cp-r8-r16)
 - [Increment](#increment)
     - [`INC r8`](#inc-r8)
     - [`INC r16`](#inc-r16)
@@ -302,6 +303,25 @@ Compares the values in two 8-bit registers by subtracting them and setting the a
 |0xBC|`CP A, H`|
 |0xBD|`CP A, L`|
 |0xBF|`CP A, A`|
+
+### `CP r8, (r16)`
+**Length:** 1 byte
+**Cycles (m-time):** 2
+
+Compares the value in an 8-bit register with the byte pointed to by a 16-bit register pair by subtracting them and
+setting the appropriarte flags (as in [`SUB r8, (r16)`](#sub-r8-r16)), but does not store the result or change any
+registers aside from the flags register.
+
+#### Flags
+- **Zero (Z)** is set if the result is 0.
+- **Subtract (N)** is always set.
+- **Half Carry (H)** is set if there was a borrow from bit 4 to bit 3. [Click here](#half-carry-behavior) for a full explanation.
+- **Carry (C)** is set if the operation overflowed (i.e. the new value would be less than 0).
+
+#### Instructions
+|Opcode|Instruction
+|---|---|
+|0xBE|`CP A, (HL)`|
 
 ## Increment
 ### `INC r8`
