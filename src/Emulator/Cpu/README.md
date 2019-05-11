@@ -36,6 +36,7 @@
     - [`LDD r8, (r16)`](#ldd-r8-r16)
 - [Bitwise](#bitwise)
     - [`AND r8, r8`](#and-r8-r8)
+    - [`AND r8, (r16)`](#and-r8-16)
     - [`RLA`](#rla)
     - [`RLCA`](#rlca)
     - [`RRA`](#rra)
@@ -641,7 +642,8 @@ No flags are modified.
 **Length:** 1 byte
 **Cycles:** 1
 
-Applies the bitwise AND operator to two 8-bit registers, masking off all bits that aren't set in both registers.
+Applies the bitwise AND operator to two 8-bit registers, masking off all bits that aren't set in both registers. The
+result is stored in the 8-bit register on the left.
 
 #### Flags
 - **Zero (Z)** is set if the result is 0.
@@ -659,6 +661,24 @@ Applies the bitwise AND operator to two 8-bit registers, masking off all bits th
 |0xA4|`AND A, H`|
 |0xA5|`AND A, L`|
 |0xA7|`AND A, A`|
+
+### `AND r8, (r16)`
+**Length:** 1 byte
+**Cycles (m-time):** 2
+
+Applies the bitwise AND operator to an 8-bit register and the byte at the address pointed to by a 16-bit register pair,
+masking off all bits that aren't set in both values. The result is stored in `r8`.
+
+#### Flags
+- **Zero (Z)** is set if the result is 0.
+- **Subtract (N)** is always reset.
+- **Half Carry (H)** is always set.
+- **Carry (C)** is always reset.
+
+#### Instructions
+|Opcode|Instruction
+|---|---|
+|0xA6|`AND A, (HL)`|
 
 ### `RLA`
 **Length:** 1 byte
