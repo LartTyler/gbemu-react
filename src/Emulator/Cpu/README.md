@@ -1,6 +1,7 @@
 ## Instructions
 - [Terms and Notes](#terms-and-notes)
 - [Add](#add)
+    - [`ADD r8, r8`](#add-r8-r8)
     - [`ADD r16, r16`](#add-r16-r16)
 - [Increment](#increment)
     - [`INC r8`](#inc-r8)
@@ -86,6 +87,29 @@ Each section below contains a table listing all similar instructions. To find a 
 browser's search function to find `0xYZ`, where `YZ` is the hexidecimal value of the opcode you're looking for.
 
 ## Add
+### `ADD r8, r8`
+**Length:** 1 byte
+**Cycles (m-time):** 1
+
+Adds the value in an 8-bit register to the value in another 8-bit register.
+
+#### Flags
+- **Zero (Z)** is set if the result is 0.
+- **Subtract (N)** is always reset.
+- **Half Carry (H)** is set if bit 3 carried into bit 4. [Click here](#half-carry-behavior) for a full explanation.
+- **Carry (C)** is set if the operation overflowed (i.e. the new value would be greater than 65535).
+
+#### Instructions
+|Opcode|Instruction
+|---|---|
+|0x80|`ADD A, B`|
+|0x81|`ADD A, C`|
+|0x82|`ADD A, D`|
+|0x83|`ADD A, E`|
+|0x84|`ADD A, H`|
+|0x85|`ADD A, L`|
+|0x87|`ADD A, A`|
+
 ### `ADD r16, r16`
 **Length:** 1 byte
 **Cycles (m-time):** 2
