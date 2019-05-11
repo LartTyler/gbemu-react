@@ -1,3 +1,4 @@
+import {Register16AddressToRegister8} from './Register16AddressToRegister8';
 import {Register16ToRegister16} from './Register16ToRegister16';
 import {Register8ToRegister8} from './Register8ToRegister8';
 
@@ -16,4 +17,7 @@ export const addInstructions = [
 	new Register16ToRegister16(0x19, 'hl', 'de'),
 	new Register16ToRegister16(0x29, 'hl', 'hl'),
 	new Register16ToRegister16(0x39, 'hl', 'stackPointer'),
+
+	// ADD r8, (r16)
+	new Register16AddressToRegister8(0x86, 'a', 'hl'),
 ];
