@@ -37,6 +37,7 @@
 - [Bitwise](#bitwise)
     - [`AND r8, r8`](#and-r8-r8)
     - [`AND r8, (r16)`](#and-r8-r16)
+    - [`XOR r8, r8`](#xor-r8-r8)
     - [`RLA`](#rla)
     - [`RLCA`](#rlca)
     - [`RRA`](#rra)
@@ -679,6 +680,30 @@ masking off all bits that aren't set in both values. The result is stored in `r8
 |Opcode|Instruction
 |---|---|
 |0xA6|`AND A, (HL)`|
+
+### `XOR r8, r8`
+**Length:** 1 byte
+**Cycles (m-time):** 1
+
+Applies the bitwise XOR operation to two 8-bit registers, masking off all bits that are set in both registers. The
+result is stored in the left register.
+
+#### Flags
+- **Zero (Z)** is set if the result is 0.
+- **Subtract (N)** is always reset.
+- **Half Carry (H)** is always reset.
+- **Carry (C)** is always reset.
+
+#### Instructions
+|Opcode|Instruction
+|---|---|
+|0xA8|`XOR A, B`|
+|0xA9|`XOR A, C`|
+|0xAA|`XOR A, D`|
+|0xAB|`XOR A, E`|
+|0xAC|`XOR A, H`|
+|0xAD|`XOR A, L`|
+|0xAF|`XOR A, A`|
 
 ### `RLA`
 **Length:** 1 byte
