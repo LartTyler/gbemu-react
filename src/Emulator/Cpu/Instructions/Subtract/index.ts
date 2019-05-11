@@ -1,3 +1,4 @@
+import {CompareRegister8AndRegister8} from './CompareRegister8AndRegister8';
 import {Register16AddressFromRegister8} from './Register16AddressFromRegister8';
 import {Register16AddressFromRegister8Carry} from './Register16AddressFromRegister8Carry';
 import {Register8FromRegister8} from './Register8FromRegister8';
@@ -27,4 +28,13 @@ export const subtractInstructions = [
 
 	// SBC r8, (r16)
 	new Register16AddressFromRegister8Carry(0x9E, 'a', 'hl'),
+
+	// CP r8, r8
+	new CompareRegister8AndRegister8(0xB8, 'a', 'b'), // nice b8 m8
+	new CompareRegister8AndRegister8(0xB9, 'a', 'c'),
+	new CompareRegister8AndRegister8(0xBA, 'a', 'd'),
+	new CompareRegister8AndRegister8(0xBB, 'a', 'e'),
+	new CompareRegister8AndRegister8(0xBC, 'a', 'h'),
+	new CompareRegister8AndRegister8(0xBD, 'a', 'l'),
+	new CompareRegister8AndRegister8(0xBF, 'a', 'a'),
 ];
