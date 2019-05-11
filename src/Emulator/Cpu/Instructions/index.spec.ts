@@ -1,5 +1,5 @@
 import {toHex} from '../../Utility/number';
-import {instructions} from './index';
+import {extendedInstructions, instructions} from './index';
 
 declare global {
 	namespace jest {
@@ -9,13 +9,7 @@ declare global {
 	}
 }
 
-describe('Primary instructions', () => {
-	const primarySkipped = [0xD3, 0xDB, 0xE3, 0xE4, 0xEB, 0xEC, 0xED, 0xF4, 0xFC, 0xFD];
-	const primaryOpcodes = (new Array(255))
-		.fill(0)
-		.map((_, index) => index)
-		.filter(code => primarySkipped.indexOf(code) === -1);
-
+describe('Instructions', () => {
 	expect.extend({
 		toContainOpcodes(actual: number[], expected: number[]) {
 			const missing: number[] = [];
@@ -46,9 +40,22 @@ describe('Primary instructions', () => {
 		},
 	});
 
-	test('Correct instruction count', () => {
+	test('All primary instructions are implemented', () => {
 		const implemented = instructions.all().map(instruction => instruction.code);
 
-		expect(implemented).toContainOpcodes(primaryOpcodes);
+		const skipped = [0xD3, 0xDB, 0xE3, 0xE4, 0xEB, 0xEC, 0xED, 0xF4, 0xFC, 0xFD];
+		const opcodes = (new Array(255))
+			.fill(0)
+			.map((_, index) => index)
+			.filter(code => skipped.indexOf(code) === -1);
+
+		expect(implemented).toContainOpcodes(opcodes);
+	});
+
+	test('All extended instructions are implemented', () => {
+		const implemented = extendedInstructions.all().map(instruction => instruction.code);
+		const opcodes = (new Array(255)).fill(0).map((_, index) => index);
+
+		expect(implemented).toContainOpcodes(opcodes);
 	});
 });
