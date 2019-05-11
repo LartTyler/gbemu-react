@@ -1,6 +1,3 @@
-<details>
-<summary><strong>Click to Expand the Table of Contents</strong></summary>
-
 - [Terms and Notes](#terms-and-notes)
 - [Add](#add)
     - [`ADD HL, r16`](#add-hl-r16)
@@ -40,7 +37,6 @@
     - [`CPL`](#cpl)
     - [`SCF`](#scf)
     - [`CCF`](#ccf)
-</details>
 
 ## Terms and Notes
 |Term|Meaning|
