@@ -4,6 +4,7 @@
     - [`ADD r8, r8`](#add-r8-r8)
     - [`ADD r16, r16`](#add-r16-r16)
     - [`ADD r8, (r16)`](#add-r8-r16)
+    - [`ADC r8, r8`](#adc-r8-r8)
 - [Increment](#increment)
     - [`INC r8`](#inc-r8)
     - [`INC r16`](#inc-r16)
@@ -146,6 +147,29 @@ Adds the byte pointed to by a 16-bit register pair to an 8-bit register.
 |Opcode|Instruction
 |---|---|
 |0x86|`ADD A, (HL)`|
+
+### `ADC r8, r8`
+**Length:** 1 byte
+**Cycles (m-time):** 1
+
+Adds the value in an 8-bit register to the value in another 8-bit register, plus 1 if the **Carry (C)** flag is set.
+
+#### Flags
+- **Zero (Z)** is set if the result is 0.
+- **Subtract (N)** is always reset.
+- **Half Carry (H)** is set if bit 3 carried into bit 4. [Click here](#half-carry-behavior) for a full explanation.
+- **Carry (C)** is set if the operation overflowed (i.e. the new value would be greater than 65535).
+
+#### Instructions
+|Opcode|Instruction
+|---|---|
+|0x88|`ADC A, B`|
+|0x89|`ADC A, C`|
+|0x8A|`ADC A, D`|
+|0x8B|`ADC A, E`|
+|0x8C|`ADC A, H`|
+|0x8D|`ADC A, L`|
+|0x8F|`ADC A, A`|
 
 ## Increment
 ### `INC r8`

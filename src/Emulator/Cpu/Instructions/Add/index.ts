@@ -1,6 +1,7 @@
 import {Register16AddressToRegister8} from './Register16AddressToRegister8';
 import {Register16ToRegister16} from './Register16ToRegister16';
 import {Register8ToRegister8} from './Register8ToRegister8';
+import {Register8ToRegister8Carry} from './Register8ToRegister8Carry';
 
 export const addInstructions = [
 	// ADD r8, r8
@@ -20,4 +21,13 @@ export const addInstructions = [
 
 	// ADD r8, (r16)
 	new Register16AddressToRegister8(0x86, 'a', 'hl'),
+
+	// ADC r8, r8
+	new Register8ToRegister8Carry(0x88, 'a', 'b'),
+	new Register8ToRegister8Carry(0x89, 'a', 'c'),
+	new Register8ToRegister8Carry(0x8A, 'a', 'd'),
+	new Register8ToRegister8Carry(0x8B, 'a', 'e'),
+	new Register8ToRegister8Carry(0x8C, 'a', 'h'),
+	new Register8ToRegister8Carry(0x8D, 'a', 'l'),
+	new Register8ToRegister8Carry(0x8F, 'a', 'a'),
 ];
