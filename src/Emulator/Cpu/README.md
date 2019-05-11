@@ -36,7 +36,7 @@
     - [`LDD r8, (r16)`](#ldd-r8-r16)
 - [Bitwise](#bitwise)
     - [`AND r8, r8`](#and-r8-r8)
-    - [`AND r8, (r16)`](#and-r8-16)
+    - [`AND r8, (r16)`](#and-r8-r16)
     - [`RLA`](#rla)
     - [`RLCA`](#rlca)
     - [`RRA`](#rra)
