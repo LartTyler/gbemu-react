@@ -1,7 +1,7 @@
 ## Instructions
 - [Terms and Notes](#terms-and-notes)
 - [Add](#add)
-    - [`ADD HL, r16`](#add-hl-r16)
+    - [`ADD r16, r16`](#add-r16-r16)
 - [Increment](#increment)
     - [`INC r8`](#inc-r8)
     - [`INC r16`](#inc-r16)
@@ -86,11 +86,11 @@ Each section below contains a table listing all similar instructions. To find a 
 browser's search function to find `0xYZ`, where `YZ` is the hexidecimal value of the opcode you're looking for.
 
 ## Add
-### `ADD HL, r16`
+### `ADD r16, r16`
 **Length:** 1 byte
 **Cycles (m-time):** 2
 
-Adds the value in a 16-bit register to the 16-bit `HL` register pair.
+Adds the value in a 16-bit register pair to another 16-bit register pair.
 
 #### Flags
 - **Subtract (N)** is always reset.
