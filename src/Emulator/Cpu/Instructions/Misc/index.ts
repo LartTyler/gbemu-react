@@ -1,6 +1,7 @@
 import {ComplementA} from './ComplementA';
 import {ComplementCarryFlag} from './ComplementCarryFlag';
 import {DecimalAdjustA} from './DecimalAdjustA';
+import {Halt} from './Halt';
 import {Noop} from './Noop';
 import {SetCarryFlag} from './SetCarryFlag';
 import {Stop} from './Stop';
@@ -11,6 +12,9 @@ export const miscInstructions = [
 
 	// STOP
 	new Stop(),
+
+	// HALT
+	new Halt(),
 
 	// DAA
 	new DecimalAdjustA(),

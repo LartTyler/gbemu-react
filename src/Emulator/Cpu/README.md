@@ -579,6 +579,9 @@ No flags are modified.
 
 Stops CPU execution.
 
+Technically, this isn't how this instruction is supposed to behave, but for now `STOP` is the same as [`HALT`](#halt),
+except it has a length of 2 bytes.
+
 #### Flags
 No flags are modified.
 
@@ -586,6 +589,20 @@ No flags are modified.
 |Opcode|Instruction|
 |---|---|
 |0x10|`STOP`|
+
+### `HALT`
+**Length:** 1 byte
+**Cycles (m-time):** 0
+
+Stops CPU execution. 
+
+#### Flags
+No flags are modified.
+
+#### Instructions
+|Opcode|Instruction
+|---|---|
+|0x76|`HALT`|
 
 ### `DAA`
 **Length:** 1 byte
