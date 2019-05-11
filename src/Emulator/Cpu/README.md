@@ -34,6 +34,7 @@
 - [Miscellaneous](#miscellaneous)
     - [`NOP`](#nop)
     - [`STOP`](#stop)
+    - [`HALT`](#halt)
     - [`DAA`](#daa)
     - [`CPL`](#cpl)
     - [`SCF`](#scf)
