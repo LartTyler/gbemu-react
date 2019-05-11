@@ -16,15 +16,16 @@
     - [`JR s8`](#jr-s8)
 - [Load](#load)
     - [`LD r8, n8`](#ld-r8-n8)
+    - [`LD r8, (r16)`](#ld-r8-r16)
     - [`LD r8, r8`](#ld-r8-r8)
-	- [`LD r16, r8`](#ld-r16-r8)
-	- [`LD r16, n16`](#ld-r16-n16)
-	- [`LD n16, SP`](#ld-n16-sp)
-	- [`LD (r16), n8`](#ld-r16-n8)
-	- [`LDI (r16), r8`](#ldi-r16-r8)
-	- [`LDI r8, (r16)`](#ldi-r8-r16)
-	- [`LDD (r16), r8`](#ldd-r16-r8)
-	- [`LDD r8, (r16)`](#ldd-r8-r16)
+    - [`LD r16, r8`](#ld-r16-r8)
+    - [`LD r16, n16`](#ld-r16-n16)
+    - [`LD n16, SP`](#ld-n16-sp)
+    - [`LD (r16), n8`](#ld-r16-n8)
+    - [`LDI (r16), r8`](#ldi-r16-r8)
+    - [`LDI r8, (r16)`](#ldi-r8-r16)
+    - [`LDD (r16), r8`](#ldd-r16-r8)
+    - [`LDD r8, (r16)`](#ldd-r8-r16)
 - [Bit Shift](#bit-shift)
     - [`RLA`](#rla)
     - [`RLCA`](#rlca)
@@ -332,6 +333,14 @@ No flags are modified.
 |---|---|
 |0x0A|`LD A, (BC)`|
 |0x1A|`LD A, (DE)`|
+|0x46|`LD B, (HL)`|
+|0x4E|`LD C, (HL)`|
+|0x56|`LD D, (HL)`|
+|0x5E|`LD E, (HL)`|
+|0x66|`LD H, (HL)`|
+|0x6E|`LD L, (HL)`|
+|0x7E|`LD A, (HL)`|
+
 
 ### `LD (r16), r8`
 **Length:** 1 bytes

@@ -74,6 +74,13 @@ export const loadInstructions = [
 	// LD r8, (r16)
 	new Register8FromRegister16Address(0x0A, 'a', 'bc'),
 	new Register8FromRegister16Address(0x1A, 'a', 'de'),
+	new Register8FromRegister16Address(0x46, 'b', 'hl'),
+	new Register8FromRegister16Address(0x4E, 'c', 'hl'),
+	new Register8FromRegister16Address(0x56, 'd', 'hl'),
+	new Register8FromRegister16Address(0x5E, 'e', 'hl'),
+	new Register8FromRegister16Address(0x66, 'h', 'hl'),
+	new Register8FromRegister16Address(0x6E, 'l', 'hl'),
+	new Register8FromRegister16Address(0x7E, 'a', 'hl'),
 
 	// LD r16, n16
 	new Register16FromValue16(0x01, 'bc'),
