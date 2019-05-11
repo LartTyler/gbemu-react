@@ -35,6 +35,7 @@
     - [`DAA`](#daa)
     - [`CPL`](#cpl)
     - [`SCF`](#scf)
+    - [`CCF`](#ccf)
 </details>
 
 ## Terms and Notes
@@ -574,17 +575,33 @@ Inverts the bits in the 8-bit `A` register (i.e. the bitwise expression `~A`).
 **Length:** 1 byte
 **Cycles (m-time):** 1
 
-Sets the carry flag, and resets **Subtract (N)** and **Half Carry (H)** flags.
+Sets the carry flag.
 
 #### Flags
-- **Subtract (N)** flag is always reset.
-- **Half Carry (H)** flag is always reset.
-- **Carry (C)** flag is always set.
+- **Subtract (N)** is always reset.
+- **Half Carry (H)** is always reset.
+- **Carry (C)** is always set.
 
 #### Instructions
 |Opcode|Instruction|
 |---|---|
 |0x37|`SCF`|
+
+### `CCF`
+**Length:** 1 byte
+**Cycles (m-time):** 1
+
+Inverts the **Carry (C)** flag bit.
+
+#### Flags
+- **Subtract (N)** is always reset.
+- **Half Carry (H)** is always reset.
+- **Carry (C)** is inverted (it's set if it wasn't set, and unset if it was).
+
+#### Instructions
+|Opcode|Instruction|
+|---|---|
+|0x3F|`CCF`|
 
 ## Half Carry Behavior
 A half carry occurs when a math instruction causes the lower nibble of an 8-bit register to either:
