@@ -706,6 +706,6 @@ the operation results in a half carry.
 16-bit half carries work differently than 8-bit half carries. Instead of operating on the low nibble of a 16-bit value,
 they actually operate on the low nibble of the high byte of the 16-bit value.
 
-You can visualize it by imagining 16-bit math operations as being split into two parts: first, the operation applied to
-the low bytes of the values being added, and then the operation being applied the high bytes of the same. Since the
+You can visualize it by imagining 16-bit math operations as being split into two parts: first, the operation is applied
+to the low byte of the values being added, and then the operation is applied to the high byte of the same. Since the
 high byte is processed last, those are the results that determine which flags are set.
