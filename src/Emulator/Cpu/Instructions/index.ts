@@ -16,3 +16,5 @@ export const instructions = new InstructionSet([
 	...jumpInstructions,
 	...loadInstructions,
 ]);
+
+export const extendedInstructions = new InstructionSet([]);
