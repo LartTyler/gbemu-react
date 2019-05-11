@@ -1,5 +1,4 @@
 import {IHardwareBus} from '../../../Hardware';
-import {regionBoundries} from '../../../Memory/Memory';
 import {Instruction} from '../../Instruction';
 import {RegisterFlag} from '../../Registers';
 
