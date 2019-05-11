@@ -37,6 +37,7 @@
 - [Bitwise](#bitwise)
     - [`AND r8, r8`](#and-r8-r8)
     - [`AND r8, (r16)`](#and-r8-r16)
+    - [`OR r8, r8`](#or-r8-r8)
     - [`XOR r8, r8`](#xor-r8-r8)
     - [`XOR r8, (r16)`](#xor-r8-r16)
     - [`RLA`](#rla)
@@ -681,6 +682,30 @@ masking off all bits that aren't set in both values. The result is stored in `r8
 |Opcode|Instruction
 |---|---|
 |0xA6|`AND A, (HL)`|
+
+### `OR r8, r8`
+**Length:** 1 byte
+**Cycles (m-time):** 1
+
+Applies the bitwise OR operator to two 8-bit registers, masking on all bits that are set in either register. The result
+is stored in the left register.
+
+#### Flags
+- **Zero (Z)** is set if the result is 0.
+- **Subtract (N)** is always reset.
+- **Half Carry (H)** is always reset.
+- **Carry (C)** is always reset.
+
+#### Instructions
+|Opcode|Instruction
+|---|---|
+|0xB0|`OR A, B`|
+|0xB1|`OR A, C`|
+|0xB2|`OR A, D`|
+|0xB3|`OR A, E`|
+|0xB4|`OR A, H`|
+|0xB5|`OR A, L`|
+|0xB7|`OR A, A`|
 
 ### `XOR r8, r8`
 **Length:** 1 byte
