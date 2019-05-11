@@ -1,6 +1,7 @@
 import {ComplementA} from './ComplementA';
 import {DecimalAdjustA} from './DecimalAdjustA';
 import {Noop} from './Noop';
+import {SetCarryFlag} from './SetCarryFlag';
 import {Stop} from './Stop';
 
 export const miscInstructions = [
@@ -15,4 +16,7 @@ export const miscInstructions = [
 
 	// CPL
 	new ComplementA(),
+
+	// SCF
+	new SetCarryFlag(),
 ];
