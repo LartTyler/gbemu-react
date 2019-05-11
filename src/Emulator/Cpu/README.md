@@ -14,6 +14,7 @@
     - [`DEC (r16)` (Address)](#dec-r16-address)
 - [Jump](#jump)
     - [`JR s8`](#jr-s8)
+    - [`JR cc, s8`](#jr-cc-s8)
 - [Load](#load)
     - [`LD r8, n8`](#ld-r8-n8)
     - [`LD r8, (r16)`](#ld-r8-r16)
@@ -244,7 +245,7 @@ is a test against the **Carry (C)** or **Zero (Z)** flags, and may be one of the
 - **Z** if the **Zero (Z)** flag is set.
 - **NZ** if the **Zero (Z)** flag is not set.
 - **C** if the **Carry (C)** flag is set.
-- **NC** if the *Carry (C)** flag is not set.
+- **NC** if the **Carry (C)** flag is not set.
 
 #### Flags
 No flags are modified.
