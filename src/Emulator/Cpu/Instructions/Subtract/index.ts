@@ -1,4 +1,5 @@
 import {Register16AddressFromRegister8} from './Register16AddressFromRegister8';
+import {Register16AddressFromRegister8Carry} from './Register16AddressFromRegister8Carry';
 import {Register8FromRegister8} from './Register8FromRegister8';
 import {Register8FromRegister8Carry} from './Register8FromRegister8Carry';
 
@@ -23,4 +24,7 @@ export const subtractInstructions = [
 	new Register8FromRegister8Carry(0x9C, 'a', 'h'),
 	new Register8FromRegister8Carry(0x9D, 'a', 'l'),
 	new Register8FromRegister8Carry(0x9F, 'a', 'a'),
+
+	// SBC r8, (r16)
+	new Register16AddressFromRegister8Carry(0x9E, 'a', 'hl'),
 ];
