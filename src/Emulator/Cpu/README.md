@@ -19,6 +19,7 @@
 	- [`LD r16, r8`](#ld-r16-r8)
 	- [`LD r16, n16`](#ld-r16-n16)
 	- [`LD n16, SP`](#ld-n16-sp)
+	- [`LD (r16), n8`](#ld-r16-n8)
 	- [`LDI (r16), r8`](#ldi-r16-r8)
 	- [`LDI r8, (r16)`](#ldi-r8-r16)
 	- [`LDD (r16), r8`](#ldd-r16-r8)
@@ -332,6 +333,20 @@ No flags are modified.
 |Opcode|Instruction|
 |---|---|
 |0x08|`LD (PC), SP`|
+
+### `LD (r16), n8`
+**Length:** 2 bytes
+**Cycles (m-time):** 3
+
+Loads an immediate 8-bit value into the address pointed to by the 16-bit register pair `(r16)`.
+
+#### Flags
+No flags are modified.
+
+#### Instructions
+|Opcode|Instruction|
+|---|---|
+|0x36|`LD (HL), n8`|
 
 ### `LDI (r16), r8`
 **Length:** 1 byte
