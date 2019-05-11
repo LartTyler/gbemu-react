@@ -1,13 +1,13 @@
-import {IHardwareBus} from '../../../Hardware';
-import {Instruction} from '../../Instruction';
-import {RegisterFlag} from '../../Registers';
+import {IHardwareBus} from '../../../../Hardware';
+import {Instruction} from '../../../Instruction';
+import {RegisterFlag} from '../../../Registers';
 
 /**
- * RRCA
+ * RRA
  */
-export class RegisterARight extends Instruction {
+export class RegisterARightCarry extends Instruction {
 	public constructor() {
-		super(0x0F, 'RRCA', 1, 1);
+		super(0x1F, 'RRA', 1, 1);
 	}
 
 	protected invoke(hardware: IHardwareBus): void {
@@ -16,10 +16,12 @@ export class RegisterARight extends Instruction {
 		const lowBit = registers.a & 0x01; // mask off all bits except LSB
 		registers.a = registers.a >> 1;
 
-		if (lowBit) {
+		if (registers.flags & RegisterFlag.CARRY)
 			registers.a |= 0x80; // mask on MSB
+
+		if (lowBit)
 			registers.flags = RegisterFlag.CARRY;
-		} else
+		else
 			registers.flags = 0;
 	}
 }

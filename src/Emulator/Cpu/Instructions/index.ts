@@ -1,6 +1,6 @@
 import {InstructionSet} from '../InstructionSet';
 import {addInstructions} from './Add';
-import {bitshiftInstructions} from './BitShift';
+import {bitwiseInstructions} from './Bitwise';
 import {decrementInstructions} from './Decrement';
 import {incrementInstructions} from './Increment';
 import {jumpInstructions} from './Jump';
@@ -12,7 +12,7 @@ export const instructions = new InstructionSet([
 	...miscInstructions,
 	...addInstructions,
 	...subtractInstructions,
-	...bitshiftInstructions,
+	...bitwiseInstructions,
 	...decrementInstructions,
 	...incrementInstructions,
 	...jumpInstructions,

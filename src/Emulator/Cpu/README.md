@@ -34,7 +34,8 @@
     - [`LDI r8, (r16)`](#ldi-r8-r16)
     - [`LDD (r16), r8`](#ldd-r16-r8)
     - [`LDD r8, (r16)`](#ldd-r8-r16)
-- [Bit Shift](#bit-shift)
+- [Bitwise](#bitwise)
+    - [`AND r8, r8`](#and-r8-r8)
     - [`RLA`](#rla)
     - [`RLCA`](#rlca)
     - [`RRA`](#rra)
@@ -635,7 +636,30 @@ No flags are modified.
 |---|---|
 |0x3A|`LDD A, (HL)`|
 
-## Bit Shift
+## Bitwise
+### `AND r8, r8`
+**Length:** 1 byte
+**Cycles:** 1
+
+Applies the bitwise AND operator to two 8-bit registers, masking off all bits that aren't set in both registers.
+
+#### Flags
+- **Zero (Z)** is set if the result is 0.
+- **Subtract (N)** is always reset.
+- **Half Carry (H)** is always set.
+- **Carry (C)** is always reset.
+
+#### Instructions
+|Opcode|Instruction
+|---|---|
+|0xA0|`AND A, B`|
+|0xA1|`AND A, C`|
+|0xA2|`AND A, D`|
+|0xA3|`AND A, E`|
+|0xA4|`AND A, H`|
+|0xA5|`AND A, L`|
+|0xA7|`AND A, A`|
+
 ### `RLA`
 **Length:** 1 byte
 **Cycles (m-time):** 1

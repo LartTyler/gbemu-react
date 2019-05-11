@@ -1,6 +1,6 @@
-import {HardwareBus} from '../../../Hardware/HardwareBus';
-import {RegisterFlag} from '../../Registers';
-import {instructions} from '../index';
+import {HardwareBus} from '../../../../Hardware/HardwareBus';
+import {RegisterFlag} from '../../../Registers';
+import {instructions} from '../../index';
 
 describe('RRA', () => {
 	const hardware = new HardwareBus();

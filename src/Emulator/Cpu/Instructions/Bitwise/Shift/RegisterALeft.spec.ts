@@ -1,13 +1,13 @@
-import {HardwareBus} from '../../../Hardware/HardwareBus';
-import {RegisterFlag} from '../../Registers';
-import {instructions} from '../index';
+import {HardwareBus} from '../../../../Hardware/HardwareBus';
+import {RegisterFlag} from '../../../Registers';
+import {instructions} from '../../index';
 
-describe('RLA', () => {
+describe('RLCA', () => {
 	const hardware = new HardwareBus();
 	const registers = hardware.cpu.registers;
 
-	test('RLA', () => {
-		const instruction = instructions.get(0x17);
+	test('RLCA', () => {
+		const instruction = instructions.get(0x07);
 
 		registers.a = 0b0001;
 
@@ -23,12 +23,7 @@ describe('RLA', () => {
 
 		instruction.execute(hardware);
 
-		expect(registers.a).toBe(0);
-		expect(registers.flags).toBe(RegisterFlag.CARRY);
-
-		instruction.execute(hardware);
-
 		expect(registers.a).toBe(0b0001);
-		expect(registers.flags).toBe(0);
+		expect(registers.flags).toBe(RegisterFlag.CARRY);
 	});
 });

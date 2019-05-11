@@ -3,7 +3,7 @@ import {RegisterALeftCarry} from './RegisterALeftCarry';
 import {RegisterARight} from './RegisterARight';
 import {RegisterARightCarry} from './RegisterARightCarry';
 
-export const bitshiftInstructions = [
+export const shiftInstructions = [
 	// RLCA
 	new RegisterALeft(),
 
