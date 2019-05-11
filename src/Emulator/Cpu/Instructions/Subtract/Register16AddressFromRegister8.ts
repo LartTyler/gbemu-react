@@ -18,6 +18,7 @@ export class Register16AddressFromRegister8 extends AbstractFromRegister8 {
 			registers,
 			registers[this.minuend],
 			hardware.memory.read(registers[this.subtrahend]),
+			false,
 		);
 	}
 }
