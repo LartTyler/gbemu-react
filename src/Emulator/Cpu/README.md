@@ -18,7 +18,7 @@
     - [`LD r8, n8`](#ld-r8-n8)
     - [`LD r8, (r16)`](#ld-r8-r16)
     - [`LD r8, r8`](#ld-r8-r8)
-    - [`LD r16, r8`](#ld-r16-r8)
+    - [`LD (r16), r8`](#ld-r16-r8)
     - [`LD r16, n16`](#ld-r16-n16)
     - [`LD n16, SP`](#ld-n16-sp)
     - [`LD (r16), n8`](#ld-r16-n8)
@@ -356,6 +356,13 @@ No flags are modified.
 |---|---|
 |0x02|`LD (BC), A`|
 |0x12|`LD (DE), A`|
+|0x70|`LD (HL), B`|
+|0x71|`LD (HL), C`|
+|0x72|`LD (HL), D`|
+|0x73|`LD (HL), E`|
+|0x74|`LD (HL), H`|
+|0x75|`LD (HL), L`|
+|0x77|`LD (HL), A`|
 
 ### `LD r16, n16`
 **Length:** 3 bytes
