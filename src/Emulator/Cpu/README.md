@@ -6,6 +6,8 @@
     - [`ADD r8, (r16)`](#add-r8-r16)
     - [`ADC r8, r8`](#adc-r8-r8)
     - [`ADC r8, (r16)`](#adc-r8-r16)
+- [Subtract](#subtract)
+    - [`SUB r8, r8`](#sub-r8-r8)
 - [Increment](#increment)
     - [`INC r8`](#inc-r8)
     - [`INC r16`](#inc-r16)
@@ -183,6 +185,30 @@ Adds the value pointed to by a 16-bit register to an 8-bit register, plus 1 if t
 - **Subtract (N)** is always reset.
 - **Half Carry (H)** is set if bit 3 carried into bit 4. [Click here](#half-carry-behavior) for a full explanation.
 - **Carry (C)** is set if the operation overflowed (i.e. the new value would be greater than 65535).
+
+## Subtract
+### `SUB r8, r8`
+**Length:** 1 byte
+**Cycles (m-time):** 1
+
+Subtracts the value in an 8-bit register from the value in another 8-bit register.
+
+#### Flags
+- **Zero (Z)** is set if the result is 0.
+- **Subtract (N)** is always set.
+- **Half Carry (H)** is set if there was a borrow from bit 4 to bit 3. [Click here](#half-carry-behavior) for a full explanation.
+- **Carry (C)** is set if the operation overflowed (i.e. the new value would be less than 0).
+
+#### Instructions
+|Opcode|Instruction
+|---|---|
+|0x90|`SUB A, B`|
+|0x91|`SUB A, C`|
+|0x92|`SUB A, D`|
+|0x93|`SUB A, E`|
+|0x94|`SUB A, H`|
+|0x95|`SUB A, L`|
+|0x97|`SUB A, A`|
  
 ## Increment
 ### `INC r8`
