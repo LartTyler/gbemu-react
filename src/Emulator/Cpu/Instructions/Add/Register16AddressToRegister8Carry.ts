@@ -1,12 +1,12 @@
 import {IHardwareBus} from '../../../Hardware';
 import {toRegisterDisplayName} from '../../../Utility/string';
 import {CpuRegister16, CpuRegister8} from '../../Registers';
-import {AbstractToRegister8Carry} from './AbstractToRegister8Carry';
+import {AbstractToRegister8} from './AbstractToRegister8';
 
 /**
  * ADC r8, (r16)
  */
-export class Register16AddressToRegister8Carry extends AbstractToRegister8Carry {
+export class Register16AddressToRegister8Carry extends AbstractToRegister8 {
 	public constructor(code: number, protected target: CpuRegister8, protected source: CpuRegister16) {
 		super(code, `ADC ${target.toUpperCase()}, (${toRegisterDisplayName(source)})`, 1, 2);
 	}
@@ -18,6 +18,7 @@ export class Register16AddressToRegister8Carry extends AbstractToRegister8Carry 
 			registers,
 			registers[this.target],
 			hardware.memory.read(registers[this.source]),
+			true,
 		);
 	}
 }

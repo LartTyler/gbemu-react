@@ -13,6 +13,6 @@ export class Register8ToRegister8 extends AbstractToRegister8 {
 	protected invoke(hardware: IHardwareBus): void {
 		const registers = hardware.cpu.registers;
 
-		registers[this.target] = this.process(registers, registers[this.target], registers[this.source]);
+		registers[this.target] = this.process(registers, registers[this.target], registers[this.source], false);
 	}
 }
