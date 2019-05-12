@@ -904,6 +904,22 @@ Performs a bit rotation to the right on the 8-bit register `A`. The bit leaving 
 |0x0F|`RRCA`|
 
 ## Subroutines
+### `RET`
+**Length:** 1 byte
+**Cycles (m-time):** 4
+
+Returns from a subroutine.
+
+Additionally, as a side-effect of this instruction, a 16-bit value is popped off the stack, incrementing `SP` by 2.
+
+#### Flags
+No flags are modified.
+
+#### Instructions
+|Opcode|Instruction
+|---|---|
+|0xC9|`RET`|
+
 ### `RET cc`
 **Length:** 1 byte
 **Cycles (m-time):** 2 if condition `cc` is not met, 5 if it is
@@ -915,6 +931,9 @@ against the **Carry (C)** or **Zero (Z)** flags, and may be one of the following
 - **NZ** if the **Zero (Z)** flag is not set.
 - **C** if the **Carry (C)** flag is set.
 - **NC** if the **Carry (C)** flag is not set.
+
+Additionally, as a side-effect of this instruction, a 16-bit value is popped off the stack, incrementing `SP` by 2 (if
+`cc` evaluated to true).
 
 #### Flags
 No flags are modified.
