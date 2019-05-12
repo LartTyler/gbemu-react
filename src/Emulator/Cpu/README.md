@@ -47,6 +47,8 @@
     - [`RLCA`](#rlca)
     - [`RRA`](#rra)
     - [`RRCA`](#rrca)
+- [Stack](#stack)
+    - [`POP r16`](#pop-r16)
 - [Subroutines](#subroutines)
     - [`RET cc`](#ret-cc)
 - [Miscellaneous](#miscellaneous)
@@ -902,6 +904,26 @@ Performs a bit rotation to the right on the 8-bit register `A`. The bit leaving 
 |Opcode|Instruction|
 |---|---|
 |0x0F|`RRCA`|
+
+## Stack
+### `POP r16`
+**Length:** 1 byte
+**Cycles (m-time):** 3
+
+Pops a 16-bit value off the stack into the 16-bit register pair `r16`.
+
+Additionally, as a side-effect of this instruction, `SP` is incremented by 2 (since a 16-bit value is popped off the
+stack).
+
+#### Flags
+No flags are modified.
+
+#### Instructions
+|Opcode|Instruction
+|---|---|
+|0xC1|`POP BC`|
+|0xD1|`POP DE`|
+|0xE1|`POP HL`|
 
 ## Subroutines
 ### `RET`
