@@ -935,7 +935,7 @@ low byte (the byte stored at `SP`) is loaded into the flags register, and the hi
 loaded into `A`.
 
 #### Flags
-Flags are set according to the byte stored in `SP`.
+Flags are set according to the byte stored at `SP`.
 
 #### Instructions
 |Opcode|Instruction
