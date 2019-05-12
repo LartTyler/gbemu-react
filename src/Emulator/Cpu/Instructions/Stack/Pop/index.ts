@@ -1,3 +1,4 @@
+import {AccumulatorAndFlags} from './AccumulatorAndFlags';
 import {Register16} from './Register16';
 
 export const popInstructions = [
@@ -5,4 +6,7 @@ export const popInstructions = [
 	new Register16(0xC1, 'bc'),
 	new Register16(0xD1, 'de'),
 	new Register16(0xE1, 'hl'),
+
+	// POP AF
+	new AccumulatorAndFlags(/* 0xF1 */),
 ];

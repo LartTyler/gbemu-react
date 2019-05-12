@@ -49,6 +49,7 @@
     - [`RRCA`](#rrca)
 - [Stack](#stack)
     - [`POP r16`](#pop-r16)
+    - [`POP AF`](#pop-af)
 - [Subroutines](#subroutines)
     - [`RET cc`](#ret-cc)
 - [Miscellaneous](#miscellaneous)
@@ -924,6 +925,22 @@ No flags are modified.
 |0xC1|`POP BC`|
 |0xD1|`POP DE`|
 |0xE1|`POP HL`|
+
+### `POP AF`
+**Length:** 1
+**Cycles (m-time):** 3
+
+Performs a [`POP r16`](#pop-r16), except the bytes are loaded into the 8-bit `A` register and the flags register. The
+low byte (the byte stored at `SP`) is loaded into the flags register, and the high byte (the byte stored at `SP + 1`) is
+loaded into `A`.
+
+#### Flags
+Flags are set according to the byte stored in `SP`.
+
+#### Instructions
+|Opcode|Instruction
+|---|---|
+|0xF1|`POP AF`|
 
 ## Subroutines
 ### `RET`
