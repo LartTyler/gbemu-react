@@ -47,6 +47,8 @@
     - [`RLCA`](#rlca)
     - [`RRA`](#rra)
     - [`RRCA`](#rrca)
+- [Subroutines](#subroutines)
+    - [`RET cc`](#ret-cc)
 - [Miscellaneous](#miscellaneous)
     - [`NOP`](#nop)
     - [`STOP`](#stop)
@@ -900,6 +902,30 @@ Performs a bit rotation to the right on the 8-bit register `A`. The bit leaving 
 |Opcode|Instruction|
 |---|---|
 |0x0F|`RRCA`|
+
+## Subroutines
+### `RET cc`
+**Length:** 1 byte
+**Cycles (m-time):** 2 if condition `cc` is not met, 5 if it is
+
+Returns from a subroutine if condition `cc` is met. Conditions may be one of the following tests. "Condition" is a test
+against the **Carry (C)** or **Zero (Z)** flags, and may be one of the following tests.
+
+- **Z** if the **Zero (Z)** flag is set.
+- **NZ** if the **Zero (Z)** flag is not set.
+- **C** if the **Carry (C)** flag is set.
+- **NC** if the **Carry (C)** flag is not set.
+
+#### Flags
+No flags are modified.
+
+#### Instructions
+|Opcode|Instruction
+|---|---|
+|0xC0|`RET NZ`|
+|0xC8|`RET Z`|
+|0xD0|`RET NC`|
+|0xD8|`RET C`|
 
 ## Miscellaneous
 ### `NOP`

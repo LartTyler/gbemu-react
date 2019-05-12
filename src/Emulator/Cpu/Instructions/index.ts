@@ -6,6 +6,7 @@ import {incrementInstructions} from './Increment';
 import {jumpInstructions} from './Jump';
 import {loadInstructions} from './Load';
 import {miscInstructions} from './Misc';
+import {subroutineInstructions} from './Subroutine';
 import {subtractInstructions} from './Subtract';
 
 export const instructions = new InstructionSet([
@@ -17,6 +18,7 @@ export const instructions = new InstructionSet([
 	...incrementInstructions,
 	...jumpInstructions,
 	...loadInstructions,
+	...subroutineInstructions,
 ]);
 
 export const extendedInstructions = new InstructionSet([]);
