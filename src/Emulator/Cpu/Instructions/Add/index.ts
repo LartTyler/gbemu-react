@@ -15,6 +15,9 @@ export const addInstructions = [
 	new Register8ToRegister8(0x85, 'a', 'l'),
 	new Register8ToRegister8(0x87, 'a', 'a'),
 
+	// ADD r8, n8
+	new Value8ToRegister8(0xC6, 'a'),
+
 	// ADD r16, r16
 	new Register16ToRegister16(0x09, 'hl', 'bc'),
 	new Register16ToRegister16(0x19, 'hl', 'de'),
@@ -23,9 +26,6 @@ export const addInstructions = [
 
 	// ADD r8, (r16)
 	new Register16AddressToRegister8(0x86, 'a', 'hl'),
-
-	// ADD r8, n8
-	new Value8ToRegister8(0xC6, 'a'),
 
 	// ADC r8, r8
 	new Register8ToRegister8Carry(0x88, 'a', 'b'),
