@@ -2,6 +2,7 @@
 - [Terms and Notes](#terms-and-notes)
 - [Add](#add)
     - [`ADD r8, r8`](#add-r8-r8)
+    - [`ADD r8, n8`](#add-r8-n8)
     - [`ADD r16, r16`](#add-r16-r16)
     - [`ADD r8, (r16)`](#add-r8-r16)
     - [`ADC r8, r8`](#adc-r8-r8)
@@ -137,6 +138,23 @@ Adds the value in an 8-bit register to the value in another 8-bit register.
 |0x84|`ADD A, H`|
 |0x85|`ADD A, L`|
 |0x87|`ADD A, A`|
+
+### `ADD r8, n8`
+**Length:** 2 bytes
+**Cycles (m-time):** 2
+
+Adds an immediate 8-bit value (the byte following the instruction in memory) to an 8-bit register.
+
+#### Flags
+- **Zero (Z)** is set if the result is 0.
+- **Subtract (N)** is always reset.
+- **Half Carry (H)** is set if bit 3 carried into bit 4. [Click here](#half-carry-behavior) for a full explanation.
+- **Carry (C)** is set if the operation overflowed (i.e. the new value would be greater than 65535).
+
+#### Instructions
+|Opcode|Instruction
+|---|---|
+|0xC6|`ADD A, n8`|
 
 ### `ADD r16, r16`
 **Length:** 1 byte
