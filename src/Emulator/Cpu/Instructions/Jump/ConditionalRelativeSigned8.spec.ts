@@ -11,7 +11,7 @@ describe('JR cc, s8', () => {
 		hardware.cpu.reset();
 		hardware.cpu.registers.programCounter = 0xC000;
 
-		hardware.memory.write(0xC002, 6);
+		hardware.memory.write(0xC001, 7);
 		hardware.memory.write(0xC008, toTwosComplement(-8));
 	});
 
@@ -22,7 +22,7 @@ describe('JR cc, s8', () => {
 
 		instruction.execute(hardware);
 
-		expect(registers.programCounter).toBe(0xC002);
+		expect(registers.programCounter).toBe(0xC001);
 		expect(hardware.cpu.clock).toBe(2);
 
 		registers.flags = flags;

@@ -17,7 +17,7 @@ describe('RLCA', () => {
 		expect(registers.flags).toBe(0);
 
 		expect(hardware.cpu.clock).toBe(1);
-		expect(registers.programCounter).toBe(1);
+		expect(registers.programCounter).toBe(0);
 
 		registers.a = 0b10000000;
 

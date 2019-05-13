@@ -19,7 +19,7 @@ describe('DEC r8', () => {
 		expect(registers.flags).toBe(RegisterFlag.SUBTRACT);
 
 		expect(hardware.cpu.clock).toBe(1);
-		expect(registers.programCounter).toBe(1);
+		expect(registers.programCounter).toBe(0);
 
 		registers[target] = 1;
 

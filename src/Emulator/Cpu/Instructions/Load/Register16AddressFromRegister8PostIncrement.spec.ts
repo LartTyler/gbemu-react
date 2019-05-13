@@ -19,6 +19,6 @@ describe('LDI (r16), r8', () => {
 		expect(registers.hl).toBe(0xC001);
 
 		expect(hardware.cpu.clock).toBe(2);
-		expect(registers.programCounter).toBe(1);
+		expect(registers.programCounter).toBe(0);
 	});
 });

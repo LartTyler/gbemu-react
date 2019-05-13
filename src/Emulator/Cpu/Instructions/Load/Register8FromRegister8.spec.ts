@@ -15,7 +15,7 @@ describe('LD r8, r8', () => {
 
 		expect(registers[target]).toBe(8);
 
-		expect(registers.programCounter).toBe(1);
+		expect(registers.programCounter).toBe(0);
 		expect(hardware.cpu.clock).toBe(1);
 	};
 

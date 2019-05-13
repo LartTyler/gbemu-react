@@ -15,7 +15,7 @@ describe('CP r8, (r16)', () => {
 
 		instruction.execute(hardware);
 
-		expect(registers.programCounter).toBe(1);
+		expect(registers.programCounter).toBe(0);
 		expect(hardware.cpu.clock).toBe(2);
 
 		expect(registers.a).toBe(5);

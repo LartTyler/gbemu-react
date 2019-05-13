@@ -22,6 +22,7 @@
     - [`DEC r16`](#dec-r16)
     - [`DEC (r16)` (Address)](#dec-r16-address)
 - [Jump](#jump)
+    - [`JP cc, (n16)`](#jp-cc-n16)
     - [`JR s8`](#jr-s8)
     - [`JR cc, s8`](#jr-cc-s8)
 - [Load](#load)
@@ -441,6 +442,30 @@ Decrements the value pointed to by a 16-bit register pair.
 |0x35|`DEC (HL)`|
 
 ## Jump
+### `JP cc, (n16)`
+**Length:** 3 bytes
+**Cycles (m-time):** 3 if condition `cc` is not met, 4 if it is
+
+Sets `PC` to the address pointed to by the immediate 16-bit value `n16` (the current value of `PC` and `PC + 1`), if the
+condition `cc` is met. "Condition" is a test against the **Carry (C)** or **Zero (Z)** flags, and may be one of the
+following tests.
+                       
+- **Z** if the **Zero (Z)** flag is set.
+- **NZ** if the **Zero (Z)** flag is not set.
+- **C** if the **Carry (C)** flag is set.
+- **NC** if the **Carry (C)** flag is not set.
+
+#### Flags
+No flags are modified.
+
+#### Instructions
+|Opcode|Instruction
+|---|---|
+|0xC2|`JP NZ, (n16)`|
+|0xCA|`JP Z, (n16)`|
+|0xD2|`JP NC, (n16)`|
+|0xDA|`JP C, (n16)`|
+
 ### `JR s8`
 **Length:** 2 bytes
 **Cycles (m-time):** 3

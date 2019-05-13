@@ -17,7 +17,7 @@ describe('DEC (r16)', () => {
 		expect(hardware.memory.read(registers.hl)).toBe(4);
 		expect(registers.flags).toBe(RegisterFlag.SUBTRACT);
 
-		expect(registers.programCounter).toBe(1);
+		expect(registers.programCounter).toBe(0);
 		expect(hardware.cpu.clock).toBe(3);
 
 		hardware.memory.write(registers.hl, 1);

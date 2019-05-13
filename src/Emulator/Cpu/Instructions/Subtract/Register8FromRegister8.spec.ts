@@ -16,7 +16,7 @@ describe('SUB r8, r8', () => {
 
 		instruction.execute(hardware);
 
-		expect(registers.programCounter).toBe(1);
+		expect(registers.programCounter).toBe(0);
 		expect(hardware.cpu.clock).toBe(1);
 
 		expect(registers[minuend]).toBe(4);
@@ -54,7 +54,7 @@ describe('SUB r8, r8', () => {
 		expect(registers.a).toBe(0);
 		expect(registers.flags).toBe(RegisterFlag.SUBTRACT | RegisterFlag.ZERO);
 
-		expect(registers.programCounter).toBe(1);
+		expect(registers.programCounter).toBe(0);
 		expect(hardware.cpu.clock).toBe(1);
 	});
 });

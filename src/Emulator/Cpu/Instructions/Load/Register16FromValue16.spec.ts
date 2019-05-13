@@ -24,7 +24,7 @@ describe('LD r16, n16', () => {
 			expect(to16Bit(hardware.cpu.registers[high], hardware.cpu.registers[low])).toBe(500);
 
 		expect(hardware.cpu.clock).toBe(3);
-		expect(hardware.cpu.registers.programCounter).toBe(0xC003);
+		expect(hardware.cpu.registers.programCounter).toBe(0xC002);
 	};
 
 	test('LD BC, (PC)', () => runner(0x01, 'b', 'c'));

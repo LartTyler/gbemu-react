@@ -19,7 +19,7 @@ describe('OR r8, r8', () => {
 		expect(registers[target]).toBe(0b1101);
 		expect(registers.flags).toBe(0);
 
-		expect(registers.programCounter).toBe(1);
+		expect(registers.programCounter).toBe(0);
 		expect(hardware.cpu.clock).toBe(1);
 
 		registers[target] = 0;
@@ -47,7 +47,7 @@ describe('OR r8, r8', () => {
 		expect(registers.a).toBe(0b1001);
 		expect(registers.flags).toBe(0);
 
-		expect(registers.programCounter).toBe(1);
+		expect(registers.programCounter).toBe(0);
 		expect(hardware.cpu.clock).toBe(1);
 
 		registers.a = 0;

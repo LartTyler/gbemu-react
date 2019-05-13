@@ -19,7 +19,7 @@ describe('XOR r8, r8', () => {
 		expect(registers[target]).toBe(0b1100);
 		expect(registers.flags).toBe(0);
 
-		expect(registers.programCounter).toBe(1);
+		expect(registers.programCounter).toBe(0);
 		expect(hardware.cpu.clock).toBe(1);
 
 		registers[target] = 0b1101;
@@ -45,7 +45,7 @@ describe('XOR r8, r8', () => {
 		expect(registers.a).toBe(0);
 		expect(registers.flags).toBe(RegisterFlag.ZERO);
 
-		expect(registers.programCounter).toBe(1);
+		expect(registers.programCounter).toBe(0);
 		expect(hardware.cpu.clock).toBe(1);
 	});
 });

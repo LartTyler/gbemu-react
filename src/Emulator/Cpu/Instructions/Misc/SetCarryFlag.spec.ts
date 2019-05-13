@@ -1,4 +1,3 @@
-import {regExpLiteral} from '@babel/types';
 import {HardwareBus} from '../../../Hardware/HardwareBus';
 import {RegisterFlag} from '../../Registers';
 import {instructions} from '../index';
@@ -12,7 +11,7 @@ describe('SCF', () => {
 		instructions.get(0x37).execute(hardware);
 
 		expect(hardware.cpu.registers.flags).toBe(RegisterFlag.CARRY);
-		expect(hardware.cpu.registers.programCounter).toBe(1);
+		expect(hardware.cpu.registers.programCounter).toBe(0);
 		expect(hardware.cpu.clock).toBe(1);
 	});
 });

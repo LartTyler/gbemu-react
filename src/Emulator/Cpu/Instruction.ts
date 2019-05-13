@@ -19,9 +19,10 @@ export abstract class Instruction {
 
 		this.invoke(hardware);
 
-		// Only update PC automatically if it wasn't modified during instruction execution.
-		if (hardware.cpu.registers.programCounter === programCounter)
-			hardware.cpu.registers.programCounter += this.length;
+		// Only update PC automatically if it wasn't modified during instruction execution, and length is greater than
+		// the default 1 byte that every instruction must occupy.
+		if (hardware.cpu.registers.programCounter === programCounter && this.length > 1)
+			hardware.cpu.registers.programCounter += this.length - 1;
 
 		// Only update the CPU clock automatically if it wasn't modified during instruction execution.
 		if (hardware.cpu.clock === clock && this.duration !== null)

@@ -23,7 +23,7 @@ describe('RET cc', () => {
 
 		instruction.execute(hardware);
 
-		expect(registers.programCounter).toBe(0xC101);
+		expect(registers.programCounter).toBe(0xC100);
 		expect(hardware.cpu.clock).toBe(2);
 
 		registers.flags = flag;

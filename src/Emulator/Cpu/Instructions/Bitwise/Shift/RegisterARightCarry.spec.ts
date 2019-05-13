@@ -16,7 +16,7 @@ describe('RRA', () => {
 		expect(registers.a).toBe(0);
 		expect(registers.flags).toBe(RegisterFlag.CARRY);
 
-		expect(registers.programCounter).toBe(1);
+		expect(registers.programCounter).toBe(0);
 		expect(hardware.cpu.clock).toBe(1);
 
 		instruction.execute(hardware);

@@ -7,7 +7,7 @@ describe('HALT', () => {
 	test('HALT', () => {
 		instructions.get(0x76).execute(hardware);
 
-		expect(hardware.cpu.registers.programCounter).toBe(1);
+		expect(hardware.cpu.registers.programCounter).toBe(0);
 		expect(hardware.cpu.clock).toBe(0);
 	});
 });

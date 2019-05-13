@@ -7,7 +7,7 @@ describe('NOP', () => {
 	test('NOP', () => {
 		instructions.get(0x00).execute(hardware);
 
-		expect(hardware.cpu.registers.programCounter).toBe(1);
+		expect(hardware.cpu.registers.programCounter).toBe(0);
 		expect(hardware.cpu.clock).toBe(1);
 	});
 });

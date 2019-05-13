@@ -19,7 +19,7 @@ describe('AND r8, r8', () => {
 		expect(registers[target]).toBe(0b0100);
 		expect(registers.flags).toBe(RegisterFlag.HALF_CARRY);
 
-		expect(registers.programCounter).toBe(1);
+		expect(registers.programCounter).toBe(0);
 		expect(hardware.cpu.clock).toBe(1);
 
 		registers[target] = 0b1101;

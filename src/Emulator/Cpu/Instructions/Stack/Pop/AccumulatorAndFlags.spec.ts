@@ -17,7 +17,7 @@ describe('POP AF', () => {
 		expect(registers.flags).toBe(RegisterFlag.ZERO | RegisterFlag.CARRY);
 		expect(registers.stackPointer).toBe(0xFFFE);
 
-		expect(registers.programCounter).toBe(1);
+		expect(registers.programCounter).toBe(0);
 		expect(hardware.cpu.clock).toBe(3);
 	});
 });
