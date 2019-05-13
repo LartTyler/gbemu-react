@@ -50,6 +50,7 @@
     - [`RRA`](#rra)
     - [`RRCA`](#rrca)
 - [Stack](#stack)
+    - [`PUSH r16`](#push-r16)
     - [`POP r16`](#pop-r16)
     - [`POP AF`](#pop-af)
 - [Subroutines](#subroutines)
@@ -950,6 +951,25 @@ Performs a bit rotation to the right on the 8-bit register `A`. The bit leaving 
 |0x0F|`RRCA`|
 
 ## Stack
+### `PUSH r16`
+**Length:** 1 byte
+**Cycles (m-time):** 4
+
+Pushes the value in a 16-bit register pair onto the stack.
+
+Additionally, as a side-effect of this instruction, `SP` is decremented by 2 (since a 16-bit value is pushed onto the
+stack).
+
+#### Flags
+No flags are modified.
+
+#### Instructions
+|Opcode|Instruction
+|---|---|
+|0xC5|`PUSH BC`|
+|0xD5|`PUSH DE`|
+|0xE5|`PUSH HL`| 
+
 ### `POP r16`
 **Length:** 1 byte
 **Cycles (m-time):** 3
