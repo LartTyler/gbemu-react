@@ -1,6 +1,6 @@
 import {IHardwareBus} from '../../../Hardware';
 import {toFlagDisplayName} from '../../../Utility/string';
-import {RegisterFlag} from '../../Registers';
+import {RegisterFlag} from '../../RegisterFlag';
 import {AbstractReturn} from './AbstractReturn';
 
 /**

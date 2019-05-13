@@ -1,6 +1,6 @@
 import {HardwareBus} from '../../../../Hardware/HardwareBus';
 import {to16Bit} from '../../../../Utility/number';
-import {RegisterFlag} from '../../../Registers';
+import {RegisterFlag} from '../../../RegisterFlag';
 import {instructions} from '../../index';
 
 describe('POP AF', () => {

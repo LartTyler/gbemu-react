@@ -1,6 +1,6 @@
 import {ICpuRegisters} from '../../../../Hardware';
 import {Instruction} from '../../../Instruction';
-import {RegisterFlag} from '../../../Registers';
+import {RegisterFlag} from '../../../RegisterFlag';
 
 export abstract class AbstractXorRegister8 extends Instruction {
 	protected process(registers: ICpuRegisters, a: number, b: number): number {

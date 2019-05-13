@@ -1,24 +1,23 @@
 import {IHardwareBus} from '../../../Hardware';
-import {fromTwosComplement} from '../../../Utility/number';
 import {Instruction} from '../../Instruction';
 import {isRegisterFlagTestSatisfied, RegisterFlagTest} from '../../RegisterFlag';
 
 /**
- * JR cc, s8
+ * JP cc, (n16)
  */
-export class ConditionalRelativeSigned8 extends Instruction {
+export class ConditionalValue16 extends Instruction {
 	public constructor(code: number, protected test: RegisterFlagTest) {
-		super(code, `JR ${test}, s8`, 2);
+		super(code, `JP ${test}, (n16)`, 3);
 	}
 
 	protected invoke(hardware: IHardwareBus): void {
 		const registers = hardware.cpu.registers;
-		hardware.cpu.clock += 2;
+		hardware.cpu.clock += 3;
 
 		if (!isRegisterFlagTestSatisfied(registers.flags, this.test))
 			return;
 
-		registers.programCounter += fromTwosComplement(hardware.memory.read(registers.programCounter));
 		hardware.cpu.clock += 1;
+		registers.programCounter = hardware.memory.readWord(registers.programCounter);
 	}
 }

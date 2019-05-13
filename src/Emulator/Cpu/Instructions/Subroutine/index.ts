@@ -1,4 +1,4 @@
-import {RegisterFlag} from '../../Registers';
+import {RegisterFlag} from '../../RegisterFlag';
 import {ConditionalReturn} from './ConditionalReturn';
 import {Return} from './Return';
 

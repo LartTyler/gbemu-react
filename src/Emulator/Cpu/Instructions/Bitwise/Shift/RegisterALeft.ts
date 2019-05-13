@@ -1,6 +1,6 @@
 import {IHardwareBus} from '../../../../Hardware';
 import {Instruction} from '../../../Instruction';
-import {RegisterFlag} from '../../../Registers';
+import {RegisterFlag} from '../../../RegisterFlag';
 
 /**
  * RLCA

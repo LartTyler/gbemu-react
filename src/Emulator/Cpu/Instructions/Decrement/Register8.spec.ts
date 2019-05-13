@@ -1,5 +1,6 @@
 import {HardwareBus} from '../../../Hardware/HardwareBus';
-import {CpuRegister, RegisterFlag} from '../../Registers';
+import {RegisterFlag} from '../../RegisterFlag';
+import {CpuRegister} from '../../Registers';
 import {instructions} from '../index';
 
 describe('DEC r8', () => {

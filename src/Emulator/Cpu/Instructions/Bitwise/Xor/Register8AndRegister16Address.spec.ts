@@ -1,5 +1,5 @@
 import {HardwareBus} from '../../../../Hardware/HardwareBus';
-import {RegisterFlag} from '../../../Registers';
+import {RegisterFlag} from '../../../RegisterFlag';
 import {instructions} from '../../index';
 
 describe('XOR r8, (r16)', () => {

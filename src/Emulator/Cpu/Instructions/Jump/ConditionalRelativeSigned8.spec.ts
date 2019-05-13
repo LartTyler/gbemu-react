@@ -1,6 +1,6 @@
 import {HardwareBus} from '../../../Hardware/HardwareBus';
 import {toTwosComplement} from '../../../Utility/number';
-import {RegisterFlag} from '../../Registers';
+import {getTestedRegisterValue, isRegisterFlagUnsetTest, RegisterFlagTest} from '../../RegisterFlag';
 import {instructions} from '../index';
 
 describe('JR cc, s8', () => {
@@ -15,17 +15,20 @@ describe('JR cc, s8', () => {
 		hardware.memory.write(0xC008, toTwosComplement(-8));
 	});
 
-	const runner = (code: number, flags: number) => {
+	const runner = (code: number, test: RegisterFlagTest) => {
 		const instruction = instructions.get(code);
 
-		registers.flags = ~flags;
+		if (isRegisterFlagUnsetTest(test))
+			registers.flags = getTestedRegisterValue(test);
+		else
+			registers.flags = ~getTestedRegisterValue(test);
 
 		instruction.execute(hardware);
 
 		expect(registers.programCounter).toBe(0xC001);
 		expect(hardware.cpu.clock).toBe(2);
 
-		registers.flags = flags;
+		registers.flags = ~registers.flags;
 
 		instruction.execute(hardware);
 
@@ -38,8 +41,8 @@ describe('JR cc, s8', () => {
 		expect(hardware.cpu.clock).toBe(8);
 	};
 
-	test('JR NZ, s8', () => runner(0x20, ~RegisterFlag.ZERO));
-	test('JR Z, s8', () => runner(0x28, RegisterFlag.ZERO));
-	test('JR NC, s8', () => runner(0x30, ~RegisterFlag.CARRY));
-	test('JR C, s8', () => runner(0x38, RegisterFlag.CARRY));
+	test('JR NZ, s8', () => runner(0x20, 'NZ'));
+	test('JR Z, s8', () => runner(0x28, 'Z'));
+	test('JR NC, s8', () => runner(0x30, 'NC'));
+	test('JR C, s8', () => runner(0x38, 'C'));
 });
