@@ -1,21 +1,24 @@
 import {IHardwareBus} from '../../../Hardware';
-import {toFlagDisplayName} from '../../../Utility/string';
-import {RegisterFlag} from '../../RegisterFlag';
-import {AbstractReturn} from './AbstractReturn';
+import {Instruction} from '../../Instruction';
+import {isRegisterFlagTestSatisfied, RegisterFlagTest} from '../../RegisterFlag';
 
 /**
  * RET cc
  */
-export class ConditionalReturn extends AbstractReturn {
-	public constructor(code: number, protected flag: RegisterFlag, protected requireSet: boolean) {
-		super(code, `RET ${requireSet ? '' : 'N'}${toFlagDisplayName(flag)}`, 1);
+export class ConditionalReturn extends Instruction {
+	public constructor(code: number, protected test: RegisterFlagTest) {
+		super(code, `RET ${test}`, 1);
 	}
 
 	protected invoke(hardware: IHardwareBus): void {
-		this.process(hardware, (flags: number) => {
-			const flagCheck = flags & this.flag;
+		const registers = hardware.cpu.registers;
+		hardware.cpu.clock += 2;
 
-			return this.requireSet && flagCheck > 0 || !this.requireSet && flagCheck === 0;
-		});
+		if (!isRegisterFlagTestSatisfied(registers.flags, this.test))
+			return;
+
+		hardware.cpu.clock += 3;
+
+		registers.programCounter = hardware.memory.stack.pop();
 	}
 }

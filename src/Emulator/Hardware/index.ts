@@ -1,4 +1,5 @@
 import {ICartridge} from '../Cartridge/Cartridge';
+import {IStack} from '../Memory/Stack';
 
 export interface IResettable {
 	reset(): void;
@@ -32,6 +33,8 @@ export interface ICpu extends IResettable {
 }
 
 export interface IMemory extends IResettable {
+	readonly stack: IStack;
+
 	loadCartridge(file: File): Promise<FileReader>;
 	getCartridge(): ICartridge;
 	read(address: number): number;

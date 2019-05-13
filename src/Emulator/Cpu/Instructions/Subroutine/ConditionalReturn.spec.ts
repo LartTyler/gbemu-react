@@ -1,5 +1,5 @@
 import {HardwareBus} from '../../../Hardware/HardwareBus';
-import {RegisterFlag} from '../../RegisterFlag';
+import {getTestedRegisterValue, isRegisterFlagUnsetTest, RegisterFlagTest} from '../../RegisterFlag';
 import {instructions} from '../index';
 
 describe('RET cc', () => {
@@ -16,17 +16,20 @@ describe('RET cc', () => {
 		hardware.memory.writeWord(registers.stackPointer, 0xC000);
 	});
 
-	const runner = (code: number, flag: RegisterFlag) => {
+	const runner = (code: number, test: RegisterFlagTest) => {
 		const instruction = instructions.get(code);
 
-		registers.flags = ~flag;
+		if (isRegisterFlagUnsetTest(test))
+			registers.flags = getTestedRegisterValue(test);
+		else
+			registers.flags = ~getTestedRegisterValue(test);
 
 		instruction.execute(hardware);
 
 		expect(registers.programCounter).toBe(0xC100);
 		expect(hardware.cpu.clock).toBe(2);
 
-		registers.flags = flag;
+		registers.flags = ~registers.flags;
 
 		instruction.execute(hardware);
 
@@ -35,8 +38,8 @@ describe('RET cc', () => {
 		expect(hardware.cpu.clock).toBe(7);
 	};
 
-	test('RET NZ', () => runner(0xC0, ~RegisterFlag.ZERO));
-	test('RET Z', () => runner(0xC8, RegisterFlag.ZERO));
-	test('RET NC', () => runner(0xD0, ~RegisterFlag.CARRY));
-	test('RET C', () => runner(0xD8, RegisterFlag.CARRY));
+	test('RET NZ', () => runner(0xC0, 'NZ'));
+	test('RET Z', () => runner(0xC8, 'Z'));
+	test('RET NC', () => runner(0xD0, 'NC'));
+	test('RET C', () => runner(0xD8, 'C'));
 });

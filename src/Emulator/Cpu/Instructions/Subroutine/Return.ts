@@ -1,15 +1,15 @@
 import {IHardwareBus} from '../../../Hardware';
-import {AbstractReturn} from './AbstractReturn';
+import {Instruction} from '../../Instruction';
 
 /**
  * RET
  */
-export class Return extends AbstractReturn {
+export class Return extends Instruction {
 	public constructor() {
-		super(0xC9, 'RET', 1);
+		super(0xC9, 'RET', 1, 4);
 	}
 
 	protected invoke(hardware: IHardwareBus): void {
-		this.process(hardware);
+		hardware.cpu.registers.programCounter = hardware.memory.stack.pop();
 	}
 }

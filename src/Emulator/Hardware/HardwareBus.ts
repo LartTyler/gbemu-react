@@ -1,5 +1,6 @@
 import {Cpu} from '../Cpu/Cpu';
 import {Memory} from '../Memory/Memory';
+import {Stack} from '../Memory/Stack';
 import {ICpu, IMemory, isHardwareBusAware} from './index';
 
 export class HardwareBus {
@@ -8,7 +9,7 @@ export class HardwareBus {
 
 	public constructor(cpu?: ICpu, memory?: IMemory) {
 		this.cpu = cpu || new Cpu();
-		this.memory = memory || new Memory();
+		this.memory = memory || new Memory(new Stack(this));
 
 		if (isHardwareBusAware(cpu))
 			cpu.setHardwareBus(this);

@@ -2,6 +2,7 @@ import {Cartridge, ICartridge} from '../Cartridge/Cartridge';
 import {IMemory} from '../Hardware';
 import {from16Bit, to16Bit, toHex} from '../Utility/number';
 import {bios} from './bios';
+import {IStack, Stack} from './Stack';
 
 export const createNotAddressableError = (address: number): Error => new Error(`${toHex(address)} is not addressable`);
 export const createNotWriteableError = (address: number): Error => new Error(`${toHex(address)} is not writeable`);
@@ -115,7 +116,7 @@ export class Memory implements IMemory {
 
 	protected cartridge: ICartridge = null;
 
-	public constructor() {
+	public constructor(public readonly stack: IStack) {
 		this.reset();
 	}
 

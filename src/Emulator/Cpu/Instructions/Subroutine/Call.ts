@@ -1,15 +1,18 @@
 import {IHardwareBus} from '../../../Hardware';
-import {AbstractCall} from './AbstractCall';
+import {Instruction} from '../../Instruction';
 
 /**
  * CALL n16
  */
-export class Call extends AbstractCall {
+export class Call extends Instruction {
 	public constructor() {
 		super(0xCD, 'CALL n16', 3, 6);
 	}
 
 	protected invoke(hardware: IHardwareBus): void {
-		this.process(hardware);
+		const registers = hardware.cpu.registers;
+
+		hardware.memory.stack.push(registers.programCounter + 2);
+		registers.programCounter = hardware.memory.readWord(registers.programCounter);
 	}
 }
