@@ -9,6 +9,7 @@
     - [`ADC r8, (r16)`](#adc-r8-r16)
 - [Subtract](#subtract)
     - [`SUB r8, r8`](#sub-r8-r8)
+    - [`SUB r8, n8`](#sub-r8-n8)
     - [`SUB r8, (r16)`](#sub-r8-r16)
     - [`SBC r8, r8`](#sbc-r8-r8)
     - [`SBC r8, (r16)`](#sbc-r8-r16)
@@ -250,6 +251,23 @@ Subtracts the value in an 8-bit register from the value in another 8-bit registe
 |0x94|`SUB A, H`|
 |0x95|`SUB A, L`|
 |0x97|`SUB A, A`|
+
+### `SUB r8, n8`
+**Length:** 2 bytes
+**Cycles (m-time):** 2
+
+Subtracts an immediate 8-bit value (the next byte after the instruction in memory) from an 8-bit register.
+
+#### Flags
+- **Zero (Z)** is set if the result is 0.
+- **Subtract (N)** is always set.
+- **Half Carry (H)** is set if there was a borrow from bit 4 to bit 3. [Click here](#half-carry-behavior) for a full explanation.
+- **Carry (C)** is set if the operation overflowed (i.e. the new value would be less than 0).
+
+#### Instructions
+|Opcode|Instruction
+|---|---|
+|0xD6|`SUB A, n8`|
 
 ### `SUB r8, (r16)`
 **Length:** 1 byte
