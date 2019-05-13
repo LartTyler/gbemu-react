@@ -1,11 +1,18 @@
 import {RegisterFlag} from '../../RegisterFlag';
 import {Call} from './Call';
+import {ConditionalCall} from './ConditionalCall';
 import {ConditionalReturn} from './ConditionalReturn';
 import {Return} from './Return';
 
 export const subroutineInstructions = [
 	// CALL
 	new Call(/* 0xCD */),
+
+	// CALL cc, n16
+	new ConditionalCall(0xC4, 'NZ'),
+	new ConditionalCall(0xCC, 'Z'),
+	new ConditionalCall(0xD4, 'NC'),
+	new ConditionalCall(0xDC, 'C'),
 
 	// RET
 	new Return(/* 0xC9 */),
