@@ -22,6 +22,7 @@
     - [`DEC r16`](#dec-r16)
     - [`DEC (r16)` (Address)](#dec-r16-address)
 - [Jump](#jump)
+    - [`JP (n16)`](#jp-n16)
     - [`JP cc, (n16)`](#jp-cc-n16)
     - [`JR s8`](#jr-s8)
     - [`JR cc, s8`](#jr-cc-s8)
@@ -442,7 +443,21 @@ Decrements the value pointed to by a 16-bit register pair.
 |0x35|`DEC (HL)`|
 
 ## Jump
-### `JP cc, (n16)`
+### `JP n16`
+**Length:** 3 bytes
+**Cycles (m-time):** 4
+
+Sets `PC` to the address pointed to by the immediate 16-bit value `n16` (the current value of `PC` and `PC + 1`.
+
+#### Flags
+No flags are modified.
+
+#### Instructions
+|Opcode|Instruction
+|---|---|
+|0xC3|`JP n16`|
+
+### `JP cc, n16`
 **Length:** 3 bytes
 **Cycles (m-time):** 3 if condition `cc` is not met, 4 if it is
 
