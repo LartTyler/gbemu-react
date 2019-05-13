@@ -42,6 +42,7 @@
     - [`LDD r8, (r16)`](#ldd-r8-r16)
 - [Bitwise](#bitwise)
     - [`AND r8, r8`](#and-r8-r8)
+    - [`AND r8, n8`](#and-r8-n8)
     - [`AND r8, (r16)`](#and-r8-r16)
     - [`OR r8, r8`](#or-r8-r8)
     - [`OR r8, (r16)`](#or-r8-r16)
@@ -796,6 +797,24 @@ result is stored in the 8-bit register on the left.
 |0xA4|`AND A, H`|
 |0xA5|`AND A, L`|
 |0xA7|`AND A, A`|
+
+### `AND r8, n8`
+**Length:** 2 bytes
+**Cycles (m-time):** 2
+
+Applies the bitwise AND operator to an immediate 8-bit value (the next byte after the instruction in memory) and an
+8-bit register, masking off all bits that aren't set in both values. The result is stored in `r8`.
+
+#### Flags
+- **Zero (Z)** is set if the result is 0.
+- **Subtract (N)** is always reset.
+- **Half Carry (H)** is always set.
+- **Carry (C)** is always reset.
+
+#### Instructions
+|Opcode|Instruction
+|---|---|
+|0xE6|`AND A, n8`|
 
 ### `AND r8, (r16)`
 **Length:** 1 byte
