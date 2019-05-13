@@ -51,6 +51,7 @@
     - [`RRCA`](#rrca)
 - [Stack](#stack)
     - [`PUSH r16`](#push-r16)
+    - [`PUSH AF`](#push-af)
     - [`POP r16`](#pop-r16)
     - [`POP AF`](#pop-af)
 - [Subroutines](#subroutines)
@@ -969,6 +970,21 @@ No flags are modified.
 |0xC5|`PUSH BC`|
 |0xD5|`PUSH DE`|
 |0xE5|`PUSH HL`| 
+
+### `PUSH AF`
+**Length:** 1 byte
+**Cycles (m-time):** 4
+
+Performs a [`PUSH r16`](#push-r16), except the bytes are read from the 8-bit `A` register and the flags register. The
+flags register is stored as the low byte (at `SP`), and `A` is stored as the high byte (at `SP + 1`).
+
+#### Flags
+No flags are modified.
+
+#### Instructions
+|Opcode|Instruction
+|---|---|
+|0xF5|`PUSH AF`|
 
 ### `POP r16`
 **Length:** 1 byte
