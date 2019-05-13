@@ -1,8 +1,12 @@
 import {RegisterFlag} from '../../RegisterFlag';
+import {Call} from './Call';
 import {ConditionalReturn} from './ConditionalReturn';
 import {Return} from './Return';
 
 export const subroutineInstructions = [
+	// CALL
+	new Call(/* 0xCD */),
+
 	// RET
 	new Return(/* 0xC9 */),
 

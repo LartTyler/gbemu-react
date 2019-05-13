@@ -53,6 +53,9 @@
     - [`POP r16`](#pop-r16)
     - [`POP AF`](#pop-af)
 - [Subroutines](#subroutines)
+    - [`CALL n16`](#call-n16)
+    - [`CALL cc, n16`](#call-cc-n16)
+    - [`RET`](#ret)
     - [`RET cc`](#ret-cc)
 - [Miscellaneous](#miscellaneous)
     - [`NOP`](#nop)
@@ -983,6 +986,45 @@ Flags are set according to the byte stored at `SP`.
 |0xF1|`POP AF`|
 
 ## Subroutines
+### `CALL n16`
+**Length:** 3 bytes
+**Cycles (m-time):** 6
+
+Invokes a subroutine by jumping to an address pointed to by an immediate 16-bit value (the current value of `PC` and
+`PC + 1`). The current value of `PC` + 2 is pushed onto the stack, allowing a subsequent call to `RET` to return
+program execution back to the instruction following the `CALL` instruction.
+
+#### Flags
+No flags are modified.
+
+#### Instructions
+|Opcode|Instruction
+|---|---|
+|0xCD|`CALL n16`|
+
+### `CALL cc, n16`
+**Length:** 3 bytes
+**Cycles (m-time):** 3 if condition `cc` is not met, 6 if it is
+
+Performs a [`CALL n16`](#call-n16) if condition `cc` is met.  "Condition" is a test against the **Carry (C)** or
+**Zero (Z)** flags, and may be one of the following tests.
+                                                              
+- **Z** if the **Zero (Z)** flag is set.
+- **NZ** if the **Zero (Z)** flag is not set.
+- **C** if the **Carry (C)** flag is set.
+- **NC** if the **Carry (C)** flag is not set.
+
+#### Flags
+No flags are modified.
+
+#### Instructions
+|Opcode|Instruction
+|---|---|
+|0xC4|`CALL NZ, n16`|
+|0xCC|`CALL Z, n16`|
+|0xD4|`CALL NC, n16`|
+|0xDC|`CALL C, n16`|
+
 ### `RET`
 **Length:** 1 byte
 **Cycles (m-time):** 4
