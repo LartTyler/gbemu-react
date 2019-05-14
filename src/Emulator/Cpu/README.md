@@ -62,6 +62,7 @@
     - [`CALL cc, n16`](#call-cc-n16)
     - [`RET`](#ret)
     - [`RET cc`](#ret-cc)
+    - [`RETI`](#reti)
 - [Miscellaneous](#miscellaneous)
     - [`NOP`](#nop)
     - [`STOP`](#stop)
@@ -1157,6 +1158,21 @@ No flags are modified.
 |0xC8|`RET Z`|
 |0xD0|`RET NC`|
 |0xD8|`RET C`|
+
+### `RETI`
+**Length:** 1 byte
+**Cycles (m-time):** 4
+
+Performs a normal [`RET`](#ret), but also enables interrupts. This instruction is the same as calling `EI` followed by
+`RET`.
+
+#### Flags
+No flags are modified.
+
+#### Instructions
+|Opcode|Instruction
+|---|---|
+|0xD9|`RETI`|
 
 ## Miscellaneous
 ### `NOP`

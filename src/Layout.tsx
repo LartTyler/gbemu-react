@@ -1,10 +1,8 @@
 import {Classes, Colors} from '@blueprintjs/core';
 import * as React from 'react';
 import {Gameboy} from './Components/Gameboy';
-import {Cpu} from './Emulator/Cpu/Cpu';
 import {IHardwareBus} from './Emulator/Hardware';
 import {HardwareBus} from './Emulator/Hardware/HardwareBus';
-import {Memory} from './Emulator/Memory/Memory';
 import './index.scss';
 
 interface IState {
@@ -15,11 +13,8 @@ export class Layout extends React.PureComponent<{}, IState> {
 	public constructor(props: {}) {
 		super(props);
 
-		const cpu = new Cpu();
-		const memory = new Memory();
-
 		this.state = {
-			hardware: new HardwareBus(cpu, memory),
+			hardware: new HardwareBus(),
 		};
 	}
 

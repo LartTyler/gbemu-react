@@ -1,8 +1,10 @@
 import {Cartridge} from '../Cartridge/Cartridge';
+import {HardwareBus} from '../Hardware/HardwareBus';
 import {Memory} from './Memory';
 
 describe('Memory', () => {
-	const memory = new Memory();
+	const hardware = new HardwareBus();
+	const memory = hardware.memory;
 
 	test('Read and write byte', () => {
 		memory.write(0xC000, 10);

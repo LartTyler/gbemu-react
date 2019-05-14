@@ -2,14 +2,14 @@ import {Cartridge, ICartridge} from '../Cartridge/Cartridge';
 import {IMemory} from '../Hardware';
 import {from16Bit, to16Bit, toHex} from '../Utility/number';
 import {bios} from './bios';
-import {IStack, Stack} from './Stack';
+import {Interrupts} from './Interrupts';
+import {IStack} from './Stack';
 
 export const createNotAddressableError = (address: number): Error => new Error(`${toHex(address)} is not addressable`);
 export const createNotWriteableError = (address: number): Error => new Error(`${toHex(address)} is not writeable`);
 
 export enum MemoryRegion {
 	BIOS,
-	INTERRUPT_CONTROL,
 	INTERRUPTS,
 	CART_ROM,
 	CART_RAM,
@@ -17,6 +17,7 @@ export enum MemoryRegion {
 	GENERAL,
 	ECHO,
 	OAM,
+	IO,
 	ZERO_PAGE,
 	UNUSED,
 }
@@ -64,34 +65,25 @@ export const regionBoundries: IRegionBoundry[] = [
 		stop: 0xFE9F,
 	},
 	{
+		region: MemoryRegion.IO,
+		start: 0xFF00,
+		stop: 0xFF7F,
+	},
+	{
 		region: MemoryRegion.ZERO_PAGE,
 		start: 0xFF80,
 		stop: 0xFFFE,
 	},
-	{
-		region: MemoryRegion.INTERRUPT_CONTROL,
-		start: 0xFFFF,
-		stop: 0xFFFF,
-	},
 ];
 
 export class Memory implements IMemory {
-	/**
-	 * If `false`, reads below $0100 will read from the cart instead of from BIOS.
-	 *
-	 * This flag is switched the first time a read occurs at $0100.
-	 */
-	protected inBios: boolean = true;
-
-	/**
-	 * $FFFF
-	 */
-	protected interruptControl: number = 0;
+	public readonly stack: IStack;
+	public readonly interrupts: Interrupts;
 
 	/**
 	 * $0000 - $00FF (256b)
 	 */
-	protected interrupts: Uint8Array;
+	protected interruptVectors: Uint8Array;
 
 	/**
 	 * $8000 - $9FFF (8k)
@@ -114,9 +106,19 @@ export class Memory implements IMemory {
 	 */
 	protected zeroPage: Uint8Array;
 
+	/**
+	 * If `false`, reads below $0100 will read from the cart instead of from BIOS.
+	 *
+	 * This flag is switched the first time a read occurs at $0100.
+	 */
+	protected inBios: boolean = true;
+
 	protected cartridge: ICartridge = null;
 
-	public constructor(public readonly stack: IStack) {
+	public constructor(stack: IStack, interrupts: Interrupts) {
+		this.stack = stack;
+		this.interrupts = interrupts;
+
 		this.reset();
 	}
 
@@ -158,7 +160,7 @@ export class Memory implements IMemory {
 				return bios[mappedAddress];
 
 			case MemoryRegion.INTERRUPTS:
-				return this.interrupts[mappedAddress];
+				return this.interruptVectors[mappedAddress];
 
 			case MemoryRegion.CART_ROM:
 			case MemoryRegion.CART_RAM:
@@ -197,7 +199,7 @@ export class Memory implements IMemory {
 				throw createNotWriteableError(address);
 
 			case MemoryRegion.INTERRUPTS:
-				this.interrupts[mappedAddress] = value;
+				this.interruptVectors[mappedAddress] = value;
 
 				break;
 
@@ -246,13 +248,14 @@ export class Memory implements IMemory {
 
 	public reset(): void {
 		this.inBios = true;
-		this.interruptControl = 0;
 
-		this.interrupts = new Uint8Array(256);
+		this.interruptVectors = new Uint8Array(256);
 		this.video = new Uint8Array(8192);
 		this.general = new Uint8Array(8192);
 		this.oam = new Uint8Array(160);
 		this.zeroPage = new Uint8Array(127);
+
+		this.interrupts.reset();
 	}
 
 	/**

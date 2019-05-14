@@ -1,4 +1,5 @@
 import {Cpu} from '../Cpu/Cpu';
+import {Interrupts} from '../Memory/Interrupts';
 import {Memory} from '../Memory/Memory';
 import {Stack} from '../Memory/Stack';
 import {ICpu, IMemory, isHardwareBusAware} from './index';
@@ -9,13 +10,13 @@ export class HardwareBus {
 
 	public constructor(cpu?: ICpu, memory?: IMemory) {
 		this.cpu = cpu || new Cpu();
-		this.memory = memory || new Memory(new Stack(this));
+		this.memory = memory || new Memory(new Stack(this), new Interrupts());
 
-		if (isHardwareBusAware(cpu))
-			cpu.setHardwareBus(this);
+		if (isHardwareBusAware(this.cpu))
+			this.cpu.setHardwareBus(this);
 
-		if (isHardwareBusAware(memory))
-			memory.setHardwareBus(this);
+		if (isHardwareBusAware(this.memory))
+			this.memory.setHardwareBus(this);
 	}
 
 	public reset(): void {
