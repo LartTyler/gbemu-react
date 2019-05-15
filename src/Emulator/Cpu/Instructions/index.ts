@@ -2,6 +2,7 @@ import {InstructionSet} from '../InstructionSet';
 import {addInstructions} from './Add';
 import {bitwiseInstructions} from './Bitwise';
 import {decrementInstructions} from './Decrement';
+import {extendedBitwiseInstructions} from './Extended/Bitwise';
 import {incrementInstructions} from './Increment';
 import {jumpInstructions} from './Jump';
 import {loadInstructions} from './Load';
@@ -23,4 +24,6 @@ export const instructions = new InstructionSet([
 	...subroutineInstructions,
 ]);
 
-export const extendedInstructions = new InstructionSet([]);
+export const extendedInstructions = new InstructionSet([
+	...extendedBitwiseInstructions,
+]);

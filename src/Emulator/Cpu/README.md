@@ -71,6 +71,10 @@
     - [`CPL`](#cpl)
     - [`SCF`](#scf)
     - [`CCF`](#ccf)
+    - [`PREFIX CB`](#prefix-cb)
+- [Extended](#extended-instructions)
+    - [`RL r8`](#rl-r8)
+    - [`RLC r8`](#rlc-r8)
 
 ## Terms and Notes
 |Term|Meaning|
@@ -1294,6 +1298,79 @@ Inverts the **Carry (C)** flag bit.
 |Opcode|Instruction|
 |---|---|
 |0x3F|`CCF`|
+
+### `PREFIX CB`
+**Length:** 2+ bytes
+**Cycles (m-time):** 2+
+
+This special instruction indicates that the next byte in memory represents a special extended instruction, referred to
+as the `CB` instructions, due to this instruction (the prefix) having an opcode of `0xCB`. The
+[Extended Instructions](#extended-instructions) section contains all of the instructions that are part of this
+instruction set.
+
+All prefixed instructions take up at least 2 bytes (one for the prefix, and one for the instruction itself), and use up
+at least two cycles (m-time).
+
+#### Flags
+No flags are modified by this instruction. However, the prefixed instruction may modify flags freely.
+
+#### Instructions
+|Opcode|Instruction
+|---|---|
+|0xCB|`PREFIX CB`|
+
+## Extended Instructions
+### `RL r8`
+Performs a bit rotation to the left on an 8-bit register. The current value of the **Carry (C)** flag is copied to bit
+0, and the bit leaving on the left is copied to the **Carry (C)** flag.
+
+```
+C <- [7 <- 0] <- C
+```
+
+#### Flags
+- **Zero (Z)** is always reset.
+- **Subtract (N)** is always reset.
+- **Half Carry (H)** is always reset.
+- **Carry (C)** is set to the value of bit 7 in `A`.
+
+#### Instructions
+|Opcode|Instruction
+|---|---|
+|0xCB 0x10|`RL B`|
+|0xCB 0x11|`RL C`|
+|0xCB 0x12|`RL D`|
+|0xCB 0x13|`RL E`|
+|0xCB 0x14|`RL H`|
+|0xCB 0x15|`RL L`|
+|0xCB 0x17|`RL A`|
+
+### `RLC r8`
+**Length:** 2 bytes
+**Cycles (m-time):** 2
+
+Performs a bit rotation to the left on an 8-bit register. The bit leaving on the left is copied to the **Carry (C)**
+flag, and to bit 0.
+
+```
+C <- [7 <- 0] <- [7]
+``` 
+
+#### Flags
+- **Zero (Z)** is always reset.
+- **Subtract (N)** is always reset.
+- **Half Carry (H)** is always reset.
+- **Carry (C)** is set to the value in bit 7 of `r8`.
+
+|Opcode|Instruction
+|---|---|
+|0xCB 0x00|`RLC B`|
+|0xCB 0x01|`RLC C`|
+|0xCB 0x02|`RLC D`|
+|0xCB 0x03|`RLC E`|
+|0xCB 0x04|`RLC H`|
+|0xCB 0x05|`RLC L`|
+|0xCB 0x07|`RLC A`|
 
 ## Half Carry Behavior
 A half carry occurs when a math instruction causes the lower nibble of an 8-bit register to either:
