@@ -3,6 +3,7 @@ import {ComplementCarryFlag} from './ComplementCarryFlag';
 import {DecimalAdjustA} from './DecimalAdjustA';
 import {Halt} from './Halt';
 import {Noop} from './Noop';
+import {Prefix} from './Prefix';
 import {SetCarryFlag} from './SetCarryFlag';
 import {Stop} from './Stop';
 
@@ -27,4 +28,7 @@ export const miscInstructions = [
 
 	// CCF
 	new ComplementCarryFlag(),
+
+	// PREFIX CB
+	new Prefix(),
 ];
