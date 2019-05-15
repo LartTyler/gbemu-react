@@ -73,8 +73,9 @@
     - [`CCF`](#ccf)
     - [`PREFIX CB`](#prefix-cb)
 - [Extended](#extended-instructions)
-    - [`RL r8`](#rl-r8)
     - [`RLC r8`](#rlc-r8)
+    - [`RL r8`](#rl-r8)
+    - [`RRC r8`](#rrc-r8)
 
 ## Terms and Notes
 |Term|Meaning|
@@ -1371,6 +1372,34 @@ C <- [7 <- 0] <- [7]
 |0xCB 0x04|`RLC H`|
 |0xCB 0x05|`RLC L`|
 |0xCB 0x07|`RLC A`|
+
+### `RRC r8`
+**Length:** 1 byte
+**Cycles (m-time):** 1
+
+Performs a bit rotation to the right on an 8-bit register. The bit leaving on the right is copied to the **Carry (C)**
+flag, and to bit 7.
+
+```
+[0] -> [7 -> 0] -> C
+```
+
+#### Flags
+- **Zero (Z)** is always reset.
+- **Subtract (N)** is always reset.
+- **Half Carry (H)** is always reset.
+- **Carry (C)** is set to the value of bit 0 in `A`.
+
+#### Instructions
+|Opcode|Instruction
+|---|---|
+|0xCB 0x08|`RRC B`|
+|0xCB 0x09|`RRC C`|
+|0xCB 0x0A|`RRC D`|
+|0xCB 0x0B|`RRC E`|
+|0xCB 0x0C|`RRC H`|
+|0xCB 0x0D|`RRC L`|
+|0xCB 0x0F|`RRC A`|
 
 ## Half Carry Behavior
 A half carry occurs when a math instruction causes the lower nibble of an 8-bit register to either:
