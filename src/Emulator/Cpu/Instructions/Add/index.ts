@@ -4,6 +4,7 @@ import {Register16ToRegister16} from './Register16ToRegister16';
 import {Register8ToRegister8} from './Register8ToRegister8';
 import {Register8ToRegister8Carry} from './Register8ToRegister8Carry';
 import {Value8ToRegister8} from './Value8ToRegister8';
+import {Value8ToRegister8Carry} from './Value8ToRegister8Carry';
 
 export const addInstructions = [
 	// ADD r8, r8
@@ -38,4 +39,7 @@ export const addInstructions = [
 
 	// ADC r8, (r16)
 	new Register16AddressToRegister8Carry(0x8E, 'a', 'hl'),
+
+	// ADC r8, n8
+	new Value8ToRegister8Carry(0xCE, 'a'),
 ];
