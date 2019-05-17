@@ -1,11 +1,15 @@
 import {ConditionalRelativeSigned8} from './ConditionalRelativeSigned8';
 import {ConditionalValue16} from './ConditionalValue16';
+import {Register16Address} from './Register16Address';
 import {RelativeSigned8} from './RelativeSigned8';
 import {Value16} from './Value16';
 
 export const jumpInstructions = [
 	// JP n16
 	new Value16(/* 0xC3 */),
+
+	// JP (r16)
+	new Register16Address(0xE9, 'hl'),
 
 	// JP cc, n16
 	new ConditionalValue16(0xC2, 'NZ'),

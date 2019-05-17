@@ -27,6 +27,7 @@
     - [`DEC (r16)` (Address)](#dec-r16-address)
 - [Jump](#jump)
     - [`JP (n16)`](#jp-n16)
+    - [`JP (r16)`](#jp-r16)
     - [`JP cc, (n16)`](#jp-cc-n16)
     - [`JR s8`](#jr-s8)
     - [`JR cc, s8`](#jr-cc-s8)
@@ -548,6 +549,20 @@ No flags are modified.
 |Opcode|Instruction
 |---|---|
 |0xC3|`JP n16`|
+
+### `JP (r16)`
+**Length:** 1 byte
+**Cycles (m-time):** 1
+
+Sets `PC` to the value pointed to by a 16-bit register pair.
+
+#### Flags
+No flags are modified.
+
+#### Instructions
+|Opcode|Instruction
+|---|---|
+|0xE9|`JP (HL)`|
 
 ### `JP cc, n16`
 **Length:** 3 bytes
