@@ -102,6 +102,11 @@ export class Memory implements IMemory {
 	protected oam: Uint8Array;
 
 	/**
+	 * $FF00 - $FF7F
+	 */
+	protected io: Uint8Array;
+
+	/**
 	 * $FF80 - $FFFE (127b)
 	 */
 	protected zeroPage: Uint8Array;
@@ -179,6 +184,9 @@ export class Memory implements IMemory {
 			case MemoryRegion.OAM:
 				return this.oam[mappedAddress];
 
+			case MemoryRegion.IO:
+				return this.io[mappedAddress];
+
 			case MemoryRegion.ZERO_PAGE:
 				return this.zeroPage[mappedAddress];
 		}
@@ -225,6 +233,11 @@ export class Memory implements IMemory {
 
 				break;
 
+			case MemoryRegion.IO:
+				this.io[mappedAddress] = value;
+
+				break;
+
 			case MemoryRegion.ZERO_PAGE:
 				this.zeroPage[mappedAddress] = value;
 
@@ -253,6 +266,7 @@ export class Memory implements IMemory {
 		this.video = new Uint8Array(8192);
 		this.general = new Uint8Array(8192);
 		this.oam = new Uint8Array(160);
+		this.io = new Uint8Array(127);
 		this.zeroPage = new Uint8Array(127);
 
 		this.interrupts.reset();
