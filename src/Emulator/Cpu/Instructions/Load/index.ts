@@ -9,6 +9,7 @@ import {Register8FromRegister16Address} from './Register8FromRegister16Address';
 import {Register8FromRegister16AddressPostDecrement} from './Register8FromRegister16AddressPostDecrement';
 import {Register8FromRegister16AddressPostIncrement} from './Register8FromRegister16AddressPostIncrement';
 import {Register8FromRegister8} from './Register8FromRegister8';
+import {Register8FromRegister8AddressHighOffset} from './Register8FromRegister8AddressHighOffset';
 import {Register8FromValue8} from './Register8FromValue8';
 import {Register8FromValue8HighOffset} from './Register8FromValue8HighOffset';
 import {Value16AddressFromRegister8} from './Value16AddressFromRegister8';
@@ -123,6 +124,9 @@ export const loadInstructions = [
 
 	// LDD r8, (r16)
 	new Register8FromRegister16AddressPostDecrement(0x3A, 'a', 'hl'),
+
+	// LDH r8, (r8)
+	new Register8FromRegister8AddressHighOffset(0xF2, 'a', 'c'),
 
 	// LDH r8, (n8)
 	new Register8FromValue8HighOffset(0xF0, 'a'),
