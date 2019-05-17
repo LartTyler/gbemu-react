@@ -42,6 +42,7 @@
     - [`LDI r8, (r16)`](#ldi-r8-r16)
     - [`LDD (r16), r8`](#ldd-r16-r8)
     - [`LDD r8, (r16)`](#ldd-r8-r16)
+    - [`LDH (r8), r8`](#ldh-r8-r8)
     - [`LDH (n8), r8`](#ldh-n8-r8)
 - [Bitwise](#bitwise)
     - [`AND r8, r8`](#and-r8-r8)
@@ -821,6 +822,25 @@ No flags are modified.
 |---|---|
 |0x3A|`LDD A, (HL)`|
 
+### `LDH (r8), r8`
+**Length:** 1 byte
+**Cycles (m-time):** 2
+
+Loads the value in an 8-bit register into the high RAM (I/O RAM and zero page RAM) address pointed to by the value in
+another 8-bit register.
+
+Another mnemonic for this instruction is `LD ($FF00 + (r8)), r8`, since the value in the left 8-bit register is added
+to `$FF00` to determine where in high RAM the value should be written (the value is treated as an offset relative to
+`$FF00`).
+
+#### Flags
+No flags are modified.
+
+#### Instructions
+|Opcode|Instruction
+|---|---|
+|0xE2|`LDH (r8), n8`|
+
 ### `LDH (n8), r8`
 **Length:** 2 bytes
 **Cycles (m-time):** 3
@@ -829,7 +849,7 @@ Loads the value in an 8-bit register `r8` into the high RAM (I/O RAM and zero pa
 immediate 8-bit value (the value at `PC`).
 
 Another mnemonic for this instruction is `LD ($FF00 + n8), r8`, since the value of `n8` is added to `$FF00` to determine
-where in high RAM the value should be written.
+where in high RAM the value should be written (the value is treated as an offset relative to `$FF00`).
  
 #### Flags
 No flags are modified.
