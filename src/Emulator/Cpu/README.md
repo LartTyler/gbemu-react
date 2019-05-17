@@ -14,6 +14,7 @@
     - [`SUB r8, (r16)`](#sub-r8-r16)
     - [`SBC r8, r8`](#sbc-r8-r8)
     - [`SBC r8, (r16)`](#sbc-r8-r16)
+    - [`SBC r8, n8`](#sbc-r8-n8)
     - [`CP r8, r8`](#cp-r8-r8)
     - [`CP r8, (r16)`](#cp-r8-r16)
 - [Increment](#increment)
@@ -357,6 +358,23 @@ Subtracts the byte pointed to by a 16-bit register pair `(r16)` from the value i
 |Opcode|Instruction
 |---|---|
 |0x9E|`SBC A, (HL)`|
+
+### `SBC r8, n8`
+**Length:** 2 bytes
+**Cycles (m-time):** 2
+
+Subtracts an 8-bit value from the value in an 8-bit register, minus 1 if the **Carry (C)** flag is set.
+
+#### Flags
+- **Zero (Z)** is set if the result is 0.
+- **Subtract (N)** is always set.
+- **Half Carry (H)** is set if there was a borrow from bit 4 to bit 3. [Click here](#half-carry-behavior) for a full explanation.
+- **Carry (C)** is set if the operation overflowed (i.e. the new value would be less than 0).
+
+#### Instructions
+|Opcode|Instruction
+|---|---|
+|0xDE|`SBC A, n8`|
 
 ### `CP r8, r8`
 **Length:** 1 byte
