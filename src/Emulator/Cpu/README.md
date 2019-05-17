@@ -53,6 +53,7 @@
     - [`OR r8, r8`](#or-r8-r8)
     - [`OR r8, (r16)`](#or-r8-r16)
     - [`XOR r8, r8`](#xor-r8-r8)
+    - [`XOR r8, n8`](#xor-r8-n8)
     - [`XOR r8, (r16)`](#xor-r8-r16)
     - [`RLA`](#rla)
     - [`RLCA`](#rlca)
@@ -1016,6 +1017,24 @@ result is stored in the left register.
 |0xAC|`XOR A, H`|
 |0xAD|`XOR A, L`|
 |0xAF|`XOR A, A`|
+
+### `XOR r8, n8`
+**Length:** 2 bytes
+**Cycles (m-time):** 2
+
+Applies the bitwise XOR operation to an 8-bit register and an immediate 8-bit value in memory (the byte at `PC`),
+masking off all bits that are set in both values. The result is stored in `r8`.
+
+#### Flags
+- **Zero (Z)** is set if the result is 0.
+- **Subtract (N)** is always reset.
+- **Half Carry (H)** is always reset.
+- **Carry (C)** is always reset.
+
+#### Instructions
+|Opcode|Instruction
+|---|---|
+|0xEE|`XOR A, n8`|
 
 ### `XOR r8, (r16)`
 **Length:** 1 byte
