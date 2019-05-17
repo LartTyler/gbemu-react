@@ -871,7 +871,7 @@ No flags are modified.
 #### Instructions
 |Opcode|Instruction
 |---|---|
-|0xE2|`LDH (r8), n8`|
+|0xE2|`LDH (C), n8`|
 
 ### `LDH (n8), r8`
 **Length:** 2 bytes
