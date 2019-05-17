@@ -1,4 +1,5 @@
 import {IHardwareBus} from '../../../Hardware';
+import {toRegisterDisplayName} from '../../../Utility/string';
 import {Instruction} from '../../Instruction';
 import {RegisterFlag} from '../../RegisterFlag';
 import {CpuRegister16} from '../../Registers';
@@ -8,7 +9,7 @@ import {CpuRegister16} from '../../Registers';
  */
 export class Register16ToRegister16 extends Instruction {
 	public constructor(code: number, protected target: CpuRegister16, protected source: CpuRegister16) {
-		super(code, `ADD ${target.toUpperCase()}, ${source.toUpperCase()}`, 1, 2);
+		super(code, `ADD ${toRegisterDisplayName(target)}, ${toRegisterDisplayName(source)}`, 1, 2);
 	}
 
 	protected invoke(hardware: IHardwareBus): void {
