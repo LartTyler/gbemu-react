@@ -42,6 +42,7 @@
     - [`LDI r8, (r16)`](#ldi-r8-r16)
     - [`LDD (r16), r8`](#ldd-r16-r8)
     - [`LDD r8, (r16)`](#ldd-r8-r16)
+    - [`LDH (n8), r8`](#ldh-n8-r8)
 - [Bitwise](#bitwise)
     - [`AND r8, r8`](#and-r8-r8)
     - [`AND r8, n8`](#and-r8-n8)
@@ -819,6 +820,24 @@ No flags are modified.
 |Opcode|Instruction|
 |---|---|
 |0x3A|`LDD A, (HL)`|
+
+### `LDH (n8), r8`
+**Length:** 2 bytes
+**Cycles (m-time):** 3
+
+Loads the value in an 8-bit register `r8` into the high RAM (I/O RAM and zero page RAM) address pointed to by an
+immediate 8-bit value (the value at `PC`).
+
+Another mnemonic for this instruction is `LD ($FF00 + n8), r8`, since the value of `n8` is added to `$FF00` to determine
+where in high RAM the value should be written.
+ 
+#### Flags
+No flags are modified.
+
+#### Instructions
+|Opcode|Instruction
+|---|---|
+|0xE0|`LDH (n8), r8`|  
 
 ## Bitwise
 ### `AND r8, r8`
