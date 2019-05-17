@@ -61,6 +61,7 @@
     - [`PUSH AF`](#push-af)
     - [`POP r16`](#pop-r16)
     - [`POP AF`](#pop-af)
+    - [`ADD SP, s8`](#add-sp-s8)
 - [Subroutines](#subroutines)
     - [`CALL n16`](#call-n16)
     - [`CALL cc, n16`](#call-cc-n16)
@@ -1161,6 +1162,23 @@ Flags are set according to the byte stored at `SP`.
 |Opcode|Instruction
 |---|---|
 |0xF1|`POP AF`|
+
+### `ADD SP, s8`
+**Length:** 2 bytes
+**Cycles (m-time):** 4
+
+Adds an immediate signed 8-bit value to `SP`.
+
+#### Flags
+- **Zero (Z)** is always reset.
+- **Subtract (N)** is always reset.
+- **Half Carry (H)** is set if bit 3 carried into bit 4. [Click here](#half-carry-behavior) for a full explanation.
+- **Carry (C)** is set if the operation overflowed (i.e. the new value would be greater than 65535).
+
+#### Instructions
+|Opcode|Instruction
+|---|---|
+|0xE8|`ADD SP, s8`|
 
 ## Subroutines
 ### `CALL n16`
