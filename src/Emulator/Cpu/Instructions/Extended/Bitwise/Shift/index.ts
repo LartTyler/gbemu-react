@@ -1,3 +1,4 @@
+import {shiftArithmeticInstructions} from './Arithmetic';
 import {Register16AddressLeft} from './Register16AddressLeft';
 import {Register16AddressLeftCarry} from './Register16AddressLeftCarry';
 import {Register16AddressRight} from './Register16AddressRight';
@@ -55,4 +56,6 @@ export const extendedShiftInstructions = [
 
 	// RR (r16)
 	new Register16AddressRightCarry(0x1E, 'hl'),
+
+	...shiftArithmeticInstructions,
 ];
