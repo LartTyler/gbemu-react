@@ -17,6 +17,7 @@
     - [`SBC r8, n8`](#sbc-r8-n8)
     - [`CP r8, r8`](#cp-r8-r8)
     - [`CP r8, (r16)`](#cp-r8-r16)
+    - [`CP r8, n8`](#cp-r8-n8)
 - [Increment](#increment)
     - [`INC r8`](#inc-r8)
     - [`INC r16`](#inc-r16)
@@ -432,6 +433,25 @@ registers aside from the flags register.
 |Opcode|Instruction
 |---|---|
 |0xBE|`CP A, (HL)`|
+
+### `CP r8, n8`
+**Length:** 2 bytes
+**Cycles (m-time):** 2
+
+Compares the value in an 8-bit register with an immediate 8-bit value in memory (the byte at `PC`) by subtracting them
+and setting the appropriate flags (as in [`SUB r8, n8`](#sub-r8-n8)), but does not store the result or change any
+registers aside from the flags register.
+
+#### Flags
+- **Zero (Z)** is set if the result is 0.
+- **Subtract (N)** is always set.
+- **Half Carry (H)** is set if there was a borrow from bit 4 to bit 3. [Click here](#half-carry-behavior) for a full explanation.
+- **Carry (C)** is set if the operation overflowed (i.e. the new value would be less than 0).
+
+#### Instructions
+|Opcode|Instruction
+|---|---|
+|0xFE|`CP A, n8`|
 
 ## Increment
 ### `INC r8`
