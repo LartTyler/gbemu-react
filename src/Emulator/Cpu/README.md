@@ -93,6 +93,7 @@
     - [`RLC r8`](#rlc-r8)
     - [`RLC (r16)`](#rlc-r16)
     - [`RL r8`](#rl-r8)
+    - [`RL (r16)`](#rl-r16)
     - [`RRC r8`](#rrc-r8)
 
 ## Terms and Notes
@@ -1660,6 +1661,28 @@ C <- [7 <- 0] <- C
 |0xCB 0x14|`RL H`|
 |0xCB 0x15|`RL L`|
 |0xCB 0x17|`RL A`|
+
+### `RL (r16)`
+**Length:** 1 byte
+**Cycles (m-time):** 3
+
+Performs a bit rotation to the left on the value pointed to by a 16-bit register pair. The current value of
+**Carry (C)** flag is copied to bit 0, and the bit leaving on the left is copied to the **Carry (C)** flag.
+
+```
+C <- [7 <- 0] <- C
+```
+
+#### Flags
+- **Zero (Z)** is always reset.
+- **Subtract (N)** is always reset.
+- **Half Carry (H)** is always reset.
+- **Carry (C)** is set to the value of bit 7 in `A`.
+
+#### Instructions
+|Opcode|Instruction
+|---|---|
+|0xCB 0x0E|`RL (HL)`|
 
 ### `RLC r8`
 **Length:** 1 byte
