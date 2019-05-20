@@ -99,6 +99,7 @@
     - [`RR r8`](#rr-r8)
     - [`RR (r16)`](#rr-r16)
     - [`SLA r8`](#sla-r8)
+    - [`SLA (r16)`](#sla-r16)
 
 ## Terms and Notes
 |Term|Meaning|
@@ -1855,6 +1856,28 @@ C <- [7 <- 0] <- 0
 |0xCB 0x24|`SLA H`|
 |0xCB 0x25|`SLA L`|
 |0xCB 0x27|`SLA A`|
+
+### `SLA (r16)`
+**Length:** 1 byte
+**Cycles (m-time):** 3
+
+Performs an [arithemtic left shift](https://en.wikipedia.org/wiki/Arithmetic_shift) on the 8-bit value pointed to by a
+16-bit register pair.
+
+```
+C <- [7 <- 0] <- 0
+```
+
+#### Flags
+- **Zero (Z)** is set if the result is 0.
+- **Subtract (N)** is always reset.
+- **Half Carry (H)** is always reset.
+- **Carry (C)** is set to the value of bit 7 in `r8`.
+
+#### Instructions
+|Opcode|Instruction
+|---|---|
+|0xCB 0x26|`SLA (HL)`|
 
 ## Half Carry Behavior
 A half carry occurs when a math instruction causes the lower nibble of an 8-bit register to either:

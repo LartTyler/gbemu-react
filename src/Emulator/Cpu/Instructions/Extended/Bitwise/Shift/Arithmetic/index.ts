@@ -1,3 +1,4 @@
+import {Register16AddressLeft} from './Register16AddressLeft';
 import {Register8Left} from './Register8Left';
 
 export const shiftArithmeticInstructions = [
@@ -9,4 +10,7 @@ export const shiftArithmeticInstructions = [
 	new Register8Left(0x24, 'h'),
 	new Register8Left(0x25, 'l'),
 	new Register8Left(0x27, 'a'),
+
+	// SLA (r16)
+	new Register16AddressLeft(0x26, 'hl'),
 ];
