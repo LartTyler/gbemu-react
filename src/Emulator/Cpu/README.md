@@ -1785,6 +1785,30 @@ copied to the **Carry (C)** flag, and to bit 7.
 |---|---|
 |0xCB 0x0E|`RRC (HL)`|
 
+### `RR r8`
+**Length:** 1 byte
+**Cycles (m-time):** 1
+
+Performs a bit rotation to the right on an 8-bit register. The current value of **Carry (C)** flag is copied to bit 7,
+and the bit leaving on the right is copied to the **Carry (C)** flag.
+
+#### Flags
+- **Zero (Z)** is set if the result is 0.
+- **Subtract (N)** is always reset.
+- **Half Carry (H)** is always reset.
+- **Carry (C)** is set to the value of bit 0 in `r8`.
+
+#### Instructions
+|Opcode|Instruction
+|---|---|
+|0xCB 0x18|`RR B`|
+|0xCB 0x19|`RR C`|
+|0xCB 0x1A|`RR D`|
+|0xCB 0x1B|`RR E`|
+|0xCB 0x1C|`RR H`|
+|0xCB 0x1D|`RR L`|
+|0xCB 0x1F|`RR A`|
+
 
 ## Half Carry Behavior
 A half carry occurs when a math instruction causes the lower nibble of an 8-bit register to either:

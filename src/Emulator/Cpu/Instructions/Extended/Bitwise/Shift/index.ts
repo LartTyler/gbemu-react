@@ -4,6 +4,7 @@ import {Register16AddressRight} from './Register16AddressRight';
 import {Register8Left} from './Register8Left';
 import {Register8LeftCarry} from './Register8LeftCarry';
 import {Register8Right} from './Register8Right';
+import {Register8RightCarry} from './Register8RightCarry';
 
 export const extendedShiftInstructions = [
 	// RLC r8
@@ -41,4 +42,13 @@ export const extendedShiftInstructions = [
 
 	// RRC (r16)
 	new Register16AddressRight(0x0E, 'hl'),
+
+	// RR r8
+	new Register8RightCarry(0x18, 'b'),
+	new Register8RightCarry(0x19, 'c'),
+	new Register8RightCarry(0x1A, 'd'),
+	new Register8RightCarry(0x1B, 'e'),
+	new Register8RightCarry(0x1C, 'h'),
+	new Register8RightCarry(0x1D, 'l'),
+	new Register8RightCarry(0x1F, 'a'),
 ];
