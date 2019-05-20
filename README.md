@@ -3,8 +3,8 @@
 - [Detailed CGB Internals](http://marc.rawer.de/Gameboy/Docs/GBCPUman.pdf)
 - [Repository of Useful GB Development Links](https://github.com/gbdev/awesome-gbdev)
 - CPU
-    - [Detailed CGB Instruction Reference](https://rednex.github.io/rgbds/gbz80.7.html)
-    - [CGB Opcode Table](http://pastraiser.com/cpu/gameboy/gameboy_opcodes.html)
+    - [Detailed GB Instruction Reference](https://rednex.github.io/rgbds/gbz80.7.html)<sup>[1](#instruction-inaccuracies)</sup>
+    - [GB Opcode Table](http://pastraiser.com/cpu/gameboy/gameboy_opcodes.html)<sup>[1](#instruction-inaccuracies)</sup>
     - [Full Z80 Opcode Reference](http://z80-heaven.wikidot.com/opcode-reference-chart) (Actual Z80, not GB Z80)
     - [Z80 Instructions Document](http://datasheets.chipdb.org/Zilog/Z80/z80-documented-0.90.pdf) (Actual Z80, not GB Z80)
 - Memory
@@ -102,3 +102,7 @@ the interrupt's handler.
 
 Before an interrupt vector is called, the current value of `PC` is pushed onto the stack so that it can be restored
 when the interrupt handler calls `RET` or `RETI`.  
+
+## Instruction Inaccuracies
+This document contains some inaccurcies, either in the length of certain instructions, or in how many cycles an
+instruction uses. For accurate instruction information, refer to the [instructions README](src/Emulator/Cpu/README.md).
