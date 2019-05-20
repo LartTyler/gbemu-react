@@ -82,6 +82,8 @@
     - [`SCF`](#scf)
     - [`CCF`](#ccf)
     - [`PREFIX CB`](#prefix-cb)
+    - [`DI`](#di)
+    - [`EI`](#ei)
 - [Extended](#extended-instructions)
     - [`RLC r8`](#rlc-r8)
     - [`RL r8`](#rl-r8)
@@ -1505,6 +1507,35 @@ No flags are modified by this instruction. However, the prefixed instruction may
 |Opcode|Instruction
 |---|---|
 |0xCB|`PREFIX CB`|
+
+### `DI`
+**Length:** 1 byte
+**Cycles (m-time):** 1
+
+Disables interrupts. Please note that this instruction only tells the CPU to not trigger interrupt subroutines, and does
+not clear any set interrupt flags.
+
+#### Flags
+No flags are modified.
+
+#### Instructions
+|Opcode|Instruction
+|---|---|
+|0xF3|`DI`|
+
+### `EI`
+**Length:** 1 byte
+**Cycles (m-time):** 1
+
+Enables interrupts, allowing the CPU to trigger any queued interrupt subroutines.
+
+#### Flags
+No flags are modified.
+
+#### Instructions
+|Opcode|Instruction
+|---|---|
+|0xFB|`EI`|
 
 ## Extended Instructions
 ### `RL r8`
