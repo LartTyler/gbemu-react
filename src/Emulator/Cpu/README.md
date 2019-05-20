@@ -96,6 +96,7 @@
     - [`RL (r16)`](#rl-r16)
     - [`RRC r8`](#rrc-r8)
     - [`RRC (r16)`](#rrc-r16)
+    - [`RR r8`](#rr-r8)
 
 ## Terms and Notes
 |Term|Meaning|
@@ -1635,6 +1636,55 @@ their documentation _only_ shows values used by the instruction itself, and does
 (i.e. `RL r8` is documented as being 1 byte and using 1 cycle, but in reality, since the prefix instruction must be
 used first, a call to `RL r8` really looks like `PREFIX CB; RL r8`, meaning it actually uses 2 bytes and 2 cycles).
 
+### `RLC r8`
+**Length:** 1 byte
+**Cycles (m-time):** 2
+
+Performs a bit rotation to the left on an 8-bit register. The bit leaving on the left is copied to the **Carry (C)**
+flag, and to bit 0.
+
+```
+C <- [7 <- 0] <- [7]
+``` 
+
+#### Flags
+- **Zero (Z)** is always reset.
+- **Subtract (N)** is always reset.
+- **Half Carry (H)** is always reset.
+- **Carry (C)** is set to the value in bit 7 of `r8`.
+
+|Opcode|Instruction
+|---|---|
+|0xCB 0x00|`RLC B`|
+|0xCB 0x01|`RLC C`|
+|0xCB 0x02|`RLC D`|
+|0xCB 0x03|`RLC E`|
+|0xCB 0x04|`RLC H`|
+|0xCB 0x05|`RLC L`|
+|0xCB 0x07|`RLC A`|
+
+### `RLC (r16)`
+**Length:** 1 byte
+**Cycles (m-time):** 3
+
+Performs a bit rotation to the left on the value pointed to by a 16-bit register pair. The bit leaving on the left is
+copied to the **Carry (C)** flag, and to bit 0.
+
+```
+C <- [7 <- 0] <- [7]
+```
+
+#### Flags
+- **Zero (Z)** is always reset.
+- **Subtract (N)** is always reset.
+- **Half Carry (H)** is always reset.
+- **Carry (C)** is set to the value in bit 7 of the value pointed to by `(r16)`.
+
+#### Instructions
+|Opcode|Instruction
+|---|---|
+|0xCB 0x06|`RLC (HL)`|
+
 ### `RL r8`
 **Length:** 1 byte
 **Cycles (m-time):** 1
@@ -1684,55 +1734,6 @@ C <- [7 <- 0] <- C
 |Opcode|Instruction
 |---|---|
 |0xCB 0x0E|`RL (HL)`|
-
-### `RLC r8`
-**Length:** 1 byte
-**Cycles (m-time):** 2
-
-Performs a bit rotation to the left on an 8-bit register. The bit leaving on the left is copied to the **Carry (C)**
-flag, and to bit 0.
-
-```
-C <- [7 <- 0] <- [7]
-``` 
-
-#### Flags
-- **Zero (Z)** is always reset.
-- **Subtract (N)** is always reset.
-- **Half Carry (H)** is always reset.
-- **Carry (C)** is set to the value in bit 7 of `r8`.
-
-|Opcode|Instruction
-|---|---|
-|0xCB 0x00|`RLC B`|
-|0xCB 0x01|`RLC C`|
-|0xCB 0x02|`RLC D`|
-|0xCB 0x03|`RLC E`|
-|0xCB 0x04|`RLC H`|
-|0xCB 0x05|`RLC L`|
-|0xCB 0x07|`RLC A`|
-
-### `RLC (r16)`
-**Length:** 1 byte
-**Cycles (m-time):** 3
-
-Performs a bit rotation to the left on the value pointed to by a 16-bit register pair. The bit leaving on the left is
-copied to the **Carry (C)** flag, and to bit 0.
-
-```
-C <- [7 <- 0] <- [7]
-```
-
-#### Flags
-- **Zero (Z)** is always reset.
-- **Subtract (N)** is always reset.
-- **Half Carry (H)** is always reset.
-- **Carry (C)** is set to the value in bit 7 of the value pointed to by `(r16)`.
-
-#### Instructions
-|Opcode|Instruction
-|---|---|
-|0xCB 0x06|`RLC (HL)`|
 
 ### `RRC r8`
 **Length:** 1 byte
