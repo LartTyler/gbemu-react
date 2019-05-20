@@ -48,6 +48,7 @@
     - [`LDH r8, (n8)`](#ldh-r8-n8)
     - [`LDH (r8), r8`](#ldh-r8-r8-address)
     - [`LDH (n8), r8`](#ldh-n8-r8)
+    - [`LDHL SP, s8`](#ldhl-sp-s8)
 - [Bitwise](#bitwise)
     - [`AND r8, r8`](#and-r8-r8)
     - [`AND r8, n8`](#and-r8-n8)
@@ -931,7 +932,26 @@ No flags are modified.
 #### Instructions
 |Opcode|Instruction
 |---|---|
-|0xE0|`LDH (n8), A`|  
+|0xE0|`LDH (n8), A`|
+
+### `LDHL SP, s8`
+**Length:** 2 bytes
+**Cycles (m-time):** 3
+
+Adds an immediate signed 8-bit value to `SP` and stores the result in the 16-bit registers pair `HL`.
+
+This instruction has the alternate mnemonic `LD HL, SP+s8`.
+
+#### Flags
+- **Zero (Z)** is always reset.
+- **Subtract (N)** is always reset.
+- **Half Carry (H)** is set if bit 3 carried into bit 4. [Click here](#half-carry-behavior) for a full explanation.
+- **Carry (C)** is set if the operation overflowed (i.e. the new value would be greater than 65535).
+
+#### Instructions
+|Opcode|Instruction
+|---|---|
+|0xF8|`LDHL SP, s8`|
 
 ## Bitwise
 ### `AND r8, r8`
