@@ -1,3 +1,4 @@
+import {Register16AddressLeft} from './Register16AddressLeft';
 import {Register8Left} from './Register8Left';
 import {Register8LeftCarry} from './Register8LeftCarry';
 import {Register8Right} from './Register8Right';
@@ -11,6 +12,9 @@ export const extendedShiftInstructions = [
 	new Register8Left(0x04, 'h'),
 	new Register8Left(0x05, 'l'),
 	new Register8Left(0x07, 'a'),
+
+	// RLC (r16)
+	new Register16AddressLeft(0x06, 'hl'),
 
 	// RL r8
 	new Register8LeftCarry(0x10, 'b'),

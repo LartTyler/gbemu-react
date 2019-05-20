@@ -91,6 +91,7 @@
     - [`EI`](#ei)
 - [Extended](#extended-instructions)
     - [`RLC r8`](#rlc-r8)
+    - [`RLC (r16)`](#rlc-r16)
     - [`RL r8`](#rl-r8)
     - [`RRC r8`](#rrc-r8)
 
@@ -1626,7 +1627,16 @@ No flags are modified.
 |0xFB|`EI`|
 
 ## Extended Instructions
+Extended instructions are executed by the [`PREFIX CB`](#prefix-cb) instruction. All instructions in this section
+consume an extra byte and an extra cycle, to account for the resources used by the `CB` prefix. **Please note** that
+their documentation _only_ shows values used by the instruction itself, and does not include the resources used by `CB`
+(i.e. `RL r8` is documented as being 1 byte and using 1 cycle, but in reality, since the prefix instruction must be
+used first, a call to `RL r8` really looks like `PREFIX CB; RL r8`, meaning it actually uses 2 bytes and 2 cycles).
+
 ### `RL r8`
+**Length:** 1 byte
+**Cycles (m-time):** 1
+
 Performs a bit rotation to the left on an 8-bit register. The current value of the **Carry (C)** flag is copied to bit
 0, and the bit leaving on the left is copied to the **Carry (C)** flag.
 
@@ -1652,7 +1662,7 @@ C <- [7 <- 0] <- C
 |0xCB 0x17|`RL A`|
 
 ### `RLC r8`
-**Length:** 2 bytes
+**Length:** 1 byte
 **Cycles (m-time):** 2
 
 Performs a bit rotation to the left on an 8-bit register. The bit leaving on the left is copied to the **Carry (C)**
@@ -1677,6 +1687,28 @@ C <- [7 <- 0] <- [7]
 |0xCB 0x04|`RLC H`|
 |0xCB 0x05|`RLC L`|
 |0xCB 0x07|`RLC A`|
+
+### `RLC (r16)`
+**Length:** 1 byte
+**Cycles (m-time):** 3
+
+Performs a bit rotation to the left on the value pointed to by a 16-bit register pair. The bit leaving on the left is
+copied to the **Carry (C)** flag, and to bit 0.
+
+```
+C <- [7 <- 0] <- [7]
+```
+
+#### Flags
+- **Zero (Z)** is always reset.
+- **Subtract (N)** is always reset.
+- **Half Carry (H)** is always reset.
+- **Carry (C)** is set to the value in bit 7 of the value pointed to by `(r16)`.
+
+#### Instructions
+|Opcode|Instruction
+|---|---|
+|0xCB 0x06|`RLC (HL)`|
 
 ### `RRC r8`
 **Length:** 1 byte
