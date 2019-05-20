@@ -1648,7 +1648,7 @@ C <- [7 <- 0] <- [7]
 ``` 
 
 #### Flags
-- **Zero (Z)** is always reset.
+- **Zero (Z)** is set if the result is 0.
 - **Subtract (N)** is always reset.
 - **Half Carry (H)** is always reset.
 - **Carry (C)** is set to the value in bit 7 of `r8`.
@@ -1675,7 +1675,7 @@ C <- [7 <- 0] <- [7]
 ```
 
 #### Flags
-- **Zero (Z)** is always reset.
+- **Zero (Z)** is set if the result is 0.
 - **Subtract (N)** is always reset.
 - **Half Carry (H)** is always reset.
 - **Carry (C)** is set to the value in bit 7 of the value pointed to by `(r16)`.
@@ -1697,10 +1697,10 @@ C <- [7 <- 0] <- C
 ```
 
 #### Flags
-- **Zero (Z)** is always reset.
+- **Zero (Z)** is set if the result is 0.
 - **Subtract (N)** is always reset.
 - **Half Carry (H)** is always reset.
-- **Carry (C)** is set to the value of bit 7 in `A`.
+- **Carry (C)** is set to the value of bit 7 in `r8`.
 
 #### Instructions
 |Opcode|Instruction
@@ -1725,10 +1725,10 @@ C <- [7 <- 0] <- C
 ```
 
 #### Flags
-- **Zero (Z)** is always reset.
+- **Zero (Z)** is set if the result is 0.
 - **Subtract (N)** is always reset.
 - **Half Carry (H)** is always reset.
-- **Carry (C)** is set to the value of bit 7 in `A`.
+- **Carry (C)** is set to the value of bit 7 in `r8`.
 
 #### Instructions
 |Opcode|Instruction
@@ -1747,10 +1747,10 @@ flag, and to bit 7.
 ```
 
 #### Flags
-- **Zero (Z)** is always reset.
+- **Zero (Z)** is set if the result is 0.
 - **Subtract (N)** is always reset.
 - **Half Carry (H)** is always reset.
-- **Carry (C)** is set to the value of bit 0 in `A`.
+- **Carry (C)** is set to the value of bit 0 in `r8`.
 
 #### Instructions
 |Opcode|Instruction
@@ -1775,10 +1775,10 @@ copied to the **Carry (C)** flag, and to bit 7.
 ```
 
 #### Flags
-- **Zero (Z)** is always reset.
+- **Zero (Z)** is set if the result is 0.
 - **Subtract (N)** is always reset.
 - **Half Carry (H)** is always reset.
-- **Carry (C)** is set to the value of bit 0 in `A`.
+- **Carry (C)** is set to the value of bit 0 in `r8`.
 
 #### Instructions
 |Opcode|Instruction

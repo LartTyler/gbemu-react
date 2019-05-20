@@ -1,5 +1,6 @@
 import {IHardwareBus} from '../../../../../Hardware';
 import {toRegisterDisplayName} from '../../../../../Utility/string';
+import {RegisterFlag} from '../../../../RegisterFlag';
 import {CpuRegister16} from '../../../../Registers';
 import {Abstract8BitLeftCarry} from '../../../Bitwise/Shift/Abstract8BitLeftCarry';
 
@@ -16,5 +17,8 @@ export class Register16AddressLeftCarry extends Abstract8BitLeftCarry {
 		const value = this.process(registers, hardware.memory.read(registers[this.target]));
 
 		hardware.memory.write(registers[this.target], value);
+
+		if (value === 0)
+			registers.flags |= RegisterFlag.ZERO;
 	}
 }

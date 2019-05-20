@@ -31,5 +31,12 @@ describe('RL (r16)', () => {
 
 		expect(hardware.memory.read(registers.hl)).toBe(0b0001);
 		expect(registers.flags).toBe(0);
+
+		hardware.memory.write(registers.hl, 0);
+
+		instruction.execute(hardware);
+
+		expect(hardware.memory.read(registers.hl)).toBe(0);
+		expect(registers.flags).toBe(RegisterFlag.ZERO);
 	});
 });

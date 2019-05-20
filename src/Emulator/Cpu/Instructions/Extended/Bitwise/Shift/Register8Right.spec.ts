@@ -26,6 +26,13 @@ describe('RRC r8', () => {
 
 		expect(registers[target]).toBe(0b01000000);
 		expect(registers.flags).toBe(0);
+
+		registers[target] = 0;
+
+		instruction.execute(hardware);
+
+		expect(registers[target]).toBe(0);
+		expect(registers.flags).toBe(RegisterFlag.ZERO);
 	};
 
 	test('RRC B', () => runner(0x08, 'b'));

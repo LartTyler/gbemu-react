@@ -24,5 +24,12 @@ describe('RRC (r16)', () => {
 
 		expect(hardware.memory.read(registers.hl)).toBe(0b01000000);
 		expect(registers.flags).toBe(0);
+
+		hardware.memory.write(registers.hl, 0);
+
+		instruction.execute(hardware);
+
+		expect(hardware.memory.read(registers.hl)).toBe(0);
+		expect(registers.flags).toBe(RegisterFlag.ZERO);
 	});
 });

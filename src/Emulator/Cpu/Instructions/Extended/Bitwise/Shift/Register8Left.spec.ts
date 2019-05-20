@@ -28,6 +28,13 @@ describe('RLC r8', () => {
 
 		expect(registers[target]).toBe(0b0001);
 		expect(registers.flags).toBe(RegisterFlag.CARRY);
+
+		registers[target] = 0;
+
+		instruction.execute(hardware);
+
+		expect(registers[target]).toBe(0);
+		expect(registers.flags).toBe(RegisterFlag.ZERO);
 	};
 
 	test('RLC B', () => runner(0x00, 'b'));

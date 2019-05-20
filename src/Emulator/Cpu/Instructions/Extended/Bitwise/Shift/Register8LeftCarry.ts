@@ -1,4 +1,5 @@
 import {IHardwareBus} from '../../../../../Hardware';
+import {RegisterFlag} from '../../../../RegisterFlag';
 import {CpuRegister8} from '../../../../Registers';
 import {Abstract8BitLeftCarry} from '../../../Bitwise/Shift/Abstract8BitLeftCarry';
 
@@ -14,5 +15,8 @@ export class Register8LeftCarry extends Abstract8BitLeftCarry {
 		const registers = hardware.cpu.registers;
 
 		registers[this.target] = this.process(registers, registers[this.target]);
+
+		if (registers[this.target] === 0)
+			registers.flags |= RegisterFlag.ZERO;
 	}
 }

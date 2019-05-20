@@ -27,12 +27,20 @@ describe('RL r8', () => {
 		instruction.execute(hardware);
 
 		expect(registers[target]).toBe(0);
-		expect(registers.flags).toBe(RegisterFlag.CARRY);
+		expect(registers.flags).toBe(RegisterFlag.CARRY | RegisterFlag.ZERO);
 
 		instruction.execute(hardware);
 
 		expect(registers[target]).toBe(0b0001);
 		expect(registers.flags).toBe(0);
+
+		registers[target] = 0;
+		registers.flags = 0;
+
+		instruction.execute(hardware);
+
+		expect(registers[target]).toBe(0);
+		expect(registers.flags).toBe(RegisterFlag.ZERO);
 	};
 
 	test('RL B', () => runner(0x10, 'b'));
