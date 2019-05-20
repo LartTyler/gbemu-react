@@ -35,6 +35,7 @@
     - [`LD r8, n8`](#ld-r8-n8)
     - [`LD r8, (r16)`](#ld-r8-r16)
     - [`LD r8, r8`](#ld-r8-r8)
+    - [`LD r16, r16`](#ld-r16-16)
     - [`LD (r16), r8`](#ld-r16-r8)
     - [`LD (n16), r8`](#ld-n16-r8)
     - [`LD r16, n16`](#ld-r16-n16)
@@ -718,6 +719,19 @@ No flags are modified.
 |0x6E|`LD L, (HL)`|
 |0x7E|`LD A, (HL)`|
 
+### `LD r16, r16`
+**Length:** 1 byte
+**Cycles (m-time):** 2
+
+Loads the value of a 16-bit register pair into another 16-bit register pair.
+
+#### Flags
+No flags are modified.
+
+#### Instructions
+|Opcode|Instruction
+|---|---|
+|0xF9|`LD SP, HL`|
 
 ### `LD (r16), r8`
 **Length:** 1 bytes
