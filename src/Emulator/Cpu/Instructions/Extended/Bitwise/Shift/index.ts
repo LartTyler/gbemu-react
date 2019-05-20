@@ -27,7 +27,7 @@ export const extendedShiftInstructions = [
 	new Register8LeftCarry(0x17, 'a'),
 
 	// RL (r16)
-	new Register16AddressLeftCarry(0x0E, 'hl'),
+	new Register16AddressLeftCarry(0x16, 'hl'),
 
 	// RRC r8
 	new Register8Right(0x08, 'b'),

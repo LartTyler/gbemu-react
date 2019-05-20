@@ -7,7 +7,7 @@ describe('RL (r16)', () => {
 	const registers = hardware.cpu.registers;
 
 	test('RL (HL)', () => {
-		const instruction = extendedInstructions.get(0x0E);
+		const instruction = extendedInstructions.get(0x16);
 		registers.hl = 0xC000;
 
 		hardware.memory.write(registers.hl, 0b0001);
