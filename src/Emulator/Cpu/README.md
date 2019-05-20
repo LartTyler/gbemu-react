@@ -95,6 +95,7 @@
     - [`RL r8`](#rl-r8)
     - [`RL (r16)`](#rl-r16)
     - [`RRC r8`](#rrc-r8)
+    - [`RRC (r16)`](#rrc-r16)
 
 ## Terms and Notes
 |Term|Meaning|
@@ -1760,6 +1761,29 @@ flag, and to bit 7.
 |0xCB 0x0C|`RRC H`|
 |0xCB 0x0D|`RRC L`|
 |0xCB 0x0F|`RRC A`|
+
+### `RRC (r16)`
+**Length:** 1 byte
+**Cycles (m-time):** 3
+
+Performs a bit rotation to the right on the value pointed to by a 16-bit register pair. The bit leaving on the right is
+copied to the **Carry (C)** flag, and to bit 7.
+
+```
+[0] -> [7 -> 0] -> C
+```
+
+#### Flags
+- **Zero (Z)** is always reset.
+- **Subtract (N)** is always reset.
+- **Half Carry (H)** is always reset.
+- **Carry (C)** is set to the value of bit 0 in `A`.
+
+#### Instructions
+|Opcode|Instruction
+|---|---|
+|0xCB 0x0E|`RRC (HL)`|
+
 
 ## Half Carry Behavior
 A half carry occurs when a math instruction causes the lower nibble of an 8-bit register to either:
