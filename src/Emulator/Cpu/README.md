@@ -102,6 +102,7 @@
     - [`SLA (r16)`](#sla-r16)
     - [`SRA r8`](#sra-r8)
     - [`SRA (r16)`](#sra-r16)
+    - [`SRL r8`](#srl-r8)
     - [`SWAP r8`](#swap-r8)
     - [`SWAP (r16)`](#swap-r16)
 
@@ -1928,12 +1929,41 @@ Performs an [arithemtic right shift](https://en.wikipedia.org/wiki/Arithmetic_sh
 - **Zero (Z)** is set if the result is 0.
 - **Subtract (N)** is always reset.
 - **Half Carry (H)** is always reset.
-- **Carry (C)** is set to the value of bit 0 in `r8`.
+- **Carry (C)** is set to the value of bit 0.
 
 #### Instructions
 |Opcode|Instruction
 |---|---|
 |0xCB 0x2E|`SRA (HL)`|
+
+### `SRL r8`
+**Length:** 1 byte
+**Cycles (m-time):** 1
+
+Performs a [logical right shift](https://en.wikipedia.org/wiki/Logical_shift) on an 8-bit register. Bits are shifted
+1 position to the right, with zero filling in the most-significant bit. The **Carry (C)** flag is set to the value of
+the bit leaving on the right.
+
+```
+0 -> [7 -> 0] -> C
+```
+
+#### Flags
+- **Zero (Z)** is set if the result is 0.
+- **Subtract (N)** is always reset.
+- **Half Carry (H)** is always reset.
+- **Carry (C)** is set to the value of bit 0 in `r8`.
+
+#### Instructions
+|Opcode|Instruction
+|---|---|
+|0xCB 0x38|`SRL B`|
+|0xCB 0x39|`SRL C`|
+|0xCB 0x3A|`SRL D`|
+|0xCB 0x3B|`SRL E`|
+|0xCB 0x3C|`SRL H`|
+|0xCB 0x3D|`SRL L`|
+|0xCB 0x3F|`SRL A`|
 
 ### `SWAP r8`
 **Length:** 1 byte
