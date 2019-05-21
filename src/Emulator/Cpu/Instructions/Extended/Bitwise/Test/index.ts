@@ -73,4 +73,14 @@ export const bitTestInstructions = [
 	new Register8(0x7C, 'h', 7),
 	new Register8(0x7D, 'l', 7),
 	new Register8(0x7F, 'a', 7),
+
+	// BIT b, (r16)
+	new Register16Address(0x46, 'hl', 0),
+	new Register16Address(0x4E, 'hl', 1),
+	new Register16Address(0x56, 'hl', 2),
+	new Register16Address(0x5E, 'hl', 3),
+	new Register16Address(0x66, 'hl', 4),
+	new Register16Address(0x6E, 'hl', 5),
+	new Register16Address(0x76, 'hl', 6),
+	new Register16Address(0x7E, 'hl', 7),
 ];

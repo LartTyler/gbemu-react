@@ -107,6 +107,7 @@
     - [`SWAP r8`](#swap-r8)
     - [`SWAP (r16)`](#swap-r16)
     - [`BIT b, r8`](#bit-b-r8)
+    - [`BIT b, (r16)`](#bit-b-r16)
 
 ## Terms and Notes
 |Term|Meaning|
@@ -2074,6 +2075,30 @@ Tests if bit `b` is set in an 8-bit register. If the bit in the given position i
 |0xCB 0x74|`BIT 6, H`|0xCB 0x7C|`BIT 7, H`|
 |0xCB 0x75|`BIT 6, L`|0xCB 0x7D|`BIT 7, L`|
 |0xCB 0x77|`BIT 6, A`|0xCB 0x7F|`BIT 7, A`|
+
+### `BIT b, (r16)`
+**Length:** 1 byte
+**Cycles (m-time):** 2
+
+Tests if bit `b` is set in the byte pointed to by a 16-bit register pair. If the bit in the given position is unset,
+the **Zero (Z)** flag is set.
+
+#### Flags
+- **Zero (Z)** is set if the tested bit is unset.
+- **Subtract (N)** is always reset.
+- **Half Carry (H)** is always set.
+
+#### Instructions
+|Opcode|Instruction
+|---|---|
+|0xCB 0x46|`BIT 0, (HL)`|
+|0xCB 0x4E|`BIT 1, (HL)`|
+|0xCB 0x56|`BIT 2, (HL)`|
+|0xCB 0x5E|`BIT 3, (HL)`|
+|0xCB 0x66|`BIT 4, (HL)`|
+|0xCB 0x6E|`BIT 5, (HL)`|
+|0xCB 0x76|`BIT 6, (HL)`|
+|0xCB 0x7E|`BIT 7, (HL)`|
 
 ## Half Carry Behavior
 A half carry occurs when a math instruction causes the lower nibble of an 8-bit register to either:
