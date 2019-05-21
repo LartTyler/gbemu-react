@@ -10,6 +10,9 @@
 - Memory
     - [Memory Region Map](http://gameboy.mongenel.com/dmg/asmmemmap.html) (see [Memory Regions (Implementation)](#memory-regions-implementation))
 
+# Current Issues / Items In Progress
+- Relative jumps (i.e. `JR s8`) seem to be moving forward or backwards too far by 1. I _think_ this might be because I'm not incrementing `PC` when I'm reading from memory, prior to the relative jump itself, but I need to check the docs to see if that's how this should behave.
+
 # Notes
 ## Memory (Notes)
 - Memory reads below $0100 are from the BIOS until $0100 is read. After the first read to $0100, all reads below $0100 are from the game cart instead.
