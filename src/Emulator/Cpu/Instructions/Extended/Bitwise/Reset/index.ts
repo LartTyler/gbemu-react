@@ -1,3 +1,4 @@
+import {Register16Address} from './Register16Address';
 import {Register8} from './Register8';
 
 export const bitResetInstructions = [
@@ -72,4 +73,14 @@ export const bitResetInstructions = [
 	new Register8(0xBC, 'h', 7),
 	new Register8(0xBD, 'l', 7),
 	new Register8(0xBF, 'a', 7),
+
+	// RES b, (r16)
+	new Register16Address(0x86, 'hl', 0),
+	new Register16Address(0x8E, 'hl', 1),
+	new Register16Address(0x96, 'hl', 2),
+	new Register16Address(0x9E, 'hl', 3),
+	new Register16Address(0xA6, 'hl', 4),
+	new Register16Address(0xAE, 'hl', 5),
+	new Register16Address(0xB6, 'hl', 6),
+	new Register16Address(0xBE, 'hl', 7),
 ];
