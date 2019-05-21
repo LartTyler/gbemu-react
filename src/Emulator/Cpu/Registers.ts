@@ -7,6 +7,8 @@ export type CpuRegister8 = 'a' | 'b' | 'c' | 'd' | 'e' | 'h' | 'l';
 export type CpuRegister16 = 'stackPointer' | 'bc' | 'de' | 'hl';
 export type CpuRegister = CpuRegister8 | CpuRegister16;
 
+export type BitPosition = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7;
+
 export class Registers implements ICpuRegisters {
 	public flags: number = 0;
 

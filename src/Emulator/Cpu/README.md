@@ -106,6 +106,7 @@
     - [`SRL (r16)`](#srl-r16)
     - [`SWAP r8`](#swap-r8)
     - [`SWAP (r16)`](#swap-r16)
+    - [`BIT b, r8`](#bit-b-r8)
 
 ## Terms and Notes
 |Term|Meaning|
@@ -113,6 +114,7 @@
 |`PC`|The program counter|
 |`SP`|The stack pointer|
 |`(XY)`|A register or register pair in parenthesis indicates an address reference defined by the register(s)|
+|b|A bit position (0 to 7, inclusive) in an 8-bit value|
 |n8|An immediate 8-bit value (the next byte in memory following the instruction)|
 |n16|An immediate 16-bit value (the next 2 bytes in memory following the instruction)|
 |s8|An immediate 8-bit signed value (the next byte in memory following the instruction, treated as a signed integer)|
@@ -2029,6 +2031,49 @@ through 0, and vice versa.
 |Opcode|Instruction
 |---|---|
 |0xCB 0x36|`SWAP (HL)`|
+
+### `BIT b, r8`
+**Length:** 1 byte
+**Cycles (m-time):** 1
+
+Tests if bit `b` is set in an 8-bit register. If the bit in the given position is unset, the **Zero (Z)** flag is set.
+
+#### Flags
+- **Zero (Z)** is set if the tested bit is unset.
+- **Subtract (N)** is always reset.
+- **Half Carry (H)** is always set.
+
+#### Instructions
+|Opcode|Instruction|Opcode|Instruction|
+|---|---|---|---|
+|0xCB 0x40|`BIT 0, B`|0xCB 0x48|`BIT 1, B`|
+|0xCB 0x41|`BIT 0, C`|0xCB 0x49|`BIT 1, C`|
+|0xCB 0x42|`BIT 0, D`|0xCB 0x4A|`BIT 1, D`|
+|0xCB 0x43|`BIT 0, E`|0xCB 0x4B|`BIT 1, E`|
+|0xCB 0x44|`BIT 0, H`|0xCB 0x4C|`BIT 1, H`|
+|0xCB 0x45|`BIT 0, L`|0xCB 0x4D|`BIT 1, L`|
+|0xCB 0x47|`BIT 0, A`|0xCB 0x4F|`BIT 1, A`|
+|0xCB 0x50|`BIT 2, B`|0xCB 0x58|`BIT 3, B`|
+|0xCB 0x51|`BIT 2, C`|0xCB 0x59|`BIT 3, C`|
+|0xCB 0x52|`BIT 2, D`|0xCB 0x5A|`BIT 3, D`|
+|0xCB 0x53|`BIT 2, E`|0xCB 0x5B|`BIT 3, E`|
+|0xCB 0x54|`BIT 2, H`|0xCB 0x5C|`BIT 3, H`|
+|0xCB 0x55|`BIT 2, L`|0xCB 0x5D|`BIT 3, L`|
+|0xCB 0x57|`BIT 2, A`|0xCB 0x5F|`BIT 3, A`|
+|0xCB 0x60|`BIT 4, B`|0xCB 0x68|`BIT 5, B`|
+|0xCB 0x61|`BIT 4, C`|0xCB 0x69|`BIT 5, C`|
+|0xCB 0x62|`BIT 4, D`|0xCB 0x6A|`BIT 5, D`|
+|0xCB 0x63|`BIT 4, E`|0xCB 0x6B|`BIT 5, E`|
+|0xCB 0x64|`BIT 4, H`|0xCB 0x6C|`BIT 5, H`|
+|0xCB 0x65|`BIT 4, L`|0xCB 0x6D|`BIT 5, L`|
+|0xCB 0x67|`BIT 4, A`|0xCB 0x6F|`BIT 5, A`|
+|0xCB 0x70|`BIT 6, B`|0xCB 0x78|`BIT 7, B`|
+|0xCB 0x71|`BIT 6, C`|0xCB 0x79|`BIT 7, C`|
+|0xCB 0x72|`BIT 6, D`|0xCB 0x7A|`BIT 7, D`|
+|0xCB 0x73|`BIT 6, E`|0xCB 0x7B|`BIT 7, E`|
+|0xCB 0x74|`BIT 6, H`|0xCB 0x7C|`BIT 7, H`|
+|0xCB 0x75|`BIT 6, L`|0xCB 0x7D|`BIT 7, L`|
+|0xCB 0x77|`BIT 6, A`|0xCB 0x7F|`BIT 7, A`|
 
 ## Half Carry Behavior
 A half carry occurs when a math instruction causes the lower nibble of an 8-bit register to either:
