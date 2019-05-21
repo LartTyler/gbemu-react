@@ -102,6 +102,8 @@
     - [`SLA (r16)`](#sla-r16)
     - [`SRA r8`](#sra-r8)
     - [`SRA (r16)`](#sra-r16)
+    - [`SWAP r8`](#swap-r8)
+    - [`SWAP (r16)`](#swap-r16)
 
 ## Terms and Notes
 |Term|Meaning|
@@ -1932,6 +1934,47 @@ Performs an [arithemtic right shift](https://en.wikipedia.org/wiki/Arithmetic_sh
 |Opcode|Instruction
 |---|---|
 |0xCB 0x2E|`SRA (HL)`|
+
+### `SWAP r8`
+**Length:** 1 byte
+**Cycles (m-time):** 1
+
+Swaps the upper and lower nibbles of an 8-bit register.  Bits 7 through 4 become bits 3 through 0, and vice versa.
+
+#### Flags
+- **Zero (Z)** is set if the result is 0.
+- **Subtract (N)** is always reset.
+- **Half Carry (H)** is always reset.
+- **Carry (C)** is always reset.
+
+#### Instructions
+|Opcode|Instruction
+|---|---|
+|0xCB 0x30|`SWAP B`|
+|0xCB 0x31|`SWAP C`|
+|0xCB 0x32|`SWAP D`|
+|0xCB 0x33|`SWAP E`|
+|0xCB 0x34|`SWAP H`|
+|0xCB 0x35|`SWAP L`|
+|0xCB 0x37|`SWAP A`|
+
+### `SWAP (r16)`
+**Length:** 1 byte
+**Cycles (m-time):** 3
+
+Swaps the upper and lower nibbles of the byte pointed to be a 16-bit register pair. Bits 7 through 4 become bits 3
+through 0, and vice versa.
+
+#### Flags
+- **Zero (Z)** is set if the result is 0.
+- **Subtract (N)** is always reset.
+- **Half Carry (H)** is always reset.
+- **Carry (C)** is always reset.
+
+#### Instructions
+|Opcode|Instruction
+|---|---|
+|0xCB 0x36|`SWAP (HL)`|
 
 ## Half Carry Behavior
 A half carry occurs when a math instruction causes the lower nibble of an 8-bit register to either:
