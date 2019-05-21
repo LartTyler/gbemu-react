@@ -1,3 +1,4 @@
+import {CpuTickEvent} from '../../../Events/Cpu/CpuTickEvent';
 import {IHardwareBus} from '../../../Hardware';
 import {toHex} from '../../../Utility/number';
 import {Instruction} from '../../Instruction';
@@ -16,6 +17,10 @@ export class Prefix extends Instruction {
 		const opcode = hardware.memory.read(registers.programCounter++);
 
 		const instruction = extendedInstructions.get(opcode);
+
+		hardware.eventDispatcher.dispatch(
+			new CpuTickEvent(hardware.cpu, registers.programCounter - 1, instruction, true),
+		);
 
 		if (!instruction) {
 			hardware.cpu.stop();

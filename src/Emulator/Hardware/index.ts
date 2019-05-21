@@ -1,4 +1,5 @@
 import {ICartridge} from '../Cartridge/Cartridge';
+import {EventDispatcher} from '../Events/EventDispatcher';
 import {Interrupts} from '../Memory/Interrupts';
 import {IStack} from '../Memory/Stack';
 
@@ -31,6 +32,8 @@ export interface ICpu extends IResettable {
 	start(): void;
 	stop(): void;
 	step(): void;
+
+	setTickRate(delay: number): void;
 }
 
 export interface IMemory extends IResettable {
@@ -49,6 +52,7 @@ export interface IMemory extends IResettable {
 export interface IHardwareBus extends IResettable {
 	readonly cpu: ICpu;
 	readonly memory: IMemory;
+	readonly eventDispatcher: EventDispatcher;
 }
 
 export interface IHardwareBusAware {

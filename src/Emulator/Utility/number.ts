@@ -1,8 +1,10 @@
-export const toHex = (value: number, prefix: boolean = true): string => {
+import {lpad} from './string';
+
+export const toHex = (value: number, prefix: boolean = true, minLength: number = 2): string => {
 	let output = value.toString(16);
 
-	if (output.length % 2 !== 0)
-		output = `0${output}`;
+	if (output.length < minLength)
+		output = lpad(output, minLength, '0');
 
 	output = output.toUpperCase();
 

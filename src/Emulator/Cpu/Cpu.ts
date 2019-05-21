@@ -1,3 +1,4 @@
+import {CpuTickEvent} from '../Events/Cpu/CpuTickEvent';
 import {ICpu, IHardwareBus, IHardwareBusAware} from '../Hardware';
 import {interruptVectors} from '../Memory/Interrupts';
 import {toHex} from '../Utility/number';
@@ -14,12 +15,20 @@ export class Cpu implements ICpu, IHardwareBusAware {
 	protected halt: boolean = true;
 	protected tickIntervalId: number = null;
 
+	protected tickRate: number = 0;
+
 	public constructor() {
 		this.registers = new Registers();
 	}
 
 	public stop(): void {
 		this.halt = true;
+
+		if (this.tickIntervalId) {
+			window.clearTimeout(this.tickIntervalId);
+
+			this.tickIntervalId = null;
+		}
 	}
 
 	public start(): void {
@@ -51,6 +60,8 @@ export class Cpu implements ICpu, IHardwareBusAware {
 		const opcode = this.hardware.memory.read(this.registers.programCounter++);
 		const operator = instructions.get(opcode);
 
+		this.hardware.eventDispatcher.dispatch(new CpuTickEvent(this, this.registers.programCounter - 1, operator));
+
 		if (!operator) {
 			this.stop();
 
@@ -67,8 +78,19 @@ export class Cpu implements ICpu, IHardwareBusAware {
 
 	public reset(): void {
 		this.clock = 0;
+		this.halt = true;
+
+		if (this.tickIntervalId) {
+			window.clearTimeout(this.tickIntervalId);
+
+			this.tickIntervalId = null;
+		}
 
 		this.registers.reset();
+	}
+
+	public setTickRate(delay: number): void {
+		this.tickRate = delay;
 	}
 
 	public setHardwareBus(hardware: IHardwareBus): void {
@@ -76,17 +98,18 @@ export class Cpu implements ICpu, IHardwareBusAware {
 	}
 
 	protected frame(): void {
-		this.tickIntervalId = null;
-
 		const frameClock = this.clock + 17556;
 
 		do {
 			this.step();
 
-			if (this.halt)
-				return;
-		} while (this.clock < frameClock);
+			if (this.halt) {
+				this.tickIntervalId = null;
 
-		this.tickIntervalId = window.setTimeout(() => this.frame(), 1);
+				return;
+			}
+		} while (this.tickRate <= 1 && this.clock < frameClock);
+
+		this.tickIntervalId = window.setTimeout(() => this.frame(), Math.max(this.tickRate, 1));
 	}
 }
