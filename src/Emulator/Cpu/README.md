@@ -103,6 +103,7 @@
     - [`SRA r8`](#sra-r8)
     - [`SRA (r16)`](#sra-r16)
     - [`SRL r8`](#srl-r8)
+    - [`SRL (r16)`](#srl-r16)
     - [`SWAP r8`](#swap-r8)
     - [`SWAP (r16)`](#swap-r16)
 
@@ -1964,6 +1965,29 @@ the bit leaving on the right.
 |0xCB 0x3C|`SRL H`|
 |0xCB 0x3D|`SRL L`|
 |0xCB 0x3F|`SRL A`|
+
+### `SRL (r16)`
+**Length:** 1 byte
+**Cycles (m-time):** 3
+
+Performs a [logical right shift](https://en.wikipedia.org/wiki/Logical_shift) on the byte pointed to by a 16-bit
+register pair. Bits are shifted 1 position to the right, with zero filling in the most-significant bit. The
+**Carry (C)** flag is set to the value of the bit leaving on the right.
+
+```
+0 -> [7 -> 0] -> C
+```
+
+#### Flags
+- **Zero (Z)** is set if the result is 0.
+- **Subtract (N)** is always reset.
+- **Half Carry (H)** is always reset.
+- **Carry (C)** is set to the value of bit 0 in `r8`.
+
+#### Instructions
+|Opcode|Instruction
+|---|---|
+|0xCB 0x3E|`SRL (HL)`|
 
 ### `SWAP r8`
 **Length:** 1 byte
