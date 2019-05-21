@@ -111,6 +111,7 @@
     - [`RES b, r8`](#res-b-r8)
     - [`RES b, (r16)`](#res-b-r16)
     - [`SET b, r8`](#set-b-r8)
+    - [`SET b, (r16)`](#set-b-r16)
 
 ## Terms and Notes
 |Term|Meaning|
@@ -2205,6 +2206,27 @@ No flags are modified.
 |0xCB 0xF4|`SET 6, H`|0xCB 0xFC|`SET 7, H`|
 |0xCB 0xF5|`SET 6, L`|0xCB 0xFD|`SET 7, L`|
 |0xCB 0xF7|`SET 6, A`|0xCB 0xFF|`SET 7, A`|
+
+### `SET b, (r16)`
+**Length:** 1 byte
+**Cycles (m-time):** 3
+
+Sets bit `b` in the byte pointed to by a 16-bit register pair to 1 (that is, it sets bit `b`).
+
+#### Flags
+No flags are modified.
+
+#### Instructions
+|Opcode|Instruction
+|---|---|
+|0xCB 0xC6|`SET 0, (HL)`|
+|0xCB 0xCE|`SET 1, (HL)`|
+|0xCB 0xD6|`SET 2, (HL)`|
+|0xCB 0xDE|`SET 3, (HL)`|
+|0xCB 0xE6|`SET 4, (HL)`|
+|0xCB 0xEE|`SET 5, (HL)`|
+|0xCB 0xF6|`SET 6, (HL)`|
+|0xCB 0xFE|`SET 7, (HL)`|
 
 ## Half Carry Behavior
 A half carry occurs when a math instruction causes the lower nibble of an 8-bit register to either:
