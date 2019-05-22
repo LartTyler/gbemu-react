@@ -32,6 +32,9 @@ export class Cpu implements ICpu, IHardwareBusAware {
 	}
 
 	public start(): void {
+		if (!this.halt)
+			return;
+
 		this.halt = false;
 
 		this.frame();
