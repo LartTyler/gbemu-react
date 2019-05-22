@@ -18,7 +18,10 @@ export class ConditionalRelativeSigned8 extends Instruction {
 		if (!isRegisterFlagTestSatisfied(registers.flags, this.test))
 			return;
 
-		registers.programCounter += fromTwosComplement(hardware.memory.read(registers.programCounter));
+		// Relative jumps occur from the END of the instruction. Since PC is "halfway through" this instruction (it's
+		// value is the address of the opcode + 1, or at the byte holding the jump distance), we add one to the jump
+		// distance to get the correct offset.
+		registers.programCounter += fromTwosComplement(hardware.memory.read(registers.programCounter)) + 1;
 		hardware.cpu.clock += 1;
 	}
 }

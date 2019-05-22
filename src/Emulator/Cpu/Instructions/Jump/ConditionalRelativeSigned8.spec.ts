@@ -12,7 +12,7 @@ describe('JR cc, s8', () => {
 		hardware.cpu.registers.programCounter = 0xC000;
 
 		hardware.memory.write(0xC001, 7);
-		hardware.memory.write(0xC008, toTwosComplement(-8));
+		hardware.memory.write(0xC009, toTwosComplement(-8));
 	});
 
 	const runner = (code: number, test: RegisterFlagTest) => {
@@ -32,12 +32,12 @@ describe('JR cc, s8', () => {
 
 		instruction.execute(hardware);
 
-		expect(registers.programCounter).toBe(0xC008);
+		expect(registers.programCounter).toBe(0xC009);
 		expect(hardware.cpu.clock).toBe(5);
 
 		instruction.execute(hardware);
 
-		expect(registers.programCounter).toBe(0xC000);
+		expect(registers.programCounter).toBe(0xC002);
 		expect(hardware.cpu.clock).toBe(8);
 	};
 
