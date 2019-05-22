@@ -1,6 +1,8 @@
-import {Button, Classes, FileInput} from '@blueprintjs/core';
+import {Button, Classes, Colors, ControlGroup, FileInput, FormGroup, InputGroup, Switch} from '@blueprintjs/core';
+import {Cell, Row} from '@dbstudios/blueprintjs-components';
 import * as React from 'react';
 import {IHardwareBus} from '../Emulator/Hardware';
+import {Debugger} from './Debug/Debugger';
 import {InstructionMonitor} from './Debug/InstructionMonitor';
 import {RegisterMonitor} from './Debug/RegisterMonitor';
 
@@ -9,7 +11,7 @@ interface IProps {
 }
 
 interface IState {
-	cpuTickRate: number;
+	cpuTickRate: string;
 	debug: boolean;
 	selectedFile: string;
 	started: boolean;
@@ -18,8 +20,8 @@ interface IState {
 
 export class Gameboy extends React.PureComponent<IProps, IState> {
 	public state: Readonly<IState> = {
-		cpuTickRate: 50,
-		debug: true,
+		cpuTickRate: '50',
+		debug: false,
 		selectedFile: null,
 		started: false,
 		title: '',
@@ -31,60 +33,38 @@ export class Gameboy extends React.PureComponent<IProps, IState> {
 
 	public componentDidMount(): void {
 		if (this.state.debug)
-			this.props.hardware.cpu.setTickRate(this.state.cpuTickRate);
-	}
-
-	public componentDidUpdate(prevProps: Readonly<IProps>, prevState: Readonly<IState>): void {
-		if (this.state.debug)
-			this.props.hardware.cpu.setTickRate(this.state.cpuTickRate);
-		else
-			this.props.hardware.cpu.setTickRate(0);
+			this.props.hardware.cpu.setTickRate(parseInt(this.state.cpuTickRate, 10));
 	}
 
 	public render(): React.ReactNode {
 		return (
-			<>
-				<FileInput
-					inputProps={{multiple: false}}
-					onInputChange={this.onCartridgeChange}
-					style={{
-						marginBottom: 10,
-					}}
-					text={this.state.selectedFile || 'Select a cartridge...'}
+			<div style={{width: 500}}>
+				<p className={Classes.TEXT_LARGE}>
+					{this.state.selectedFile !== null && (
+						<>Now playing <strong>{this.state.title}</strong>...</>
+					) || (
+						<>Select a ROM to load</>
+					)}
+				</p>
+
+				<ControlGroup style={{marginBottom: 10}}>
+					<FileInput
+						fill={true}
+						hasSelection={this.state.selectedFile !== null}
+						inputProps={{multiple: false}}
+						onInputChange={this.onCartridgeChange}
+						text={this.state.selectedFile || 'Select a cartridge...'}
+					/>
+
+					<Button icon="power" onClick={this.onPowerClick} />
+				</ControlGroup>
+
+				<Debugger
+					enabled={this.state.debug}
+					hardware={this.props.hardware}
+					onEnabledChange={this.onDebuggerEnabledChange}
 				/>
-
-				{this.state.debug && (
-					<div style={{marginBottom: 10}}>
-						<Button onClick={this.onStartStopClick} style={{marginRight: 5}}>
-							Start / Stop
-						</Button>
-
-						<Button onClick={this.onStepClick} style={{marginRight: 5}}>
-							Step
-						</Button>
-
-						<Button onClick={this.onResetClick}>
-							Reset
-						</Button>
-					</div>
-				)}
-
-				{this.state.selectedFile !== null && (
-					<p className={Classes.TEXT_LARGE}>
-						Now playing <strong>{this.state.title}</strong>...
-					</p>
-				)}
-
-				{this.state.debug && (
-					<>
-						<div style={{width: 500, marginBottom: 10}}>
-							<RegisterMonitor hardware={this.props.hardware} />
-						</div>
-
-						<InstructionMonitor hardware={this.props.hardware} />
-					</>
-				)}
-			</>
+			</div>
 		);
 	}
 
@@ -97,33 +77,27 @@ export class Gameboy extends React.PureComponent<IProps, IState> {
 			selectedFile: file.name,
 		});
 
-		this.props.hardware.memory.loadCartridge(file).then(() => this.setState({
-			title: this.props.hardware.memory.getCartridge().title,
-		}));
-	};
+		this.props.hardware.memory.loadCartridge(file).then(() => {
+			this.setState({
+				title: this.props.hardware.memory.getCartridge().title,
+			});
 
-	private onStartStopClick = () => {
-		if (this.state.started)
-			this.props.hardware.cpu.stop();
-		else
-			this.props.hardware.cpu.start();
+			if (!this.state.debug) {
+				this.props.hardware.cpu.start();
 
-		this.setState({
-			started: !this.state.started,
+				this.setState({
+					started: true,
+				});
+			}
 		});
 	};
 
-	private onStepClick = () => {
-		this.setState({
-			started: false,
-		});
+	private onDebuggerEnabledChange = (enabled: boolean) => this.setState({
+		debug: enabled,
+	});
 
-		this.props.hardware.cpu.stop();
-		this.props.hardware.cpu.step();
-	};
-
-	private onResetClick = () => {
-		this.props.hardware.cpu.reset();
+	private onPowerClick = () => {
+		this.props.hardware.reset();
 		this.props.hardware.cpu.start();
 
 		this.setState({

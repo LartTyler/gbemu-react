@@ -34,6 +34,7 @@ export interface ICpu extends IResettable {
 	step(): void;
 
 	setTickRate(delay: number): void;
+	isRunning(): boolean;
 }
 
 export interface IMemory extends IResettable {

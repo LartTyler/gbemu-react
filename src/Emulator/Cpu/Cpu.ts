@@ -96,6 +96,10 @@ export class Cpu implements ICpu, IHardwareBusAware {
 		this.tickRate = delay;
 	}
 
+	public isRunning(): boolean {
+		return !this.halt;
+	}
+
 	public setHardwareBus(hardware: IHardwareBus): void {
 		this.hardware = hardware;
 	}
