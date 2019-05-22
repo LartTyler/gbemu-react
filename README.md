@@ -11,11 +11,26 @@
     - [Memory Region Map](http://gameboy.mongenel.com/dmg/asmmemmap.html) (see [Memory Regions (Implementation)](#memory-regions-implementation))
 
 # Current Issues / Items In Progress
-- Relative jumps (i.e. `JR s8`) seem to be moving forward or backwards too far by 1. I _think_ this might be because I'm not incrementing `PC` when I'm reading from memory, prior to the relative jump itself, but I need to check the docs to see if that's how this should behave.
+- `RST` instructions are not yet implemented. Unit tests have those instructions flagged as ignored, but they need to be implemented.
 
 # Notes
 ## Memory (Notes)
 - Memory reads below $0100 are from the BIOS until $0100 is read. After the first read to $0100, all reads below $0100 are from the game cart instead.
+
+### Cartridges and Memory Bank Controllers (MBC)
+> Much of the following information has been compiled from [The Cycle-Accurate GB Docs](https://github.com/AntonioND/giibiiadvance/blob/master/docs/TCAGBD.pdf)
+> and [Dooskington's GameLad page on MBCs](https://github.com/Dooskington/GameLad/wiki/Part-11---Memory-Bank-Controllers).
+
+Normally, the max memory space the Gameboy can address is 65,535 addresses. Of that, only 32k (32,767 addresses) are
+available to the cartridge, as the rest are used to control the Gameboy's hardware. To work around this limitation, most
+games utilize a Memory Bank Controller (MBC) to allow ROM and / or RAM banks on the cartridge itself to be switched out.
+
+Normally, with no MBC in play, the entire cartridge is mapped to addresses `$0000 - $7FFF`. All 32k of memory is
+read-only, and writes to that range are silently ignored. A cartridge with an MBC chip, however, can "hook" (for
+lack of a better word) into writes to special ranges in cartridge memory to change the behavior of subsequent reads and
+writes.
+
+**TODO** Finish MBC docs.
 
 # Implementation Details
 ## Memory Regions (Implementation)

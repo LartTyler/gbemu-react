@@ -1,5 +1,6 @@
 import {to16Bit} from '../Utility/number';
 import {fromBinary} from '../Utility/string';
+import {ReadOnlyController} from './Controllers/ReadOnlyController';
 
 export interface ICartridge {
 	readonly logo: Uint8Array;
@@ -7,6 +8,12 @@ export interface ICartridge {
 	readonly licensee: number;
 
 	read(address: number): number;
+	write(address: number, value: number): void;
+}
+
+export interface IController {
+	read(address: number): number;
+	write(address: number, value: number): void;
 }
 
 export class Cartridge implements ICartridge {
@@ -14,21 +21,25 @@ export class Cartridge implements ICartridge {
 	public readonly title: string;
 	public readonly licensee: number;
 
-	protected rom: Uint8Array;
+	protected controller: IController;
 
-	public constructor(rom: Uint8Array) {
-		this.rom = rom;
+	public constructor(data: Uint8Array) {
+		this.controller = new ReadOnlyController(data);
 
-		this.logo = rom.slice(0x0104, 0x0133);
-		this.title = fromBinary(rom.slice(0x0134, 0x0143)).trim();
+		this.logo = data.slice(0x0104, 0x0133);
+		this.title = fromBinary(data.slice(0x0134, 0x0143)).trim();
 
-		if (rom[0x014B] === 0x33)
-			this.licensee = to16Bit(rom[0x0145], rom[0x0144]);
+		if (data[0x014B] === 0x33)
+			this.licensee = to16Bit(data[0x0145], data[0x0144]);
 		else
-			this.licensee = rom[0x014B];
+			this.licensee = data[0x014B];
 	}
 
 	public read(address: number): number {
-		return this.rom[address];
+		return this.controller.read(address);
+	}
+
+	public write(address: number, value: number): void {
+		this.controller.write(address, value);
 	}
 }
