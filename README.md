@@ -2,6 +2,7 @@
 - [CGB Development Wiki](http://gbdev.gg8.se/wiki/articles/Main_Page)
 - [Detailed CGB Internals](http://marc.rawer.de/Gameboy/Docs/GBCPUman.pdf)
 - [Repository of Useful GB Development Links](https://github.com/gbdev/awesome-gbdev)
+- [The Pandocs](http://bgb.bircd.org/pandocs.htm)
 - CPU
     - [Detailed GB Instruction Reference](https://rednex.github.io/rgbds/gbz80.7.html)<sup>[1](#instruction-inaccuracies)</sup>
     - [GB Opcode Table](http://pastraiser.com/cpu/gameboy/gameboy_opcodes.html)<sup>[1](#instruction-inaccuracies)</sup>
@@ -12,6 +13,7 @@
 
 # Current Issues / Items In Progress
 - `RST` instructions are not yet implemented. Unit tests have those instructions flagged as ignored, but they need to be implemented.
+- Only basic cartridge support has been added. No MBCs are currently supported, but will be added in the future.
 
 # Notes
 ## Memory (Notes)
@@ -41,12 +43,13 @@ segments it's memory, the actual memory implementation combines a few sequential
 |-----|----|-----|-------|
 |`$0000 - $00FF`|255b|[Interrupt](#interrupts) vectors|&mdash;|
 |`$0100 - $7FFF`|32k|Cart ROM|See [Game Cart (Implementation)](#game-cart-implementation)|
-|`$8000 - $9FFF`|8k|Video Memory|Character (tile) VRAM|
+|`$8000 - $9FFF`|8k|Video Memory|Character (tile) VRAM (see [Video (Implementation)](#video-implementation)|
 |`$A000 - $BFFF`|8k|Game cart RAM|Mapped external RAM (stored on the game cart)|
 |`$C000 - $DFFF`|8k|Working RAM|General purpose RAM|
 |`$E000 - $FDFF`|7.5k (approx.)|Echo RAM|A [copy of](http://gbdev.gg8.se/wiki/articles/Memory_Map#Echo_RAM) the first (roughly) 7.5k of working RAM|
-|`$FE00 - $FE9F`|160b|Object Attribute Memory|Sprite RAM (40 sprites, each using 4 bytes); see [Sprites (Implementation)](#sprites-implementation)|
+|`$FE00 - $FE9F`|160b|Object Attribute Memory|Sprite RAM (40 sprites, each using 4 bytes); see [Video (Implementation)](#video-implementation)|
 |`$FEA0 - $FEFF`|96b|Unused|&mdash;|
+|`$FF00 - $FF7F`|128b|IO RAM|Used as special purpose registers to control hardware and store hardware status|
 |`$FF80 - $FFFE`|127b|Zero-page RAM|A small segment of fast memory|
 |`$FFFF`|1b|Interrupt enable register|A special IO register that controls [interrupts](#interrupts)|
 
@@ -55,6 +58,87 @@ For implementation details relating to CPU instructions, [click here](src/Emulat
 
 ## Game Cart (Implementation)
 Stub.
+
+## Video (Implementation)
+The video and rendering system are made up of 4 main parts:
+
+1. Color palettes, which are managed by special registers in IO RAM.
+2. Tile VRAM, the roughly 6k segment of memory between `$8000` and `$97FF` that holds bitmap graphics.
+3. Background attribute maps, stored in two distinct memory regions: `$9800 - $9BFF` and `$9C00 - $9FFF`.
+4. Object attribute maps, stored between `$FE00` and `$FE9F`.
+
+### Color Palettes
+There are two types of palettes: monochrome and color. The classic Gameboy only used the monochrome palette, while the
+Gameboy color supports both monochrome and color palettes.
+
+#### Monochrome Palette
+The monochrome palette, used by the classic Gameboy and the Gameboy Color (depending on mode), consists of a single byte
+that "maps" color indexes in tile VRAM to grayscale colors. There are 3 monochrome palettes, which can be controlled
+via special registers in IO RAM.
+
+|Address|Name|Purpose|
+|---|---|---|
+|`$FF47`|BGP|The palette used by tiles rendered in the background|
+|`$FF48`|OBP0|The first palette used by foreground sprites|
+|`$FF49`|OBP1|The second palette used by foreground sprites|
+
+Each palette consists of a single byte, which each pair of bits assigning gray shades to the color numbers used by tiles
+in VRAM. Possible gray shades are listed below.
+
+```
+0  White
+1  Light gray
+2  Dark gray
+3  Black
+```
+
+Since a color needs two bits to be defined, the palette byte is split up like so.
+
+|Bits|Color Number|
+|---|---|
+|Bit 7 - 6|Color 3|
+|Bit 5 - 4|Color 2|
+|Bit 3 - 2|Color 1|
+|Bit 1 - 0|Color 0|
+
+In other words, the bits in the palette define which of the 4 possible colors are assigned to which color number. The
+tiles being rendered are made up of color numbers, which map to the desired color via the palette register.
+
+There is, however, one exception. For `OBP0` and `OBP1`, color 0 is _always_ transparent, regardless of the value set
+in the lower two bits of their corresponding register.
+
+<details>
+<summary>Click here to view an example</summary>
+
+For example, let's use the default monochrome color palette, `0b11100100`, which translates to the following colors.
+
+|Bits|Color Number|Color|
+|---|---|---|
+|`0b11`|Color 3|Black|
+|`0b10`|Color 2|Dark Gray|
+|`0b01`|Color 1|Light Gray|
+|`0b00`|Color 0|White|
+
+In our example, let's also assume that the tile being rendered begins with the value `0x93`, or `0b10010011`. The colors
+used for those 4 pixels (since each pixel is represented by two bits), we'd get the following colors, in order.
+
+|Bits|Color Number|Color|
+|---|---|---|
+|`0b10`|Color 2|Dark Gray|
+|`0b01`|Color 1|Light Gray|
+|`0b00`|Color 0|White|
+|`0b11`|Color 3|Black|
+
+If our palette were to suddenly be reversed, becoming `0b00100111`, the exact same 4 pixels we just rendered would
+instead look like the following (remember that our 4 pixels are defined as `0b10010011`).
+
+|Bits|Color Number|Color|
+|---|---|---| 
+|`0b10`|Color 2|Light Gray|
+|`0b01`|Color 1|Dark Gray|
+|`0b00`|Color 0|Black|
+|`0b11`|Color 3|White|
+</details>
 
 ## Sprites (Implementation)
 Stub.

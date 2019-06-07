@@ -7,6 +7,10 @@ export interface IResettable {
 	reset(): void;
 }
 
+export const isResettable = (value: any): value is IResettable => {
+	return typeof value === 'object' && 'reset' in value;
+};
+
 export interface ICpuRegisters {
 	a: number;
 	b: number;
@@ -48,6 +52,10 @@ export interface IMemory extends IResettable {
 	readWord(address: number): number;
 	write(address: number, value: number): void;
 	writeWord(address: number, value: number): void;
+}
+
+export interface IGpu extends IResettable {
+	tick(): void;
 }
 
 export interface IHardwareBus extends IResettable {
