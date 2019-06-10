@@ -68,8 +68,9 @@ The video and rendering system are made up of 4 main parts:
 4. Object attribute maps, stored between `$FE00` and `$FE9F`.
 
 ### Color Palettes
-There are two types of palettes: monochrome and color. The classic Gameboy only used the monochrome palette, while the
-Gameboy color supports both monochrome and color palettes.
+There are two types of palettes: [monochrome](#monochrome-palette) and [color](#color-palettes). The classic Gameboy
+only used the monochrome palette, while the Gameboy color supports both monochrome and color palettes (the palettes used
+changes based on the current mode).
 
 #### Monochrome Palette
 The monochrome palette, used by the classic Gameboy and the Gameboy Color (depending on mode), consists of a single byte
@@ -139,6 +140,51 @@ instead look like the following (remember that our 4 pixels are defined as `0b10
 |`0b00`|Color 0|Black|
 |`0b11`|Color 3|White|
 </details>
+
+#### Color Palettes
+The Gameboy Color added support for a set of color palettes. Each color in the palette consists of two bytes, with 5
+bits being used to represent one color channel.
+
+|Bits|Channel
+|---|---|
+|Bits 0 - 4|Red|
+|Bits 5 - 9|Green|
+|Bits 10 - 14|Blue|
+
+The value for each channel can range from 0 to 31 (`0x00` to `0x1F` in hexidecimal). The higher the value, the more
+intense the color channel will appear. The 15th bit (most-significant bit) of each color is unused.
+
+There are 2 palette groups in the Gameboy Color's palette, each group subdivided into 8 sub-palettes. The Gameboy
+Color's palettes are managed very differently from the original Monochrome palette. Color palettes are accessed through
+a pair of registers in IO RAM, called their index and data registers.
+
+A palette's index register is used to address a byte in the palette, which can then be read from and written to using
+the palette's data register. The index register uses the first 6 bits (0 to 5) to hold the value of the index, with
+an extra flag being held in bit 7 to indicate if the register should auto-increment following every write operation. The
+index bits (0 to 5) of the index palette can range from 0 to 63 (`0x00` to `0x3F` in hexidecimal).
+
+**Background Color Palettes**
+The background color palette registers are the index register BGPI at `$FF68` and the data register BGPD at `$FF69`.
+There are a total of 8 background color palettes, numbered 0 to 7, and referred to as BGP0 to BGP7.
+
+Read operations on the data register BGPD will return the value of the byte indicated by the index register BGPI, and
+writes to BGPD will update the value of that byte in the palette (remember that each color is represented by a pair of
+bytes, so it would require two writes to BGPD to fully change one color in the palette). To assist with updating the
+palettes, bit 7 in BGPI can be set to indicate that the index register should increment following every write (please
+note that this is **write** only, the auto-increment bit in BGPI will not cause an increment on read).
+
+Color palettes cannot be read from or written to when the LCD controller is reading from them (during Mode 3). By
+default, all colors in the color palettes are initialized to white.
+
+**Object Color Palettes**
+The object palettes (also called sprite or foreground palettes) work the same was as described in the previous section,
+**Background Color Palettes**. The object palettes are accessed through the index register OBPI at `$FF6A` and the
+data register OBPD at `$FF6B`.
+
+There are a total of 8 object color palettes, numbered, 0 to 7, and referred to as OBP0 to OBP7.
+
+Unlike the background palettes, the 0th color in each palette is _always_ transparent, and may be left unitialized, or
+initialized to any random value.
 
 ## Sprites (Implementation)
 Stub.
