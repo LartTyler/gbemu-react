@@ -22,7 +22,7 @@ describe('ADD r16, 16', () => {
 		expect(registers[target]).toBe(15);
 		expect(registers.flags).toBe(0);
 
-		expect(hardware.cpu.clock).toBe(2);
+		expect(hardware.cpu.clock.total).toBe(2);
 		expect(registers.programCounter).toBe(0);
 
 		registers[target] = 0xFFF;
@@ -65,7 +65,7 @@ describe('ADD r16, 16', () => {
 		expect(registers.hl).toBe(20);
 		expect(registers.flags).toBe(0);
 
-		expect(hardware.cpu.clock).toBe(2);
+		expect(hardware.cpu.clock.total).toBe(2);
 		expect(registers.programCounter).toBe(0);
 
 		registers.hl = 0xF00;

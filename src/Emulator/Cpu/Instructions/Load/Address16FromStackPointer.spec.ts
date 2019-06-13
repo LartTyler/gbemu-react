@@ -16,7 +16,7 @@ describe('LD (PC), SP', () => {
 
 		expect(hardware.memory.readWord(0xC000)).toBe(500);
 
-		expect(hardware.cpu.clock).toBe(5);
+		expect(hardware.cpu.clock.total).toBe(5);
 		expect(registers.programCounter).toBe(0xC002);
 	});
 });

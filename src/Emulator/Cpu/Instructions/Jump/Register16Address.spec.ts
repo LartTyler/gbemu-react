@@ -12,6 +12,6 @@ describe('JP (r16)', () => {
 		instructions.get(0xE9).execute(hardware);
 
 		expect(registers.programCounter).toBe(0xC100);
-		expect(hardware.cpu.clock).toBe(1);
+		expect(hardware.cpu.clock.total).toBe(1);
 	});
 });

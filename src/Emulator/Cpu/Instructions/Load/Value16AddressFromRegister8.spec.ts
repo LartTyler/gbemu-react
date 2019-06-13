@@ -15,6 +15,6 @@ describe('LD (n16), r8', () => {
 		expect(hardware.memory.read(0xC100)).toBe(5);
 
 		expect(registers.programCounter).toBe(0xC002);
-		expect(hardware.cpu.clock).toBe(4);
+		expect(hardware.cpu.clock.total).toBe(4);
 	});
 });

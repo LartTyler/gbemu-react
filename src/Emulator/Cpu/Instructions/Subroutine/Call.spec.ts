@@ -16,6 +16,6 @@ describe('CALL n16', () => {
 		expect(registers.stackPointer).toBe(0xFFFC);
 		expect(hardware.memory.readWord(registers.stackPointer)).toBe(0xC002);
 
-		expect(hardware.cpu.clock).toBe(6);
+		expect(hardware.cpu.clock.total).toBe(6);
 	});
 });

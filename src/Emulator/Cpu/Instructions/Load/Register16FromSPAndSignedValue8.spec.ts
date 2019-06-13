@@ -20,7 +20,7 @@ describe('LDHL SP, s8', () => {
 		expect(registers.flags).toBe(0);
 
 		expect(registers.programCounter).toBe(0xC001);
-		expect(hardware.cpu.clock).toBe(3);
+		expect(hardware.cpu.clock.total).toBe(3);
 
 		registers.stackPointer = 0xFFFE;
 		hardware.memory.write(registers.programCounter, toTwosComplement(-8));

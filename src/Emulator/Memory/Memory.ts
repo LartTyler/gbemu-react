@@ -1,5 +1,7 @@
 import {Cartridge, ICartridge} from '../Cartridge/Cartridge';
-import {IMemory} from '../Hardware';
+import {ColorPaletteManager} from '../Gpu/Palette/ColorPaletteManager';
+import {MonochromePaletteManager} from '../Gpu/Palette/MonochromePaletteManager';
+import {IHardwareBus, IHardwareBusAware, IMemory} from '../Hardware';
 import {from16Bit, to16Bit, toHex} from '../Utility/number';
 import {bios} from './bios';
 import {Interrupts} from './Interrupts';
@@ -76,7 +78,7 @@ export const regionBoundries: IRegionBoundry[] = [
 	},
 ];
 
-export class Memory implements IMemory {
+export class Memory implements IMemory, IHardwareBusAware {
 	public readonly stack: IStack;
 	public readonly interrupts: Interrupts;
 
@@ -112,6 +114,21 @@ export class Memory implements IMemory {
 	protected zeroPage: Uint8Array;
 
 	/**
+	 * $FF47 - BGP
+	 * $FF48 - OBP1
+	 * $FF49 - OBP2
+	 */
+	protected monochromePalettes: MonochromePaletteManager;
+
+	/**
+	 * $FF68 - BGPI
+	 * $FF69 - BGPD
+	 * $FF6A - OBPI
+	 * $FF6B - OBPD
+	 */
+	protected colorPalettes: ColorPaletteManager;
+
+	/**
 	 * If `false`, reads below $0100 will read from the cart instead of from BIOS.
 	 *
 	 * This flag is switched the first time a read occurs at $0100.
@@ -120,11 +137,20 @@ export class Memory implements IMemory {
 
 	protected cartridge: ICartridge = null;
 
+	protected hardware: IHardwareBus = null;
+
 	public constructor(stack: IStack, interrupts: Interrupts) {
 		this.stack = stack;
 		this.interrupts = interrupts;
 
+		this.monochromePalettes = new MonochromePaletteManager();
+		this.colorPalettes = new ColorPaletteManager();
+
 		this.reset();
+	}
+
+	public setHardwareBus(hardware: IHardwareBus): void {
+		this.hardware = hardware;
 	}
 
 	public getCartridge(): ICartridge {
@@ -185,7 +211,52 @@ export class Memory implements IMemory {
 				return this.oam[mappedAddress];
 
 			case MemoryRegion.IO:
-				return this.io[mappedAddress];
+				switch (mappedAddress) {
+					// region IO Register Sub-mapping
+					case 0x40:
+						return this.hardware.gpu.control;
+
+					case 0x41:
+						return this.hardware.gpu.status;
+
+					case 0x42:
+						return this.hardware.gpu.scrollY;
+
+					case 0x43:
+						return this.hardware.gpu.scrollX;
+
+					case 0x44:
+						return this.hardware.gpu.currentLine;
+
+					case 0x45:
+						return this.hardware.gpu.currentLineCompare;
+
+					case 0x4A:
+						return this.hardware.gpu.windowY;
+
+					case 0x4B:
+						return this.hardware.gpu.windowX;
+
+					case 0x47:
+						return this.monochromePalettes.background.getValue();
+
+					case 0x48:
+						return this.monochromePalettes.foreground1.getValue();
+
+					case 0x49:
+						return this.monochromePalettes.foreground2.getValue();
+
+					case 0x69:
+						return this.colorPalettes.background.get(this.io[mappedAddress - 1]);
+
+					case 0x6B:
+						return this.colorPalettes.foreground.get(this.io[mappedAddress - 1]);
+
+					// endregion
+
+					default:
+						return this.io[mappedAddress];
+				}
 
 			case MemoryRegion.ZERO_PAGE:
 				return this.zeroPage[mappedAddress];
@@ -234,7 +305,73 @@ export class Memory implements IMemory {
 				break;
 
 			case MemoryRegion.IO:
-				this.io[mappedAddress] = value;
+				switch (mappedAddress) {
+					// region IO Register Sub-mapping
+					case 0x40:
+						this.hardware.gpu.control = value;
+
+						break;
+
+					case 0x41:
+						this.hardware.gpu.status = (value & ~7) | (this.hardware.gpu.status & 7);
+
+						break;
+
+					case 0x42:
+						this.hardware.gpu.scrollY = value;
+
+						break;
+
+					case 0x43:
+						this.hardware.gpu.scrollX = value;
+
+						break;
+
+					case 0x45:
+						this.hardware.gpu.currentLineCompare = value;
+
+						break;
+
+					case 0x4A:
+						this.hardware.gpu.windowY = value;
+
+						break;
+
+					case 0x4B:
+						this.hardware.gpu.windowX = value;
+
+						break;
+
+					case 0x47:
+						this.monochromePalettes.background.setValue(value);
+
+						break;
+
+					case 0x48:
+						this.monochromePalettes.foreground1.setValue(value);
+
+						break;
+
+					case 0x49:
+						this.monochromePalettes.foreground2.setValue(value);
+
+						break;
+
+					case 0x69:
+						this.colorPalettes.background.set(this.io[mappedAddress - 1], value);
+
+						break;
+
+					case 0x6B:
+						this.colorPalettes.foreground.set(this.io[mappedAddress - 1], value);
+
+						break;
+
+					// endregion
+
+					default:
+						this.io[mappedAddress] = value;
+				}
 
 				break;
 

@@ -14,7 +14,7 @@ describe('SET b, r8', () => {
 		expect(registers[target]).toBe(1 << position);
 
 		expect(registers.programCounter).toBe(0);
-		expect(hardware.cpu.clock).toBe(1);
+		expect(hardware.cpu.clock.total).toBe(1);
 	};
 
 	test('SET 0, B', () => runner(0xC0, 'b', 0));

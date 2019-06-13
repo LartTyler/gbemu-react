@@ -7,7 +7,7 @@ describe('STOP', () => {
 	test('STOP', () => {
 		instructions.get(0x10).execute(hardware);
 
-		expect(hardware.cpu.clock).toBe(1);
+		expect(hardware.cpu.clock.total).toBe(1);
 		expect(hardware.cpu.registers.programCounter).toBe(1);
 	});
 });

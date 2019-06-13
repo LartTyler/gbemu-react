@@ -21,7 +21,7 @@ describe('LD (r16), r8', () => {
 		expect(hardware.memory.read(0xC000)).toBe(10);
 
 		expect(hardware.cpu.registers.programCounter).toBe(0);
-		expect(hardware.cpu.clock).toBe(2);
+		expect(hardware.cpu.clock.total).toBe(2);
 	};
 
 	test('LD (BC), A', () => runner(0x02, 'b', 'c', 'a'));

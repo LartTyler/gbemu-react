@@ -12,12 +12,12 @@ export class ConditionalReturn extends Instruction {
 
 	protected invoke(hardware: IHardwareBus): void {
 		const registers = hardware.cpu.registers;
-		hardware.cpu.clock += 2;
+		hardware.cpu.clock.total += 2;
 
 		if (!isRegisterFlagTestSatisfied(registers.flags, this.test))
 			return;
 
-		hardware.cpu.clock += 3;
+		hardware.cpu.clock.total += 3;
 
 		registers.programCounter = hardware.memory.stack.pop();
 	}

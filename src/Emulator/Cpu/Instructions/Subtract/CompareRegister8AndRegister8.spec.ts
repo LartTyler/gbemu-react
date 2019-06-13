@@ -21,7 +21,7 @@ describe('CP r8, r8', () => {
 		expect(registers.flags).toBe(RegisterFlag.SUBTRACT);
 
 		expect(registers.programCounter).toBe(0);
-		expect(hardware.cpu.clock).toBe(1);
+		expect(hardware.cpu.clock.total).toBe(1);
 
 		registers[minuend] = 16;
 		registers[subtrahend] = 1;
@@ -56,6 +56,6 @@ describe('CP r8, r8', () => {
 		expect(registers.flags).toBe(RegisterFlag.SUBTRACT | RegisterFlag.ZERO);
 
 		expect(registers.programCounter).toBe(0);
-		expect(hardware.cpu.clock).toBe(1);
+		expect(hardware.cpu.clock.total).toBe(1);
 	});
 });

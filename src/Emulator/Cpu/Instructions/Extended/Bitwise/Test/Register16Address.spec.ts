@@ -20,7 +20,7 @@ describe('BIT b, (r16)', () => {
 		expect(registers.flags).toBe(RegisterFlag.ZERO | RegisterFlag.HALF_CARRY);
 
 		expect(registers.programCounter).toBe(0);
-		expect(hardware.cpu.clock).toBe(2);
+		expect(hardware.cpu.clock.total).toBe(2);
 
 		hardware.memory.write(registers.hl, 1 << position);
 

@@ -19,7 +19,7 @@ describe('AND r8, n8', () => {
 		expect(registers.flags).toBe(RegisterFlag.HALF_CARRY);
 
 		expect(registers.programCounter).toBe(0xC001);
-		expect(hardware.cpu.clock).toBe(2);
+		expect(hardware.cpu.clock.total).toBe(2);
 
 		registers.a = 0b1101;
 		hardware.memory.write(registers.programCounter, 0b000);

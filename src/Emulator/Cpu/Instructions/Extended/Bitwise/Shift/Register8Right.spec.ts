@@ -20,7 +20,7 @@ describe('RRC r8', () => {
 		expect(registers.flags).toBe(RegisterFlag.CARRY);
 
 		expect(registers.programCounter).toBe(0);
-		expect(hardware.cpu.clock).toBe(1);
+		expect(hardware.cpu.clock.total).toBe(1);
 
 		instruction.execute(hardware);
 

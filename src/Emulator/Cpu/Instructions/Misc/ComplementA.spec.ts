@@ -15,6 +15,6 @@ describe('CPL', () => {
 		expect(registers.flags).toBe(RegisterFlag.SUBTRACT | RegisterFlag.HALF_CARRY);
 
 		expect(registers.programCounter).toBe(0);
-		expect(hardware.cpu.clock).toBe(1);
+		expect(hardware.cpu.clock.total).toBe(1);
 	});
 });

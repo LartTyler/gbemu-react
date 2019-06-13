@@ -14,13 +14,13 @@ describe('JR s8', () => {
 		instruction.execute(hardware);
 
 		expect(hardware.cpu.registers.programCounter).toBe(0xC009);
-		expect(hardware.cpu.clock).toBe(3);
+		expect(hardware.cpu.clock.total).toBe(3);
 
 		hardware.memory.write(0xC009, toTwosComplement(-8));
 
 		instruction.execute(hardware);
 
 		expect(hardware.cpu.registers.programCounter).toBe(0xC002);
-		expect(hardware.cpu.clock).toBe(6);
+		expect(hardware.cpu.clock.total).toBe(6);
 	});
 });

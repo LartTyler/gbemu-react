@@ -18,7 +18,7 @@ describe('RES b, (r16)', () => {
 		expect(hardware.memory.read(registers.hl)).toBe(0xFF & ~(1 << position));
 
 		expect(registers.programCounter).toBe(0);
-		expect(hardware.cpu.clock).toBe(3);
+		expect(hardware.cpu.clock.total).toBe(3);
 	};
 
 	test('RES 0, (HL)', () => runner(0x86, 0));

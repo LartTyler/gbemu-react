@@ -21,7 +21,7 @@ describe('ADC r8, (r16)', () => {
 		expect(registers.flags).toBe(0);
 
 		expect(registers.programCounter).toBe(0);
-		expect(hardware.cpu.clock).toBe(2);
+		expect(hardware.cpu.clock.total).toBe(2);
 
 		registers.a = 15;
 		hardware.memory.write(registers.hl, 15);

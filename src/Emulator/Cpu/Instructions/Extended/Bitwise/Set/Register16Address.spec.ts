@@ -17,7 +17,7 @@ describe('SET b, (r16)', () => {
 		expect(hardware.memory.read(registers.hl)).toBe(1 << position);
 
 		expect(registers.programCounter).toBe(0);
-		expect(hardware.cpu.clock).toBe(3);
+		expect(hardware.cpu.clock.total).toBe(3);
 	};
 
 	test('SET 0, (HL)', () => runner(0xC6, 'hl', 0));

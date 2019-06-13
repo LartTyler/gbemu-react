@@ -20,7 +20,7 @@ describe('PUSH r16', () => {
 		expect(registers.stackPointer).toBe(0xFFFC);
 		expect(registers.programCounter).toBe(0);
 
-		expect(hardware.cpu.clock).toBe(4);
+		expect(hardware.cpu.clock.total).toBe(4);
 	};
 
 	test('PUSH BC', () => runner(0xC5, 'bc'));

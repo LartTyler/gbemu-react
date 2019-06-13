@@ -16,7 +16,7 @@ describe('SUB r8, n8', () => {
 		instruction.execute(hardware);
 
 		expect(registers.programCounter).toBe(0xC001);
-		expect(hardware.cpu.clock).toBe(2);
+		expect(hardware.cpu.clock.total).toBe(2);
 
 		expect(registers.a).toBe(4);
 		expect(registers.flags).toBe(RegisterFlag.SUBTRACT);

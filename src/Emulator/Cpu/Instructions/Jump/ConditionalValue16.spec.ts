@@ -25,14 +25,14 @@ describe('JP cc, (n16)', () => {
 		instruction.execute(hardware);
 
 		expect(registers.programCounter).toBe(0xC002);
-		expect(hardware.cpu.clock).toBe(3);
+		expect(hardware.cpu.clock.total).toBe(3);
 
 		registers.flags = ~registers.flags;
 
 		instruction.execute(hardware);
 
 		expect(registers.programCounter).toBe(0xC100);
-		expect(hardware.cpu.clock).toBe(7);
+		expect(hardware.cpu.clock.total).toBe(7);
 	};
 
 	test('JP NZ, (r16)', () => runner(0xC2, 'NZ'));

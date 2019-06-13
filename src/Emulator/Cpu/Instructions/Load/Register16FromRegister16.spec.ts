@@ -13,6 +13,6 @@ describe('LD r16, r16', () => {
 		expect(registers.stackPointer).toBe(5);
 
 		expect(registers.programCounter).toBe(0);
-		expect(hardware.cpu.clock).toBe(2);
+		expect(hardware.cpu.clock.total).toBe(2);
 	});
 });

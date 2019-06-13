@@ -15,7 +15,6 @@ export abstract class Instruction {
 
 	public execute(hardware: IHardwareBus): void {
 		const programCounter = hardware.cpu.registers.programCounter;
-		const clock = hardware.cpu.clock;
 
 		this.invoke(hardware);
 
@@ -25,8 +24,8 @@ export abstract class Instruction {
 			hardware.cpu.registers.programCounter += this.length - 1;
 
 		// Only update the CPU clock automatically if it wasn't modified during instruction execution.
-		if (hardware.cpu.clock === clock && this.duration !== null)
-			hardware.cpu.clock += this.duration;
+		if (hardware.cpu.clock.delta === 0 && this.duration !== null)
+			hardware.cpu.clock.total += this.duration;
 	}
 
 	protected abstract invoke(hardware: IHardwareBus): void;

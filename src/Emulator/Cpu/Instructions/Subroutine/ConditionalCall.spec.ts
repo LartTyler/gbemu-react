@@ -27,7 +27,7 @@ describe('CALL cc, n16', () => {
 
 		expect(registers.programCounter).toBe(0xC002);
 		expect(registers.stackPointer).toBe(0xFFFE);
-		expect(hardware.cpu.clock).toBe(3);
+		expect(hardware.cpu.clock.total).toBe(3);
 
 		registers.flags = ~registers.flags;
 
@@ -36,7 +36,7 @@ describe('CALL cc, n16', () => {
 		expect(registers.programCounter).toBe(0xC100);
 		expect(registers.stackPointer).toBe(0xFFFC);
 		expect(hardware.memory.readWord(registers.stackPointer)).toBe(0xC004);
-		expect(hardware.cpu.clock).toBe(9);
+		expect(hardware.cpu.clock.total).toBe(9);
 	};
 
 	test('CALL NZ, n16', () => runner(0xC4, 'NZ'));

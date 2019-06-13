@@ -19,7 +19,7 @@ describe('CP r8, n8', () => {
 		expect(registers.flags).toBe(RegisterFlag.SUBTRACT);
 
 		expect(registers.programCounter).toBe(0xC001);
-		expect(hardware.cpu.clock).toBe(2);
+		expect(hardware.cpu.clock.total).toBe(2);
 
 		registers.a = 16;
 		hardware.memory.write(registers.programCounter, 1);

@@ -26,7 +26,7 @@ describe('POP r16', () => {
 		expect(registers.stackPointer).toBe(0xFFFC);
 
 		expect(registers.programCounter).toBe(0);
-		expect(hardware.cpu.clock).toBe(3);
+		expect(hardware.cpu.clock.total).toBe(3);
 
 		instruction.execute(hardware);
 

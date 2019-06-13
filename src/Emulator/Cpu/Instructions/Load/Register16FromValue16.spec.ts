@@ -23,7 +23,7 @@ describe('LD r16, n16', () => {
 		else
 			expect(to16Bit(hardware.cpu.registers[high], hardware.cpu.registers[low])).toBe(500);
 
-		expect(hardware.cpu.clock).toBe(3);
+		expect(hardware.cpu.clock.total).toBe(3);
 		expect(hardware.cpu.registers.programCounter).toBe(0xC002);
 	};
 

@@ -8,6 +8,6 @@ describe('HALT', () => {
 		instructions.get(0x76).execute(hardware);
 
 		expect(hardware.cpu.registers.programCounter).toBe(0);
-		expect(hardware.cpu.clock).toBe(0);
+		expect(hardware.cpu.clock.total).toBe(0);
 	});
 });

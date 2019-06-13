@@ -27,7 +27,7 @@ describe('RET cc', () => {
 		instruction.execute(hardware);
 
 		expect(registers.programCounter).toBe(0xC100);
-		expect(hardware.cpu.clock).toBe(2);
+		expect(hardware.cpu.clock.total).toBe(2);
 
 		registers.flags = ~registers.flags;
 
@@ -35,7 +35,7 @@ describe('RET cc', () => {
 
 		expect(registers.programCounter).toBe(0xC000);
 		expect(registers.stackPointer).toBe(0xFFFE);
-		expect(hardware.cpu.clock).toBe(7);
+		expect(hardware.cpu.clock.total).toBe(7);
 	};
 
 	test('RET NZ', () => runner(0xC0, 'NZ'));

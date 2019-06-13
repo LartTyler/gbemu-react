@@ -12,12 +12,12 @@ export class ConditionalCall extends Instruction {
 
 	protected invoke(hardware: IHardwareBus): void {
 		const registers = hardware.cpu.registers;
-		hardware.cpu.clock += 3;
+		hardware.cpu.clock.total += 3;
 
 		if (!isRegisterFlagTestSatisfied(registers.flags, this.test))
 			return;
 
-		hardware.cpu.clock += 3;
+		hardware.cpu.clock.total += 3;
 
 		hardware.memory.stack.push(registers.programCounter + 2);
 		registers.programCounter = hardware.memory.readWord(registers.programCounter);

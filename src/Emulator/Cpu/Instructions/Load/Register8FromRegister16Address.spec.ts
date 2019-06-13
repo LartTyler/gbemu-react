@@ -17,7 +17,7 @@ describe('LD r8, (r16)', () => {
 		instructions.get(code).execute(hardware);
 
 		expect(hardware.cpu.registers[target]).toBe(10);
-		expect(hardware.cpu.clock).toBe(2);
+		expect(hardware.cpu.clock.total).toBe(2);
 		expect(hardware.cpu.registers.programCounter).toBe(0);
 	};
 

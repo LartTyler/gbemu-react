@@ -26,19 +26,19 @@ describe('JR cc, s8', () => {
 		instruction.execute(hardware);
 
 		expect(registers.programCounter).toBe(0xC001);
-		expect(hardware.cpu.clock).toBe(2);
+		expect(hardware.cpu.clock.total).toBe(2);
 
 		registers.flags = ~registers.flags;
 
 		instruction.execute(hardware);
 
 		expect(registers.programCounter).toBe(0xC009);
-		expect(hardware.cpu.clock).toBe(5);
+		expect(hardware.cpu.clock.total).toBe(5);
 
 		instruction.execute(hardware);
 
 		expect(registers.programCounter).toBe(0xC002);
-		expect(hardware.cpu.clock).toBe(8);
+		expect(hardware.cpu.clock.total).toBe(8);
 	};
 
 	test('JR NZ, s8', () => runner(0x20, 'NZ'));

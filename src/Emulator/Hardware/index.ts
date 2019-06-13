@@ -1,5 +1,7 @@
 import {ICartridge} from '../Cartridge/Cartridge';
+import {Clock} from '../Cpu/Clock';
 import {EventDispatcher} from '../Events/EventDispatcher';
+import {LcdMode} from '../Gpu/LcdStatus';
 import {Interrupts} from '../Memory/Interrupts';
 import {IStack} from '../Memory/Stack';
 
@@ -29,8 +31,7 @@ export interface ICpuRegisters {
 }
 
 export interface ICpu extends IResettable {
-	clock: number;
-
+	readonly clock: Clock;
 	readonly registers: ICpuRegisters;
 
 	start(): void;
@@ -55,12 +56,22 @@ export interface IMemory extends IResettable {
 }
 
 export interface IGpu extends IResettable {
+	control: number;
+	status: number;
+	scrollY: number;
+	scrollX: number;
+	currentLine: number;
+	currentLineCompare: number;
+	windowY: number;
+	windowX: number;
+
 	tick(): void;
 }
 
 export interface IHardwareBus extends IResettable {
 	readonly cpu: ICpu;
 	readonly memory: IMemory;
+	readonly gpu: IGpu;
 	readonly eventDispatcher: EventDispatcher;
 }
 

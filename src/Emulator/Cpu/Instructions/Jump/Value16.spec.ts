@@ -12,6 +12,6 @@ describe('JP n16', () => {
 		instructions.get(0xC3).execute(hardware);
 
 		expect(registers.programCounter).toBe(0xC100);
-		expect(hardware.cpu.clock).toBe(4);
+		expect(hardware.cpu.clock.total).toBe(4);
 	});
 });

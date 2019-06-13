@@ -2,13 +2,13 @@ import {CpuTickEvent} from '../Events/Cpu/CpuTickEvent';
 import {ICpu, IHardwareBus, IHardwareBusAware} from '../Hardware';
 import {interruptVectors} from '../Memory/Interrupts';
 import {toHex} from '../Utility/number';
+import {Clock} from './Clock';
 import {instructions} from './Instructions';
 import {Registers} from './Registers';
 
 export class Cpu implements ICpu, IHardwareBusAware {
+	public readonly clock: Clock;
 	public readonly registers: Registers;
-
-	public clock: number = 0;
 
 	protected hardware: IHardwareBus;
 
@@ -18,6 +18,7 @@ export class Cpu implements ICpu, IHardwareBusAware {
 	protected tickRate: number = 0;
 
 	public constructor() {
+		this.clock = new Clock();
 		this.registers = new Registers();
 	}
 
@@ -77,10 +78,14 @@ export class Cpu implements ICpu, IHardwareBusAware {
 		 * Note: additional clock and PC updates are handled by {@see Instruction}.
 		 */
 		operator.execute(this.hardware);
+
+		this.hardware.gpu.tick();
+
+		this.clock.next();
 	}
 
 	public reset(): void {
-		this.clock = 0;
+		this.clock.reset();
 		this.halt = true;
 
 		if (this.tickIntervalId) {
@@ -105,7 +110,8 @@ export class Cpu implements ICpu, IHardwareBusAware {
 	}
 
 	protected frame(): void {
-		const frameClock = this.clock + 17556;
+		// TODO Probably should rethink this
+		const frameClock = this.clock.total + 17556;
 
 		do {
 			this.step();
@@ -115,7 +121,7 @@ export class Cpu implements ICpu, IHardwareBusAware {
 
 				return;
 			}
-		} while (this.tickRate <= 1 && this.clock < frameClock);
+		} while (this.tickRate <= 1 && this.clock.total < frameClock);
 
 		this.tickIntervalId = window.setTimeout(() => this.frame(), Math.max(this.tickRate, 1));
 	}

@@ -20,7 +20,7 @@ describe('INC r8', () => {
 
 		expect(registers[target]).toBe(6);
 
-		expect(hardware.cpu.clock).toBe(1);
+		expect(hardware.cpu.clock.total).toBe(1);
 		expect(registers.programCounter).toBe(0);
 
 		registers[target] = 15;

@@ -1,0 +1,15 @@
+export enum LcdStatus {
+	LY_COINCIDENCE_INTERRUPT = 0x40,
+	OAM_INTERRUPT = 0x20,
+	VLBANK_INTERRUPT = 0x10,
+	HBLANK_INTERRUPT = 0x08,
+	LY_COINCIDENCE_FLAG = 0x04,
+	MODE = 0x03,
+}
+
+export enum LcdMode {
+	HBLANK = 0,
+	VBLANK = 1,
+	OAM_SEARCH = 2,
+	RENDER = 3,
+}

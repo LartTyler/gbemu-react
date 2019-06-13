@@ -12,12 +12,12 @@ export class ConditionalValue16 extends Instruction {
 
 	protected invoke(hardware: IHardwareBus): void {
 		const registers = hardware.cpu.registers;
-		hardware.cpu.clock += 3;
+		hardware.cpu.clock.total += 3;
 
 		if (!isRegisterFlagTestSatisfied(registers.flags, this.test))
 			return;
 
-		hardware.cpu.clock += 1;
+		hardware.cpu.clock.total += 1;
 		registers.programCounter = hardware.memory.readWord(registers.programCounter);
 	}
 }

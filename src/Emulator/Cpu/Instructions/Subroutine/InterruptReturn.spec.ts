@@ -16,6 +16,6 @@ describe('RETI', () => {
 		expect(registers.programCounter).toBe(0xC000);
 		expect(registers.stackPointer).toBe(0xFFFE);
 		expect(hardware.memory.interrupts.enabled).toBe(true);
-		expect(hardware.cpu.clock).toBe(4);
+		expect(hardware.cpu.clock.total).toBe(4);
 	});
 });

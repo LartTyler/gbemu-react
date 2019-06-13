@@ -17,6 +17,6 @@ describe('LDD r8, (r16)', () => {
 		expect(registers.hl).toBe(0xBFFF);
 
 		expect(registers.programCounter).toBe(0);
-		expect(hardware.cpu.clock).toBe(2);
+		expect(hardware.cpu.clock.total).toBe(2);
 	});
 });

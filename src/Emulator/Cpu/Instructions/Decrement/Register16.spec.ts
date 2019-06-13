@@ -24,7 +24,7 @@ describe('DEC r16', () => {
 		expect(registers[high]).toBe(0);
 		expect(registers[low]).toBe(255);
 
-		expect(hardware.cpu.clock).toBe(2);
+		expect(hardware.cpu.clock.total).toBe(2);
 		expect(registers.programCounter).toBe(0);
 
 		values = from16Bit(500);
@@ -59,7 +59,7 @@ describe('DEC r16', () => {
 
 		expect(registers.stackPointer).toBe(255);
 
-		expect(hardware.cpu.clock).toBe(2);
+		expect(hardware.cpu.clock.total).toBe(2);
 		expect(registers.programCounter).toBe(0);
 
 		registers.stackPointer = 0;

@@ -20,7 +20,7 @@ describe('ADD SP, s8', () => {
 		expect(registers.flags).toBe(0);
 
 		expect(registers.programCounter).toBe(0xC001);
-		expect(hardware.cpu.clock).toBe(4);
+		expect(hardware.cpu.clock.total).toBe(4);
 
 		hardware.memory.write(registers.programCounter, toTwosComplement(-7));
 
